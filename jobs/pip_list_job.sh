@@ -8,13 +8,14 @@
 #SBATCH --output=../output/job-%j/job.out
 #SBATCH --account=fall2024-comp551
 
-module load cuda/cuda-12.6
-module load miniconda/miniconda-fall2024
-source ~/.bashrc
-conda activate test_environment #environment
-
 # Access the job number
 job_number=$SLURM_JOB_ID
+
+module load cuda/cuda-12.6
+module load miniconda/miniconda-fall2024
+pip3 list >> ../output/job-$job_number/pip3_list_no_conda.txt
+source ~/.bashrc
+conda activate test_environment #environment
 
 echo "Test" > ../output/job-$job_number/test_out.txt
 nvidia-smi >> ../output/job-$job_number/test_out.txt
