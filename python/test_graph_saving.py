@@ -1,4 +1,13 @@
 import matplotlib.pyplot as plt
+import sys
+
+if len(sys.argv) == 1:
+    output_path = "."
+elif len(sys.argv) == 2:
+    output_path = sys.argv[1]
+else:
+    print("Usage: python test_graph_saving.py [output_path]")
+    sys.exit(1)
 
 # Sample data
 x = [0, 1, 2, 3, 4, 5]
@@ -18,8 +27,7 @@ plt.legend()
 
 # Save the plot as a PNG file
 print("Saving graphs to disk")
-plt.savefig("sample_graph.png")
-plt.savefig("sample_graph_settings.png", dpi=300, bbox_inches="tight")
+plt.savefig(f"{output_path}/sample_graph_settings.png", dpi=300, bbox_inches="tight")
 
 # Optional: Display the plot
 # plt.show()

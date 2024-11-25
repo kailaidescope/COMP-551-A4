@@ -5,7 +5,7 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=32G
 #SBATCH --time=00:05:00 # 5 mins
-#SBATCH --output=../output/%S-%j.out
+#SBATCH --output=../output/job-%j.out
 #SBATCH --account=fall2024-comp551
 
 module load cuda/cuda-12.6
@@ -15,5 +15,5 @@ conda activate test_environment #environment
 
 echo "Test" > ../output/test_out.txt
 nvidia-smi >> ../output/test_out.txt
-python3 ../python/test_graph_saving.py #insert python script here
+python3 ../python/test_graph_saving.py ../output #insert python script here
 
