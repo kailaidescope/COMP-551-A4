@@ -13,9 +13,12 @@ module load miniconda/miniconda-fall2024
 source ~/.bashrc
 conda activate test_environment #environment
 
-echo "Test" > ../output/job-%j/test_out.txt
-nvidia-smi >> ../output/job-%j/test_out.txt
-pip3 list >> ../output/job-%j/pip3_list.txt
-pip list >> ../output/job-%j/pip_list.txt
-conda list >> ../output/job-%j/conda_list.txt
+# Access the job number
+job_number=$SLURM_JOB_ID
+
+echo "Test" > ../output/job-$job_number/test_out.txt
+nvidia-smi >> ../output/job-$job_number/test_out.txt
+pip3 list >> ../output/job-$job_number/pip3_list.txt
+pip list >> ../output/job-$job_number/pip_list.txt
+conda list >> ../output/job-$job_number/conda_list.txt
 
