@@ -13,7 +13,7 @@ module load miniconda/miniconda-fall2024
 source ~/.bashrc
 conda activate test_environment #environment
 
-echo "Test" > ../outputs/test_out.txt
-nvidia-smi >> ../outputs/test_out.txt
-python ../python/test_graph_saving.py #insert python script here
+echo "Test" > ../output/test_out.txt
+nvidia-smi >> ../output/test_out.txt
+python3 ../python/test_graph_saving.py #insert python script here
 
