@@ -1,0 +1,5 @@
+/var/spool/slurmd/job02014/slurm_script: line 16: ../output/job-%j/test_out.txt: No such file or directory
+/var/spool/slurmd/job02014/slurm_script: line 17: ../output/job-%j/test_out.txt: No such file or directory
+/var/spool/slurmd/job02014/slurm_script: line 18: ../output/job-%j/pip3_list.txt: No such file or directory
+/var/spool/slurmd/job02014/slurm_script: line 19: ../output/job-%j/pip_list.txt: No such file or directory
+/var/spool/slurmd/job02014/slurm_script: line 20: ../output/job-%j/conda_list.txt: No such file or directory
