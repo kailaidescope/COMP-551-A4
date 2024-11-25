@@ -1,5 +1,14 @@
 # %% [markdown]
 # # Imports
+import sys
+
+if len(sys.argv) == 1:
+    output_path = "."
+elif len(sys.argv) == 2:
+    output_path = sys.argv[1]
+else:
+    print("Usage: python test_graph_saving.py [output_path]")
+    sys.exit(1)
 
 # %%
 # Dependencies
@@ -262,7 +271,7 @@ plt.legend()
 plt.title("Training and Test Accuracy")
 
 plt.tight_layout()
-plt.savefig("plot_28x28.png")
+plt.savefig(f"{output_path}/plot_28x28.png", dpi=300, bbox_inches="tight")
 
 # %%
 
@@ -450,4 +459,4 @@ plt.legend()
 plt.title("Training and Test Accuracy")
 
 plt.tight_layout()
-plt.savefig("plot_128x128.png")
+plt.savefig(f"{output_path}/plot_128x128.png", dpi=300, bbox_inches="tight")
