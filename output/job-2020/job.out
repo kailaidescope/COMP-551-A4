@@ -1,0 +1,68 @@
+Downloading https://zenodo.org/records/10519652/files/organamnist.npz?download=1 to /home/2021/kturan/.medmnist/organamnist.npz
+Mean: 0.4680282473564148, Std: 0.2471546232700348
+Using downloaded and verified file: /home/2021/kturan/.medmnist/organamnist.npz
+Using downloaded and verified file: /home/2021/kturan/.medmnist/organamnist.npz
+Using downloaded and verified file: /home/2021/kturan/.medmnist/organamnist.npz
+Dataset OrganAMNIST of size 28 (organamnist)
+    Number of datapoints: 34561
+    Root location: /home/2021/kturan/.medmnist
+    Split: train
+    Task: multi-class
+    Number of channels: 1
+    Meaning of labels: {'0': 'bladder', '1': 'femur-left', '2': 'femur-right', '3': 'heart', '4': 'kidney-left', '5': 'kidney-right', '6': 'liver', '7': 'lung-left', '8': 'lung-right', '9': 'pancreas', '10': 'spleen'}
+    Number of samples: {'train': 34561, 'val': 6491, 'test': 17778}
+    Description: The OrganAMNIST is based on 3D computed tomography (CT) images from Liver Tumor Segmentation Benchmark (LiTS). It is renamed from OrganMNIST_Axial (in MedMNIST v1) for simplicity. We use bounding-box annotations of 11 body organs from another study to obtain the organ labels. Hounsfield-Unit (HU) of the 3D images are transformed into gray-scale with an abdominal window. We crop 2D images from the center slices of the 3D bounding boxes in axial views (planes). The images are resized into 1×28×28 to perform multi-class classification of 11 body organs. 115 and 16 CT scans from the source training set are used as training and validation set, respectively. The 70 CT scans from the source test set are treated as the test set.
+    License: CC BY 4.0
+===================
+Dataset OrganAMNIST of size 28 (organamnist)
+    Number of datapoints: 17778
+    Root location: /home/2021/kturan/.medmnist
+    Split: test
+    Task: multi-class
+    Number of channels: 1
+    Meaning of labels: {'0': 'bladder', '1': 'femur-left', '2': 'femur-right', '3': 'heart', '4': 'kidney-left', '5': 'kidney-right', '6': 'liver', '7': 'lung-left', '8': 'lung-right', '9': 'pancreas', '10': 'spleen'}
+    Number of samples: {'train': 34561, 'val': 6491, 'test': 17778}
+    Description: The OrganAMNIST is based on 3D computed tomography (CT) images from Liver Tumor Segmentation Benchmark (LiTS). It is renamed from OrganMNIST_Axial (in MedMNIST v1) for simplicity. We use bounding-box annotations of 11 body organs from another study to obtain the organ labels. Hounsfield-Unit (HU) of the 3D images are transformed into gray-scale with an abdominal window. We crop 2D images from the center slices of the 3D bounding boxes in axial views (planes). The images are resized into 1×28×28 to perform multi-class classification of 11 body organs. 115 and 16 CT scans from the source training set are used as training and validation set, respectively. The 70 CT scans from the source test set are treated as the test set.
+    License: CC BY 4.0
+Accuracy: 0.7644279446506919
+Epoch [1/8], Train Loss: 0.4464, Train Acc: 85.32%, Test Loss: 0.4701, Test Acc: 84.51%
+Epoch [2/8], Train Loss: 0.1449, Train Acc: 95.58%, Test Loss: 0.4223, Test Acc: 86.35%
+Epoch [3/8], Train Loss: 0.0839, Train Acc: 97.73%, Test Loss: 0.5265, Test Acc: 83.77%
+Epoch [4/8], Train Loss: 0.0906, Train Acc: 97.36%, Test Loss: 0.4221, Test Acc: 87.06%
+Epoch [5/8], Train Loss: 0.0426, Train Acc: 98.91%, Test Loss: 0.4339, Test Acc: 87.50%
+Epoch [6/8], Train Loss: 0.0319, Train Acc: 99.25%, Test Loss: 0.4341, Test Acc: 87.63%
+Epoch [7/8], Train Loss: 0.0244, Train Acc: 99.43%, Test Loss: 0.4392, Test Acc: 87.94%
+Epoch [8/8], Train Loss: 0.0241, Train Acc: 99.41%, Test Loss: 0.4569, Test Acc: 87.61%
+Downloading https://zenodo.org/records/10519652/files/organamnist_128.npz?download=1 to /home/2021/kturan/.medmnist/organamnist_128.npz
+Using downloaded and verified file: /home/2021/kturan/.medmnist/organamnist_128.npz
+Using downloaded and verified file: /home/2021/kturan/.medmnist/organamnist.npz
+Mean: 0.00014369277050718665, Std: 1.0000704526901245
+Dataset OrganAMNIST of size 128 (organamnist_128)
+    Number of datapoints: 34561
+    Root location: /home/2021/kturan/.medmnist
+    Split: train
+    Task: multi-class
+    Number of channels: 1
+    Meaning of labels: {'0': 'bladder', '1': 'femur-left', '2': 'femur-right', '3': 'heart', '4': 'kidney-left', '5': 'kidney-right', '6': 'liver', '7': 'lung-left', '8': 'lung-right', '9': 'pancreas', '10': 'spleen'}
+    Number of samples: {'train': 34561, 'val': 6491, 'test': 17778}
+    Description: The OrganAMNIST is based on 3D computed tomography (CT) images from Liver Tumor Segmentation Benchmark (LiTS). It is renamed from OrganMNIST_Axial (in MedMNIST v1) for simplicity. We use bounding-box annotations of 11 body organs from another study to obtain the organ labels. Hounsfield-Unit (HU) of the 3D images are transformed into gray-scale with an abdominal window. We crop 2D images from the center slices of the 3D bounding boxes in axial views (planes). The images are resized into 1×28×28 to perform multi-class classification of 11 body organs. 115 and 16 CT scans from the source training set are used as training and validation set, respectively. The 70 CT scans from the source test set are treated as the test set.
+    License: CC BY 4.0
+===================
+Dataset OrganAMNIST of size 128 (organamnist_128)
+    Number of datapoints: 17778
+    Root location: /home/2021/kturan/.medmnist
+    Split: test
+    Task: multi-class
+    Number of channels: 1
+    Meaning of labels: {'0': 'bladder', '1': 'femur-left', '2': 'femur-right', '3': 'heart', '4': 'kidney-left', '5': 'kidney-right', '6': 'liver', '7': 'lung-left', '8': 'lung-right', '9': 'pancreas', '10': 'spleen'}
+    Number of samples: {'train': 34561, 'val': 6491, 'test': 17778}
+    Description: The OrganAMNIST is based on 3D computed tomography (CT) images from Liver Tumor Segmentation Benchmark (LiTS). It is renamed from OrganMNIST_Axial (in MedMNIST v1) for simplicity. We use bounding-box annotations of 11 body organs from another study to obtain the organ labels. Hounsfield-Unit (HU) of the 3D images are transformed into gray-scale with an abdominal window. We crop 2D images from the center slices of the 3D bounding boxes in axial views (planes). The images are resized into 1×28×28 to perform multi-class classification of 11 body organs. 115 and 16 CT scans from the source training set are used as training and validation set, respectively. The 70 CT scans from the source test set are treated as the test set.
+    License: CC BY 4.0
+Epoch [1/8], Train Loss: 1.3773, Train Acc: 69.66%, Test Loss: 0.5594, Test Acc: 81.35%
+Epoch [2/8], Train Loss: 0.4882, Train Acc: 84.31%, Test Loss: 0.4398, Test Acc: 85.14%
+Epoch [3/8], Train Loss: 0.3797, Train Acc: 85.78%, Test Loss: 0.4306, Test Acc: 86.21%
+Epoch [4/8], Train Loss: 0.2796, Train Acc: 89.82%, Test Loss: 0.4162, Test Acc: 87.00%
+Epoch [5/8], Train Loss: 0.2350, Train Acc: 90.82%, Test Loss: 0.4670, Test Acc: 86.84%
+Epoch [6/8], Train Loss: 0.3285, Train Acc: 91.65%, Test Loss: 0.5957, Test Acc: 85.26%
+Epoch [7/8], Train Loss: 0.3568, Train Acc: 86.55%, Test Loss: 0.4105, Test Acc: 87.69%
+Epoch [8/8], Train Loss: 0.2367, Train Acc: 90.71%, Test Loss: 0.4558, Test Acc: 88.42%
