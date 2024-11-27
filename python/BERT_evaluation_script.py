@@ -34,7 +34,17 @@ model.to(device)
 
 # Load the GoEmotions dataset
 dataset = load_dataset("google-research-datasets/go_emotions")
-test_dataset = dataset["test"]
+
+
+# Define a filtering function to keep only examples with a single label
+def filter_single_label(example):
+    return len(example["labels"]) == 1
+
+
+# Apply the filter to all splits (train, validation, test)
+filtered_dataset = dataset.filter(filter_single_label)
+
+test_dataset = filtered_dataset["test"]
 
 
 # Preprocess function (tokenization)
