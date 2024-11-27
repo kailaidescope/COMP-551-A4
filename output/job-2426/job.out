@@ -1,0 +1,18 @@
+Starting BERT test script
+Device: cuda
+Predicted class: excitement
+Predicted probabilities: tensor([[0.0371, 0.0332, 0.0343, 0.0445, 0.0280, 0.0352, 0.0428, 0.0448, 0.0320,
+         0.0260, 0.0226, 0.0244, 0.0268, 0.0783, 0.0117, 0.0214, 0.0274, 0.0308,
+         0.0416, 0.0449, 0.0390, 0.0305, 0.0330, 0.0274, 0.0443, 0.0393, 0.0470,
+         0.0514]], device='cuda:0')
+Fine-tuning the model on the GoEmotions dataset...
+{'eval_loss': 2.582733392715454, 'eval_accuracy': 0.3500439753737907, 'eval_runtime': 15.7904, 'eval_samples_per_second': 288.024, 'eval_steps_per_second': 18.049, 'epoch': 1.0}
+{'eval_loss': 2.568385124206543, 'eval_accuracy': 0.3500439753737907, 'eval_runtime': 15.7301, 'eval_samples_per_second': 289.128, 'eval_steps_per_second': 18.118, 'epoch': 2.0}
+{'eval_loss': 2.5636916160583496, 'eval_accuracy': 0.3500439753737907, 'eval_runtime': 15.68, 'eval_samples_per_second': 290.051, 'eval_steps_per_second': 18.176, 'epoch': 3.0}
+{'train_runtime': 445.4363, 'train_samples_per_second': 244.533, 'train_steps_per_second': 15.288, 'train_loss': 2.6007345011930982, 'epoch': 3.0}
+Classification head saved.
+Predicted class after fine-tuning: neutral
+Predicted probabilities after fine-tuning: tensor([[0.0863, 0.0438, 0.0299, 0.0445, 0.0553, 0.0221, 0.0257, 0.0406, 0.0134,
+         0.0195, 0.0416, 0.0147, 0.0075, 0.0170, 0.0126, 0.0594, 0.0019, 0.0299,
+         0.0387, 0.0033, 0.0311, 0.0024, 0.0194, 0.0037, 0.0137, 0.0278, 0.0233,
+         0.2708]], device='cuda:0')
