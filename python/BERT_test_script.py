@@ -4,7 +4,6 @@ from transformers import (
     AutoModelForSequenceClassification,
     Trainer,
     TrainingArguments,
-    DataCollatorForSequenceClassification,
 )
 from datasets import load_dataset
 import torch.nn.functional as F
@@ -117,7 +116,12 @@ filtered_dataset = dataset.filter(filter_single_label)
 
 # Step 2: Preprocess the dataset (tokenize)
 def preprocess_function(examples):
-    return tokenizer(examples["text"], truncation=True, padding=True, max_length=128)
+    return tokenizer(
+        examples["text"],
+        truncation=True,
+        padding="max_length",  # Pad to a fixed length
+        max_length=200,  # Set a fixed max length (can adjust as needed)
+    )
 
 
 # Tokenize the dataset
@@ -144,16 +148,12 @@ training_args = TrainingArguments(
 )
 
 # Step 5: Initialize the Trainer
-# Use the default data collator with dynamic padding
-data_collator = DataCollatorForSequenceClassification(tokenizer, padding="longest")
-
 trainer = Trainer(
     model=model,
     args=training_args,
     train_dataset=tokenized_datasets["train"],
     eval_dataset=tokenized_datasets["validation"],
     compute_metrics=compute_metrics,
-    data_collator=data_collator,  # Add the data collator here
 )
 
 
