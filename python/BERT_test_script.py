@@ -4,6 +4,7 @@ from transformers import (
     AutoModelForSequenceClassification,
     Trainer,
     TrainingArguments,
+    DataCollatorForSequenceClassification,
 )
 from datasets import load_dataset
 import torch.nn.functional as F
@@ -143,13 +144,18 @@ training_args = TrainingArguments(
 )
 
 # Step 5: Initialize the Trainer
+# Use the default data collator with dynamic padding
+data_collator = DataCollatorForSequenceClassification(tokenizer, padding="longest")
+
 trainer = Trainer(
-    model=model,  # the model to train
-    args=training_args,  # training arguments
-    train_dataset=tokenized_datasets["train"],  # training dataset
-    eval_dataset=tokenized_datasets["validation"],  # evaluation dataset
-    compute_metrics=compute_metrics,  # evaluation metric (accuracy)
+    model=model,
+    args=training_args,
+    train_dataset=tokenized_datasets["train"],
+    eval_dataset=tokenized_datasets["validation"],
+    compute_metrics=compute_metrics,
+    data_collator=data_collator,  # Add the data collator here
 )
+
 
 # Step 6: Train the model
 trainer.train()
