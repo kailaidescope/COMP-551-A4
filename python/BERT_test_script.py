@@ -24,6 +24,9 @@ outputs = model(**inputs)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Device: {device}")
 
+# Move the model to the selected device (either GPU or CPU)
+model.to(device)
+
 # Move input tensors to GPU if available
 inputs = {k: v.to(device) for k, v in inputs.items()}
 
@@ -73,5 +76,5 @@ label_map = {
 }
 
 # Print the result
-print(f"Predicted class: {label_map.get(predicted_class_idx, 'Unknown')}")
+print(f"Predicted class: {label_map.get(str(predicted_class_idx), 'Unknown')}")
 print(f"Predicted probabilities: {probabilities}")
