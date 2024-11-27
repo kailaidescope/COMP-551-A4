@@ -1,0 +1,8 @@
+Starting BERT test script
+Device: cuda
+Predicted class: caring
+Predicted probabilities: tensor([[0.0376, 0.0282, 0.0272, 0.0324, 0.0398, 0.0492, 0.0410, 0.0450, 0.0277,
+         0.0390, 0.0343, 0.0338, 0.0346, 0.0248, 0.0215, 0.0313, 0.0282, 0.0402,
+         0.0419, 0.0464, 0.0435, 0.0341, 0.0475, 0.0350, 0.0308, 0.0266, 0.0450,
+         0.0334]], device='cuda:0')
+Fine-tuning the model on the GoEmotions dataset...
