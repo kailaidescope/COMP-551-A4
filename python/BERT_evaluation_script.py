@@ -1,9 +1,5 @@
 import torch
-from transformers import (
-    AutoTokenizer,
-    AutoModelForSequenceClassification,
-    DataCollatorForSequenceClassification,
-)
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from datasets import load_dataset
 from torch.utils.data import DataLoader
 from tqdm import tqdm
@@ -43,17 +39,16 @@ test_dataset = dataset["test"]
 
 # Preprocess function (tokenization)
 def preprocess_function(examples):
-    return tokenizer(examples["text"], truncation=True, padding=True, max_length=128)
+    return tokenizer(
+        examples["text"], truncation=True, padding="max_length", max_length=200
+    )
 
 
 # Tokenize the test dataset
 tokenized_test = test_dataset.map(preprocess_function, batched=True)
 
-# DataCollator for dynamic padding
-data_collator = DataCollatorForSequenceClassification(tokenizer, padding="longest")
-
 # DataLoader for batching the test data
-test_dataloader = DataLoader(tokenized_test, batch_size=16, collate_fn=data_collator)
+test_dataloader = DataLoader(tokenized_test, batch_size=16)
 
 
 # Function to make predictions on the test dataset
