@@ -1,5 +1,9 @@
 import torch
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
+from transformers import (
+    AutoTokenizer,
+    AutoModelForSequenceClassification,
+    DataCollatorForSequenceClassification,
+)
 from datasets import load_dataset
 from torch.utils.data import DataLoader
 from tqdm import tqdm
@@ -22,7 +26,7 @@ tokenizer = AutoTokenizer.from_pretrained(bert_path)
 model = AutoModelForSequenceClassification.from_pretrained(bert_path, num_labels=28)
 
 # Load the classification head from the specified path
-classification_head_path = input_head_path
+classification_head_path = input_head_path  # Path to the saved classification head
 classification_head = torch.load(classification_head_path)
 
 # Replace the model's classification head with the loaded one
@@ -45,8 +49,11 @@ def preprocess_function(examples):
 # Tokenize the test dataset
 tokenized_test = test_dataset.map(preprocess_function, batched=True)
 
+# DataCollator for dynamic padding
+data_collator = DataCollatorForSequenceClassification(tokenizer, padding="longest")
+
 # DataLoader for batching the test data
-test_dataloader = DataLoader(tokenized_test, batch_size=16)
+test_dataloader = DataLoader(tokenized_test, batch_size=16, collate_fn=data_collator)
 
 
 # Function to make predictions on the test dataset
