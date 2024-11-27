@@ -144,14 +144,10 @@ training_args = TrainingArguments(
     per_device_eval_batch_size=16,  # Batch size for evaluation
     num_train_epochs=3,  # Number of epochs
     weight_decay=0.01,  # Weight decay strength
-    logging_dir=None,  # Disable logging
-    logging_steps=0,  # Disable logging
-    save_steps=0,  # Disable saving checkpoints
-    save_total_limit=0,  # Limit the number of checkpoints to 0
-    disable_tqdm=True,  # Disable tqdm progress bar
+    logging_strategy="no",  # No logging
+    save_strategy="no",  # No saving
     push_to_hub=False,  # Don't push model to Hugging Face Hub
-    report_to=None,  # Disable reporting to tracking tools like TensorBoard, etc.
-    load_best_model_at_end=False,  # Disable automatic best model loading
+    report_to="none",  # Disable reporting to tracking tools like TensorBoard, etc.
 )
 
 # Step 5: Initialize the Trainer
