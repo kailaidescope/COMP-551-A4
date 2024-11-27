@@ -1,54 +1,0 @@
-2024-11-27 14:18:15.195784: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
-2024-11-27 14:18:15.207550: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:477] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
-WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-E0000 00:00:1732735095.219707 1731399 cuda_dnn.cc:8310] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
-E0000 00:00:1732735095.223382 1731399 cuda_blas.cc:1418] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
-2024-11-27 14:18:15.239522: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
-To enable the following instructions: AVX2 AVX512F AVX512_VNNI AVX512_BF16 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
-/usr/local/env_dirs/fall2024/lib/python3.12/site-packages/transformers/tokenization_utils_base.py:1601: FutureWarning: `clean_up_tokenization_spaces` was not set. It will be set to `True` by default. This behavior will be depracted in transformers v4.45, and will be then set to `False` by default. For more details check this issue: https://github.com/huggingface/transformers/issues/31884
-  warnings.warn(
-Some weights of BertForSequenceClassification were not initialized from the model checkpoint at /opt/models/bert-base-uncased and are newly initialized: ['classifier.bias', 'classifier.weight']
-You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
-Downloading readme:   0%|          | 0.00/9.40k [00:00<?, ?B/s]Downloading readme: 100%|██████████| 9.40k/9.40k [00:00<00:00, 28.8MB/s]
-Downloading data:   0%|          | 0.00/2.77M [00:00<?, ?B/s]Downloading data: 100%|██████████| 2.77M/2.77M [00:02<00:00, 1.09MB/s]Downloading data: 100%|██████████| 2.77M/2.77M [00:02<00:00, 1.07MB/s]
-Downloading data:   0%|          | 0.00/350k [00:00<?, ?B/s]Downloading data: 100%|██████████| 350k/350k [00:00<00:00, 6.74MB/s]
-Downloading data:   0%|          | 0.00/347k [00:00<?, ?B/s]Downloading data: 100%|██████████| 347k/347k [00:00<00:00, 7.92MB/s]
-Generating train split:   0%|          | 0/43410 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 43410/43410 [00:00<00:00, 525205.99 examples/s]
-Generating validation split:   0%|          | 0/5426 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 5426/5426 [00:00<00:00, 361065.09 examples/s]
-Generating test split:   0%|          | 0/5427 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 5427/5427 [00:00<00:00, 377549.97 examples/s]
-Filter:   0%|          | 0/43410 [00:00<?, ? examples/s]Filter:  76%|███████▌  | 33000/43410 [00:00<00:00, 322655.32 examples/s]Filter: 100%|██████████| 43410/43410 [00:00<00:00, 254613.30 examples/s]
-Filter:   0%|          | 0/5426 [00:00<?, ? examples/s]Filter: 100%|██████████| 5426/5426 [00:00<00:00, 182362.50 examples/s]
-Filter:   0%|          | 0/5427 [00:00<?, ? examples/s]Filter: 100%|██████████| 5427/5427 [00:00<00:00, 184007.69 examples/s]
-Map:   0%|          | 0/36308 [00:00<?, ? examples/s]Map:   6%|▌         | 2000/36308 [00:00<00:06, 5578.13 examples/s]Map:  14%|█▍        | 5000/36308 [00:00<00:02, 11126.02 examples/s]Map:  25%|██▍       | 9000/36308 [00:00<00:01, 15133.71 examples/s]Map:  33%|███▎      | 12000/36308 [00:00<00:01, 16349.13 examples/s]Map:  41%|████▏     | 15000/36308 [00:00<00:01, 17612.64 examples/s]Map:  47%|████▋     | 17000/36308 [00:01<00:01, 18038.16 examples/s]Map:  55%|█████▌    | 20000/36308 [00:01<00:00, 18477.77 examples/s]Map:  61%|██████    | 22000/36308 [00:01<00:00, 18828.64 examples/s]Map:  69%|██████▉   | 25000/36308 [00:01<00:00, 18347.65 examples/s]Map:  74%|███████▍  | 27000/36308 [00:01<00:00, 12544.89 examples/s]Map:  85%|████████▌ | 31000/36308 [00:02<00:00, 15016.19 examples/s]Map:  96%|█████████▋| 35000/36308 [00:02<00:00, 16677.62 examples/s]Map: 100%|██████████| 36308/36308 [00:02<00:00, 14185.79 examples/s]
-Map:   0%|          | 0/4548 [00:00<?, ? examples/s]Map:  88%|████████▊ | 4000/4548 [00:00<00:00, 21684.73 examples/s]Map: 100%|██████████| 4548/4548 [00:00<00:00, 17825.94 examples/s]
-Map:   0%|          | 0/4590 [00:00<?, ? examples/s]Map:  87%|████████▋ | 4000/4590 [00:00<00:00, 21395.83 examples/s]Map: 100%|██████████| 4590/4590 [00:00<00:00, 17825.99 examples/s]
-/usr/local/env_dirs/fall2024/lib/python3.12/site-packages/transformers/training_args.py:1525: FutureWarning: `evaluation_strategy` is deprecated and will be removed in version 4.46 of 🤗 Transformers. Use `eval_strategy` instead
-  warnings.warn(
-  0%|          | 0/6810 [00:00<?, ?it/s]Traceback (most recent call last):
-  File "/home/2021/kturan/courses/COMP551/COMP-551-A4/jobs/../python/BERT_test_script.py", line 155, in <module>
-    trainer.train()
-  File "/usr/local/env_dirs/fall2024/lib/python3.12/site-packages/transformers/trainer.py", line 1938, in train
-    return inner_training_loop(
-           ^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/env_dirs/fall2024/lib/python3.12/site-packages/transformers/trainer.py", line 2236, in _inner_training_loop
-    for step, inputs in enumerate(epoch_iterator):
-  File "/usr/local/env_dirs/fall2024/lib/python3.12/site-packages/accelerate/data_loader.py", line 552, in __iter__
-    current_batch = next(dataloader_iter)
-                    ^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/env_dirs/fall2024/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 630, in __next__
-    data = self._next_data()
-           ^^^^^^^^^^^^^^^^^
-  File "/usr/local/env_dirs/fall2024/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 673, in _next_data
-    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/env_dirs/fall2024/lib/python3.12/site-packages/torch/utils/data/_utils/fetch.py", line 55, in fetch
-    return self.collate_fn(data)
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/env_dirs/fall2024/lib/python3.12/site-packages/transformers/data/data_collator.py", line 92, in default_data_collator
-    return torch_default_data_collator(features)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/env_dirs/fall2024/lib/python3.12/site-packages/transformers/data/data_collator.py", line 158, in torch_default_data_collator
-    batch[k] = torch.tensor([f[k] for f in features])
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-ValueError: expected sequence of length 115 at dim 1 (got 42)
-  0%|          | 0/6810 [00:00<?, ?it/s]
