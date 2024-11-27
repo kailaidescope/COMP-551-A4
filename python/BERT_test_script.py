@@ -137,7 +137,7 @@ def compute_metrics(p):
 # Step 4: Set up training arguments
 # Define training arguments with minimal output
 training_args = TrainingArguments(
-    output_dir="./results",  # Still need an output directory, but no logging or saving
+    output_dir=f"{output_path}/results",  # Still need an output directory, but no logging or saving
     evaluation_strategy="epoch",  # Evaluate every epoch
     learning_rate=2e-5,  # Learning rate for training
     per_device_train_batch_size=16,  # Batch size for training
