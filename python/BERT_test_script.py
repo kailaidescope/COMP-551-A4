@@ -135,16 +135,23 @@ def compute_metrics(p):
 
 
 # Step 4: Set up training arguments
+# Define training arguments with minimal output
 training_args = TrainingArguments(
-    output_dir="./results",  # output directory
-    evaluation_strategy="epoch",  # evaluation strategy to adopt during training
-    learning_rate=2e-5,  # learning rate
-    per_device_train_batch_size=16,  # batch size for training
-    per_device_eval_batch_size=16,  # batch size for evaluation
-    num_train_epochs=3,  # number of training epochs
-    weight_decay=0.01,  # strength of weight decay
-    push_to_hub=False,  # Don't push the model to the Hugging Face hub
-    logging_dir="./logs",  # directory for storing logs
+    output_dir="./results",  # Still need an output directory, but no logging or saving
+    evaluation_strategy="epoch",  # Evaluate every epoch
+    learning_rate=2e-5,  # Learning rate for training
+    per_device_train_batch_size=16,  # Batch size for training
+    per_device_eval_batch_size=16,  # Batch size for evaluation
+    num_train_epochs=3,  # Number of epochs
+    weight_decay=0.01,  # Weight decay strength
+    logging_dir=None,  # Disable logging
+    logging_steps=0,  # Disable logging
+    save_steps=0,  # Disable saving checkpoints
+    save_total_limit=0,  # Limit the number of checkpoints to 0
+    disable_tqdm=True,  # Disable tqdm progress bar
+    push_to_hub=False,  # Don't push model to Hugging Face Hub
+    report_to=None,  # Disable reporting to tracking tools like TensorBoard, etc.
+    load_best_model_at_end=False,  # Disable automatic best model loading
 )
 
 # Step 5: Initialize the Trainer
