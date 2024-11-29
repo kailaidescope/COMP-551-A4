@@ -118,7 +118,7 @@ def predict(model, dataloader, device):
 predictions, true_labels = predict(model, test_dataloader, device)
 
 # Calculate accuracy
-accuracy = (predictions == true_labels).mean()
+accuracy = np.mean(np.array(predictions) == np.array(true_labels))
 print(f"Test Accuracy: {accuracy:.4f}")
 
 # Optionally, map the predictions to the labels (for example, emotions)
