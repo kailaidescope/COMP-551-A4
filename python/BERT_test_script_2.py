@@ -8,19 +8,16 @@ from transformers import (
 from datasets import load_dataset
 import torch.nn.functional as F
 from sklearn.metrics import accuracy_score
+from sklearn.utils.class_weight import compute_class_weight
+import numpy as np
 import sys
 
 if len(sys.argv) == 1:
     output_path = "."
-    head_name = "classification_head"
 elif len(sys.argv) == 2:
     output_path = sys.argv[1]
-    head_name = "classification_head"
-elif len(sys.argv) == 3:
-    output_path = sys.argv[1]
-    head_name = sys.argv[2]
 else:
-    print("Usage: python test_graph_saving.py [output_path] [head_name]")
+    print("Usage: python test_graph_saving.py [output_path]")
     sys.exit(1)
 
 print("Starting BERT test script")
@@ -147,7 +144,8 @@ training_args = TrainingArguments(
     learning_rate=2e-5,  # Learning rate for training
     per_device_train_batch_size=16,  # Batch size for training
     per_device_eval_batch_size=16,  # Batch size for evaluation
-    num_train_epochs=7,  # Number of epochs
+    warmup_steps=500,  # Number of warmup steps for learning rate scheduler
+    num_train_epochs=3,  # Number of epochs
     weight_decay=0.01,  # Weight decay strength
     logging_strategy="no",  # No logging
     save_strategy="no",  # No saving
@@ -155,13 +153,54 @@ training_args = TrainingArguments(
     report_to="none",  # Disable reporting to tracking tools like TensorBoard, etc.
 )
 
+
 # Step 5: Initialize the Trainer
+# Extract all labels from the training dataset
+labels = [label[0] for label in filtered_dataset["train"]["labels"]]
+
+# Compute class weights
+class_weights = compute_class_weight(
+    class_weight="balanced",
+    classes=np.arange(28),  # Total number of classes in GoEmotions
+    y=labels,
+)
+class_weights_tensor = (
+    torch.tensor(class_weights).float().to("cuda")
+)  # Move to GPU if available
+
+
+class WeightedTrainer(Trainer):
+    def __init__(self, *args, class_weights=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.class_weights = class_weights  # Pass the computed class weights
+
+    def compute_loss(self, model, inputs, return_outputs=False):
+        labels = inputs.pop("labels")
+        outputs = model(**inputs)
+        logits = outputs.logits
+
+        # Apply class weights in CrossEntropyLoss
+        loss_fct = torch.nn.CrossEntropyLoss(weight=self.class_weights)
+        loss = loss_fct(logits, labels)
+
+        return (loss, outputs) if return_outputs else loss
+
+
 trainer = Trainer(
     model=model,
     args=training_args,
     train_dataset=tokenized_datasets["train"],
     eval_dataset=tokenized_datasets["validation"],
     compute_metrics=compute_metrics,
+)
+# Initialize the custom trainer
+trainer = WeightedTrainer(
+    model=model,
+    args=training_args,
+    train_dataset=filtered_dataset["train"],
+    eval_dataset=filtered_dataset["validation"],
+    tokenizer=tokenizer,
+    class_weights=class_weights_tensor,  # Pass class weights
 )
 
 
@@ -170,7 +209,7 @@ trainer.train()
 
 # Step 6.5: Save only the classification head (classifier layer)
 classifier_layer = model.classifier  # This is the classification head
-torch.save(classifier_layer.state_dict(), f"{output_path}/{head_name}.pth")
+torch.save(classifier_layer.state_dict(), f"{output_path}/classification_head.pth")
 print("Classification head saved.")
 
 # Step 7: Test the model again after fine-tuning
