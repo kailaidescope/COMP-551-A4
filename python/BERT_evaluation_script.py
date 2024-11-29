@@ -1,6 +1,7 @@
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from datasets import load_dataset
+from torch.nn.utils.rnn import pad_sequence
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 import torch.nn.functional as F
@@ -57,11 +58,34 @@ def preprocess_function(examples):
 # Tokenize the test dataset
 tokenized_test = test_dataset.map(preprocess_function, batched=True)
 
-# DataLoader for batching the test data
-test_dataloader = DataLoader(tokenized_test, batch_size=16)
+
+# Custom collate function to convert dataset batches into tensors
+def custom_collate_fn(batch):
+    # Extract inputs and labels from the batch
+    input_ids = [torch.tensor(example["input_ids"]) for example in batch]
+    attention_masks = [torch.tensor(example["attention_mask"]) for example in batch]
+    labels = [
+        torch.tensor(example["labels"][0]) for example in batch
+    ]  # Use the single label
+
+    # Pad the sequences to the same length
+    input_ids = pad_sequence(
+        input_ids, batch_first=True, padding_value=tokenizer.pad_token_id
+    )
+    attention_masks = pad_sequence(attention_masks, batch_first=True, padding_value=0)
+    labels = torch.tensor(labels)
+
+    # Return the padded inputs and labels
+    return {"input_ids": input_ids, "attention_mask": attention_masks, "label": labels}
 
 
-# Function to make predictions on the test dataset
+# DataLoader for batching the test data with the custom collate function
+test_dataloader = DataLoader(
+    tokenized_test, batch_size=16, collate_fn=custom_collate_fn
+)
+
+
+# Updated predict function (no changes needed here)
 def predict(model, dataloader, device):
     model.eval()  # Set the model to evaluation mode
     predictions = []
@@ -70,7 +94,10 @@ def predict(model, dataloader, device):
     with torch.no_grad():
         for batch in tqdm(dataloader, desc="Evaluating"):
             # Move batch to the appropriate device
-            inputs = {key: value.to(device) for key, value in batch.items()}
+            inputs = {
+                key: value.to(device) for key, value in batch.items() if key != "label"
+            }
+            labels = batch["label"].to(device)
 
             # Forward pass
             outputs = model(**inputs)
@@ -82,9 +109,7 @@ def predict(model, dataloader, device):
 
             # Append predictions and true labels
             predictions.extend(predicted_classes.cpu().numpy())
-            true_labels.extend(
-                batch["label"]
-            )  # Assuming the labels are in the "label" column
+            true_labels.extend(labels.cpu().numpy())
 
     return predictions, true_labels
 
