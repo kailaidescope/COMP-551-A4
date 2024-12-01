@@ -135,7 +135,7 @@ def compute_metrics(eval_preds):
 training_args = TrainingArguments(
     output_dir=f"{output_path}/results",  # Still need an output directory, but no logging or saving
     evaluation_strategy="epoch",  # Evaluate every epoch
-    learning_rate=0.02,  # Learning rate for training
+    learning_rate=0.01,  # Learning rate for training
     per_device_train_batch_size=16,  # Batch size for training
     per_device_eval_batch_size=16,  # Batch size for evaluation
     num_train_epochs=8,  # Number of epochs
