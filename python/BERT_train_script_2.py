@@ -105,7 +105,7 @@ data_collator = DataCollatorWithPadding(tokenizer)
 
 
 # Step 3: Define the compute metric function for evaluation
-metric = load_metric("glue", "mprc")
+metric = load_metric("glue", "mrpc")
 
 
 def compute_metrics(eval_preds):
