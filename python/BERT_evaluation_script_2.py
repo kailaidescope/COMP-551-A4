@@ -1,19 +1,27 @@
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from datasets import load_dataset
-from torch.nn.utils.rnn import pad_sequence
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 import torch.nn.functional as F
+from torch.nn.utils.rnn import pad_sequence
+from torch.utils.data import DataLoader
 import numpy as np
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
 import sys
 
 if len(sys.argv) == 1:
     input_head_path = "."
+    output_confusion_matrix_path = "."
 elif len(sys.argv) == 2:
     input_head_path = sys.argv[1]
+    output_confusion_matrix_path = "."
+elif len(sys.argv) == 3:
+    input_head_path = sys.argv[1]
+    output_confusion_matrix_path = sys.argv[2]
 else:
-    print("Usage: python test_graph_saving.py [input_path]")
+    print("Usage: python test_graph_saving.py [input_head_path] [output_graph_path]")
     sys.exit(1)
 
 # Load the tokenizer and base BERT model
@@ -59,13 +67,25 @@ def preprocess_function(examples):
 # Tokenize the test dataset
 tokenized_test = test_dataset.map(preprocess_function, batched=True)
 
-trainer = Trainer(
-    model,
-    eval_dataset=tokenized_datasets["validation"],
-    data_collator=data_collator,
-    tokenizer=tokenizer,
-    compute_metrics=compute_metrics,
-)
+
+# Custom collate function to convert dataset batches into tensors
+def custom_collate_fn(batch):
+    # Extract inputs and labels from the batch
+    input_ids = [torch.tensor(example["input_ids"]) for example in batch]
+    attention_masks = [torch.tensor(example["attention_mask"]) for example in batch]
+    labels = [
+        torch.tensor(example["labels"][0]) for example in batch
+    ]  # Use the single label
+
+    # Pad the sequences to the same length
+    input_ids = pad_sequence(
+        input_ids, batch_first=True, padding_value=tokenizer.pad_token_id
+    )
+    attention_masks = pad_sequence(attention_masks, batch_first=True, padding_value=0)
+    labels = torch.tensor(labels)
+
+    # Return the padded inputs and labels
+    return {"input_ids": input_ids, "attention_mask": attention_masks, "label": labels}
 
 
 # DataLoader for batching the test data with the custom collate function
@@ -149,3 +169,22 @@ for i in range(10):
     print(
         f"True Label: {label_map[str(true_labels[i])]} | Predicted: {label_map.get(str(predictions[i]), 'Unknown')}"
     )
+
+
+# Function to compute and display the confusion matrix
+def plot_confusion_matrix(true_labels, predictions, label_map, output_path="."):
+    # Convert label_map to a sorted list of labels
+    labels = list(label_map.values())
+
+    # Compute the confusion matrix
+    cm = confusion_matrix(true_labels, predictions, labels=range(len(labels)))
+
+    # Display the confusion matrix using matplotlib
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=labels)
+    disp.plot(cmap=plt.cm.Blues, xticks_rotation="vertical")
+    plt.title("Confusion Matrix")
+    plt.savefig(output_path, dpi=300, bbox_inches="tight")
+
+
+# Call the function to plot the confusion matrix
+plot_confusion_matrix(true_labels, predictions, label_map, output_confusion_matrix_path)
