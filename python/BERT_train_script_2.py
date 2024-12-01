@@ -142,10 +142,15 @@ trainer = Trainer(
 )
 
 
-# Step 5.1: Train the model
+# Step 6: Train the model
 trainer.train()
 
-# Step 5.2: Test the model
+# Step 7: Save only the classification head (classifier layer)
+classifier_layer = model.classifier  # This is the classification head
+torch.save(classifier_layer.state_dict(), f"{output_path}/{head_name}.pth")
+print("Classification head saved.")
+
+# Step 8: Test the model
 
 predictions = trainer.predict(tokenized_datasets["test"])
 class_predictions = np.argmax(predictions.predictions, axis=1)
@@ -161,9 +166,3 @@ print(
     "Metrics:",
     metric.compute(predictions=class_predictions, references=predictions.label_ids),
 )
-
-
-# Step 6: Save only the classification head (classifier layer)
-classifier_layer = model.classifier  # This is the classification head
-torch.save(classifier_layer.state_dict(), f"{output_path}/{head_name}.pth")
-print("Classification head saved.")
