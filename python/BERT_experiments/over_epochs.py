@@ -13,46 +13,13 @@ import sys
 
 if len(sys.argv) == 1:
     output_path = "."
-    head_name = "classification_head"
 elif len(sys.argv) == 2:
     output_path = sys.argv[1]
-    head_name = "classification_head"
-elif len(sys.argv) == 3:
-    output_path = sys.argv[1]
-    head_name = sys.argv[2]
 else:
-    print("Usage: python test_graph_saving.py [output_path] [head_name]")
+    print("Usage: python over_epochs.py [output_path]")
     sys.exit(1)
 
-print("Starting BERT fine-tuning script")
-
-# Path to the local directory containing the saved model
-bert_path = "/opt/models/bert-base-uncased"
-distil_path = "/opt/models/distilgpt2"
-
-model_path = bert_path
-
-print("Loading model")
-
-# Load the tokenizer and model
-tokenizer = AutoTokenizer.from_pretrained(model_path)
-model = AutoModelForSequenceClassification.from_pretrained(
-    model_path, num_labels=28
-)  # 27 emotions + neutral
-
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-print(f"Device: {device}")
-
-# Move the model to the selected device (either GPU or CPU)
-model.to(device)
-
-# Freeze all BERT layers
-for param in model.bert.parameters():
-    param.requires_grad = False
-
-# Only the classification head will be trained
-for param in model.classifier.parameters():  # Assuming 'classifier' is your head
-    param.requires_grad = True
+print("Starting BERT epoch experiments script")
 
 # If you have a label map (e.g., emotions or sentiments), you can map the index to the label
 label_map = {
@@ -85,6 +52,29 @@ label_map = {
     "26": "surprise",
     "27": "neutral",
 }
+
+# Path to the local directory containing the saved model
+bert_path = "/opt/models/bert-base-uncased"
+distil_path = "/opt/models/distilgpt2"
+
+model_path = bert_path
+
+epoch_list = range(1, 6)
+
+print("Loading model")
+
+# Load the tokenizer and model
+tokenizer = AutoTokenizer.from_pretrained(model_path)
+model = AutoModelForSequenceClassification.from_pretrained(
+    model_path, num_labels=28
+)  # 27 emotions + neutral
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(f"Device: {device}")
+
+# Move the model to the selected device (either GPU or CPU)
+model.to(device)
+
 
 print("Fine-tuning the model on the GoEmotions dataset...")
 
