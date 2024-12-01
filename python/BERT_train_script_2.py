@@ -6,9 +6,8 @@ from transformers import (
     TrainingArguments,
     DataCollatorWithPadding,
 )
-from datasets import load_dataset
-import torch.nn.functional as F
-from sklearn.metrics import accuracy_score
+from datasets import load_dataset, load_metric
+import numpy as np
 import sys
 
 if len(sys.argv) == 1:
@@ -106,9 +105,13 @@ data_collator = DataCollatorWithPadding(tokenizer)
 
 
 # Step 3: Define the compute metric function for evaluation
-def compute_metrics(p):
-    preds = p.predictions.argmax(axis=-1)
-    return {"accuracy": accuracy_score(p.label_ids, preds)}
+metric = load_metric("glue", "mprc")
+
+
+def compute_metrics(eval_preds):
+    logits, labels = eval_preds
+    predictions = np.argmax(logits, axis=-1)
+    return metric.compute(predictions=predictions, references=labels)
 
 
 # Step 4: Set up training arguments
@@ -133,37 +136,34 @@ trainer = Trainer(
     args=training_args,
     train_dataset=tokenized_datasets["train"],
     eval_dataset=tokenized_datasets["validation"],
+    data_collator=data_collator,
+    tokenizer=tokenizer,
     compute_metrics=compute_metrics,
 )
 
 
-# Step 6: Train the model
+# Step 5.1: Train the model
 trainer.train()
 
-# Step 6.5: Save only the classification head (classifier layer)
+# Step 5.2: Test the model
+
+predictions = trainer.predict(tokenized_datasets["test"])
+class_predictions = np.argmax(predictions.predictions, axis=1)
+print(
+    "Predictions shape: ",
+    predictions.predictions.shape,
+    "\nLabels shape: ",
+    predictions.label_ids.shape,
+    "\nClass Predictions: ",
+    class_predictions,
+)
+print(
+    "Metrics:",
+    metric.compute(predictions=class_predictions, references=predictions.label_ids),
+)
+
+
+# Step 6: Save only the classification head (classifier layer)
 classifier_layer = model.classifier  # This is the classification head
 torch.save(classifier_layer.state_dict(), f"{output_path}/{head_name}.pth")
 print("Classification head saved.")
-
-# Step 7: Test the model again after fine-tuning
-inputs = tokenizer("Hello, Hugging Face!", return_tensors="pt")
-inputs = {k: v.to(device) for k, v in inputs.items()}
-
-# Forward pass through the fine-tuned model
-with torch.no_grad():  # No need to compute gradients for inference
-    outputs = model(**inputs)
-
-# Get the logits (raw predictions) from the model output
-logits = outputs.logits
-
-# Convert logits to probabilities (using softmax)
-probabilities = F.softmax(logits, dim=-1)
-
-# Get the predicted class label (the index of the max probability)
-predicted_class_idx = torch.argmax(probabilities, dim=-1).item()
-
-# Print the new prediction after training
-print(
-    f"Predicted class after fine-tuning: {label_map.get(str(predicted_class_idx), 'Unknown')}"
-)
-print(f"Predicted probabilities after fine-tuning: {probabilities}")

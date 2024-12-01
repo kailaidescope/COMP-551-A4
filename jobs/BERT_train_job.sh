@@ -17,5 +17,5 @@ module load miniconda/miniconda-fall2024
 
 echo "BERT Test Job" > ../output/job-$job_number/test_out.txt
 nvidia-smi >> ../output/job-$job_number/test_out.txt
-python3 ../python/BERT_train_script.py ../output/job-$job_number 3_epoch_head #insert python script here
+python3 ../python/BERT_train_script_2.py ../output/job-$job_number 3_epoch_head #insert python script here
 
