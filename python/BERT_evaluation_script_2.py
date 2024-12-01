@@ -57,10 +57,12 @@ filtered_dataset = dataset.filter(filter_single_label)
 test_dataset = filtered_dataset["test"]
 
 
-# Preprocess function (tokenization)
 def preprocess_function(examples):
     return tokenizer(
-        examples["text"], truncation=True, padding="max_length", max_length=200
+        examples["text"],
+        truncation=True,
+        padding="max_length",  # Pad to a fixed length
+        max_length=200,  # Set a fixed max length (can adjust as needed)
     )
 
 

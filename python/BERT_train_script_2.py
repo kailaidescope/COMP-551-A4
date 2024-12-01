@@ -4,23 +4,27 @@ from transformers import (
     AutoModelForSequenceClassification,
     Trainer,
     TrainingArguments,
+    DataCollatorWithPadding,
 )
 from datasets import load_dataset
 import torch.nn.functional as F
 from sklearn.metrics import accuracy_score
-from sklearn.utils.class_weight import compute_class_weight
-import numpy as np
 import sys
 
 if len(sys.argv) == 1:
     output_path = "."
+    head_name = "classification_head"
 elif len(sys.argv) == 2:
     output_path = sys.argv[1]
+    head_name = "classification_head"
+elif len(sys.argv) == 3:
+    output_path = sys.argv[1]
+    head_name = sys.argv[2]
 else:
-    print("Usage: python test_graph_saving.py [output_path]")
+    print("Usage: python test_graph_saving.py [output_path] [head_name]")
     sys.exit(1)
 
-print("Starting BERT test script")
+print("Starting BERT fine-tuning script")
 
 # Path to the local directory containing the saved model
 bert_path = "/opt/models/bert-base-uncased"
@@ -28,42 +32,19 @@ distil_path = "/opt/models/distilgpt2"
 
 model_path = bert_path
 
+print("Loading model")
+
 # Load the tokenizer and model
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 model = AutoModelForSequenceClassification.from_pretrained(
     model_path, num_labels=28
 )  # 27 emotions + neutral
 
-# Test the model with a sample input
-input_text = "Hello, Hugging Face!"
-inputs = tokenizer(input_text, return_tensors="pt")
-outputs = model(**inputs)
-
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Device: {device}")
 
 # Move the model to the selected device (either GPU or CPU)
 model.to(device)
-
-# Freeze the base BERT model layers and only train the classification head
-for param in model.bert.parameters():
-    param.requires_grad = False
-
-# Move input tensors to GPU if available
-inputs = {k: v.to(device) for k, v in inputs.items()}
-
-# Forward pass through the model
-with torch.no_grad():  # No need to compute gradients for inference
-    outputs = model(**inputs)
-
-# Get the logits (raw predictions) from the model output
-logits = outputs.logits
-
-# Convert logits to probabilities (using softmax)
-probabilities = F.softmax(logits, dim=-1)
-
-# Get the predicted class label (the index of the max probability)
-predicted_class_idx = torch.argmax(probabilities, dim=-1).item()
 
 # If you have a label map (e.g., emotions or sentiments), you can map the index to the label
 label_map = {
@@ -97,10 +78,6 @@ label_map = {
     "27": "neutral",
 }
 
-# Print the result
-print(f"Predicted class: {label_map.get(str(predicted_class_idx), 'Unknown')}")
-print(f"Predicted probabilities: {probabilities}")
-
 print("Fine-tuning the model on the GoEmotions dataset...")
 
 # Step 1: Load the GoEmotions dataset
@@ -115,19 +92,17 @@ def filter_single_label(example):
 # Apply the filter to all splits (train, validation, test)
 filtered_dataset = dataset.filter(filter_single_label)
 
+print("Filtered dataset:\n", filtered_dataset)
+
 
 # Step 2: Preprocess the dataset (tokenize)
 def preprocess_function(examples):
-    return tokenizer(
-        examples["text"],
-        truncation=True,
-        padding="max_length",  # Pad to a fixed length
-        max_length=200,  # Set a fixed max length (can adjust as needed)
-    )
+    return tokenizer(examples["text"], truncation=True)
 
 
 # Tokenize the dataset
 tokenized_datasets = filtered_dataset.map(preprocess_function, batched=True)
+data_collator = DataCollatorWithPadding(tokenizer)
 
 
 # Step 3: Define the compute metric function for evaluation
@@ -144,7 +119,6 @@ training_args = TrainingArguments(
     learning_rate=2e-5,  # Learning rate for training
     per_device_train_batch_size=16,  # Batch size for training
     per_device_eval_batch_size=16,  # Batch size for evaluation
-    warmup_steps=500,  # Number of warmup steps for learning rate scheduler
     num_train_epochs=3,  # Number of epochs
     weight_decay=0.01,  # Weight decay strength
     logging_strategy="no",  # No logging
@@ -153,54 +127,13 @@ training_args = TrainingArguments(
     report_to="none",  # Disable reporting to tracking tools like TensorBoard, etc.
 )
 
-
 # Step 5: Initialize the Trainer
-# Extract all labels from the training dataset
-labels = [label[0] for label in filtered_dataset["train"]["labels"]]
-
-# Compute class weights
-class_weights = compute_class_weight(
-    class_weight="balanced",
-    classes=np.arange(28),  # Total number of classes in GoEmotions
-    y=labels,
-)
-class_weights_tensor = (
-    torch.tensor(class_weights).float().to("cuda")
-)  # Move to GPU if available
-
-
-class WeightedTrainer(Trainer):
-    def __init__(self, *args, class_weights=None, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.class_weights = class_weights  # Pass the computed class weights
-
-    def compute_loss(self, model, inputs, return_outputs=False):
-        labels = inputs.pop("labels")
-        outputs = model(**inputs)
-        logits = outputs.logits
-
-        # Apply class weights in CrossEntropyLoss
-        loss_fct = torch.nn.CrossEntropyLoss(weight=self.class_weights)
-        loss = loss_fct(logits, labels)
-
-        return (loss, outputs) if return_outputs else loss
-
-
 trainer = Trainer(
     model=model,
     args=training_args,
     train_dataset=tokenized_datasets["train"],
     eval_dataset=tokenized_datasets["validation"],
     compute_metrics=compute_metrics,
-)
-# Initialize the custom trainer
-trainer = WeightedTrainer(
-    model=model,
-    args=training_args,
-    train_dataset=filtered_dataset["train"],
-    eval_dataset=filtered_dataset["validation"],
-    tokenizer=tokenizer,
-    class_weights=class_weights_tensor,  # Pass class weights
 )
 
 
@@ -209,7 +142,7 @@ trainer.train()
 
 # Step 6.5: Save only the classification head (classifier layer)
 classifier_layer = model.classifier  # This is the classification head
-torch.save(classifier_layer.state_dict(), f"{output_path}/classification_head.pth")
+torch.save(classifier_layer.state_dict(), f"{output_path}/{head_name}.pth")
 print("Classification head saved.")
 
 # Step 7: Test the model again after fine-tuning
