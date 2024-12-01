@@ -195,16 +195,20 @@ print("Durations:", durations)
 # Graph the results
 
 plt.plot(epoch_list, f1s, label="F1 Score")
+plt.title("F1 Score Over Epochs for Full Model Fine-Tuning")
 plt.savefig(f"{output_path}/f1.png", dpi=300)
 
 plt.plot(epoch_list, accuracies, label="Accuracy")
+plt.title("Accuracy Over Epochs for Full Model Fine-Tuning")
 plt.savefig(f"{output_path}/accuracy.png", dpi=300)
 
 plt.plot(epoch_list, durations, label="Duration")
+plt.title("Duration Over Epochs for Full Model Fine-Tuning")
 plt.savefig(f"{output_path}/duration.png", dpi=300)
 
 plt.plot(epoch_list, f1s, label="F1 Score")
 plt.plot(epoch_list, accuracies, label="Accuracy")
+plt.title("F1 Score and Accuracy Over Epochs for Full Model Fine-Tuning")
 plt.savefig(f"{output_path}/f1_and_accuracy.png", dpi=300)
 
 print("Graphs saved to disk")
