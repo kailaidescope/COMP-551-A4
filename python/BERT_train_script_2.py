@@ -50,6 +50,13 @@ model.to(device)
 for param in model.bert.parameters():
     param.requires_grad = False
 
+# Freeze the lower layers of BERT and leave the higher layers trainable
+for name, param in model.bert.named_parameters():
+    print(name)
+
+for name, param in model.named_parameters():
+    print(name)
+
 # Only the classification head will be trained
 for param in model.classifier.parameters():  # Assuming 'classifier' is your head
     param.requires_grad = True
@@ -128,10 +135,10 @@ def compute_metrics(eval_preds):
 training_args = TrainingArguments(
     output_dir=f"{output_path}/results",  # Still need an output directory, but no logging or saving
     evaluation_strategy="epoch",  # Evaluate every epoch
-    learning_rate=2e-5,  # Learning rate for training
+    learning_rate=0.01,  # Learning rate for training
     per_device_train_batch_size=16,  # Batch size for training
     per_device_eval_batch_size=16,  # Batch size for evaluation
-    num_train_epochs=3,  # Number of epochs
+    num_train_epochs=4,  # Number of epochs
     weight_decay=0.01,  # Weight decay strength
     logging_strategy="no",  # No logging
     save_strategy="no",  # No saving
