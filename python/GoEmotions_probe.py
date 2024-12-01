@@ -52,4 +52,3 @@ def filter_single_label(example):
 filtered_dataset = dataset.filter(filter_single_label)
 
 print("Filtered dataset:\n", filtered_dataset)
-print("Filtered dataset info:\n", filtered_dataset.info)
