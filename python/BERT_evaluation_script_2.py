@@ -59,25 +59,13 @@ def preprocess_function(examples):
 # Tokenize the test dataset
 tokenized_test = test_dataset.map(preprocess_function, batched=True)
 
-
-# Custom collate function to convert dataset batches into tensors
-def custom_collate_fn(batch):
-    # Extract inputs and labels from the batch
-    input_ids = [torch.tensor(example["input_ids"]) for example in batch]
-    attention_masks = [torch.tensor(example["attention_mask"]) for example in batch]
-    labels = [
-        torch.tensor(example["labels"][0]) for example in batch
-    ]  # Use the single label
-
-    # Pad the sequences to the same length
-    input_ids = pad_sequence(
-        input_ids, batch_first=True, padding_value=tokenizer.pad_token_id
-    )
-    attention_masks = pad_sequence(attention_masks, batch_first=True, padding_value=0)
-    labels = torch.tensor(labels)
-
-    # Return the padded inputs and labels
-    return {"input_ids": input_ids, "attention_mask": attention_masks, "label": labels}
+trainer = Trainer(
+    model,
+    eval_dataset=tokenized_datasets["validation"],
+    data_collator=data_collator,
+    tokenizer=tokenizer,
+    compute_metrics=compute_metrics,
+)
 
 
 # DataLoader for batching the test data with the custom collate function
