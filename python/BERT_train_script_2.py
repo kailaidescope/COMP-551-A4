@@ -6,7 +6,7 @@ from transformers import (
     TrainingArguments,
     DataCollatorWithPadding,
 )
-from datasets import load_dataset, load_metric
+from datasets import load_dataset, load_metric, list_metrics
 import numpy as np
 import sys
 
@@ -105,6 +105,7 @@ data_collator = DataCollatorWithPadding(tokenizer)
 
 
 # Step 3: Define the compute metric function for evaluation
+print(list_metrics())
 metric = load_metric("glue", "mrpc")
 
 
