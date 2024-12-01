@@ -111,7 +111,7 @@ def compute_metrics(eval_preds):
     predictions = np.argmax(logits, axis=-1)
     return {
         "accuracy": accuracy_score(labels, predictions),
-        "f1": f1_score(predictions=predictions, references=labels, average="macro"),
+        "f1": f1_score(labels, predictions, average="macro"),
     }
 
 
@@ -165,9 +165,7 @@ print(
 )
 print(
     "Metrics:/nF1:",
-    f1_score(
-        predictions=predictions, references=predictions.label_ids, average="macro"
-    ),
+    f1_score(predictions.label_ids, class_predictions, average="macro"),
     "\nAccuracy:",
-    accuracy_score(predictions.label_ids, predictions),
+    accuracy_score(predictions.label_ids, class_predictions),
 )
