@@ -6,7 +6,8 @@ from transformers import (
     TrainingArguments,
     DataCollatorWithPadding,
 )
-from datasets import load_dataset, load_metric, list_metrics
+from sklearn.metrics import f1_score, accuracy_score
+from datasets import load_dataset, load_metric
 import numpy as np
 import sys
 
@@ -105,14 +106,15 @@ data_collator = DataCollatorWithPadding(tokenizer)
 
 
 # Step 3: Define the compute metric function for evaluation
-print(list_metrics())
-metric = load_metric("glue", "mrpc")
-
-
 def compute_metrics(eval_preds):
     logits, labels = eval_preds
     predictions = np.argmax(logits, axis=-1)
-    return metric.compute(predictions=predictions, references=labels)
+    return {
+        "accuracy": accuracy_score(labels, predictions),
+        "f1": f1_score.compute(
+            predictions=predictions, references=labels, average="macro"
+        ),
+    }
 
 
 # Step 4: Set up training arguments
@@ -164,6 +166,10 @@ print(
     class_predictions,
 )
 print(
-    "Metrics:",
-    metric.compute(predictions=class_predictions, references=predictions.label_ids),
+    "Metrics:/nF1:",
+    f1_score.compute(
+        predictions=predictions, references=predictions.label_ids, average="macro"
+    ),
+    "\nAccuracy:",
+    accuracy_score(predictions.label_ids, predictions),
 )
