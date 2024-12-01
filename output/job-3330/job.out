@@ -1,0 +1,19 @@
+Starting BERT fine-tuning script
+Loading model
+Device: cuda
+Fine-tuning the model on the GoEmotions dataset...
+Filtered dataset:
+ DatasetDict({
+    train: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 36308
+    })
+    validation: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 4548
+    })
+    test: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 4590
+    })
+})
