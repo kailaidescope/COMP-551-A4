@@ -46,20 +46,19 @@ print(f"Device: {device}")
 # Move the model to the selected device (either GPU or CPU)
 model.to(device)
 
-# Freeze all BERT layers
-for param in model.bert.parameters():
-    param.requires_grad = False
+only_train_head = True
 
-# Freeze the lower layers of BERT and leave the higher layers trainable
-for name, param in model.bert.named_parameters():
-    print(name)
+if only_train_head:
+    # Freeze all BERT layers
+    for param in model.bert.parameters():
+        param.requires_grad = False
 
-for name, param in model.named_parameters():
-    print(name)
+    for name, param in model.named_parameters():
+        print("Name:", name, " - Size:", param.size())
 
-# Only the classification head will be trained
-for param in model.classifier.parameters():  # Assuming 'classifier' is your head
-    param.requires_grad = True
+    # Only the classification head will be trained
+    for param in model.classifier.parameters():  # Assuming 'classifier' is your head
+        param.requires_grad = True
 
 # If you have a label map (e.g., emotions or sentiments), you can map the index to the label
 label_map = {
