@@ -38,8 +38,6 @@ print("Fine-tuning the model on the GoEmotions dataset...")
 dataset = load_dataset("google-research-datasets/go_emotions")
 
 print("Dataset:\n", dataset.data)
-
-print("Dataset splits:\n", dataset.splits)
 print("Dataset info:\n", dataset.info)
 print("Train shape:\n", dataset["train"].shape)
 
