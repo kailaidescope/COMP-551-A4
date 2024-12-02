@@ -15,19 +15,29 @@ import matplotlib.pyplot as plt
 
 if len(sys.argv) == 1:
     output_path = "."
-    only_train_head = False
+    train_method = "full"
 elif len(sys.argv) == 2:
     output_path = sys.argv[1]
-    only_train_head = False
+    train_method = "full"
 elif len(sys.argv) == 3:
     output_path = sys.argv[1]
-    only_train_head = str.lower(sys.argv[2]) == "true"
+    if str.lower(sys.argv[2]) == "head":
+        train_method = "head"
+    elif str.lower(sys.argv[2]) == "full":
+        train_method = "full"
+    elif str.lower(sys.argv[2]) == "head+1":
+        train_method = "head+1"
+    else:
+        print("Invalid train method. Options: head, full, head+1")
+        sys.exit(1)
 else:
-    print("Usage: python over_epochs.py [output_path] [train_head_only (True/False)]")
+    print(
+        "Usage: python over_epochs.py [output_path] [train_method (head, full, head+1)]"
+    )
     sys.exit(1)
 
 print("Starting BERT epoch experiments script")
-print("Only train head:", only_train_head)
+print("Train method:", train_method)
 
 # If you have a label map (e.g., emotions or sentiments), you can map the index to the label
 label_map = {
@@ -71,11 +81,14 @@ num_epochs = 10
 batch_size = 16
 weight_decay = 0.01
 # Set the learning rate and number of epochs depending on head or full fine-tune
-if only_train_head:
+if train_method == "head":
     learning_rate = 0.01
     num_epochs = (num_epochs * 2) - 4
-else:
+elif train_method == "full":
     learning_rate = 2e-5
+elif train_method == "head+1":
+    learning_rate = 1e-3
+    num_epochs = (num_epochs * 2) - 6
 
 print(
     "Learning rate:",
@@ -109,17 +122,40 @@ print(f"Device: {device}")
 # Move the model to the selected device (either GPU or CPU)
 model.to(device)
 
-if only_train_head:
+if train_method == "head":
     # Freeze all BERT layers
     for param in model.bert.parameters():
         param.requires_grad = False
 
-    """ for name, param in model.named_parameters():
-        print("Name:", name, " - Size:", param.size()) """
+    # Only the classification head will be trained
+    for param in model.classifier.parameters():
+        param.requires_grad = True
+elif train_method == "head+1":
+    # Freeze all BERT layers
+    for param in model.bert.parameters():
+        param.requires_grad = False
 
     # Only the classification head will be trained
     for param in model.classifier.parameters():
         param.requires_grad = True
+
+    # Unfreeze the last transformer layer
+    for param in model.bert.encoder.layer[11].parameters():
+        param.requires_grad = True
+
+    # Unfreeze the pooler layer
+    for param in model.bert.pooler.parameters():
+        param.requires_grad = True
+
+for name, param in model.named_parameters():
+    print(
+        "Name:",
+        name,
+        " - Size:",
+        param.size(),
+        " - Requires grad:",
+        param.requires_grad,
+    )
 
 print("Fine-tuning the model on the GoEmotions dataset...")
 
@@ -250,13 +286,11 @@ print("Validation Losses (", len(validation_losses), "):", validation_losses)
 
 
 # Graph the results
+train_method_title = train_method.title()
 
 plt.figure()
 plt.plot(epoch_list, f1s, label="F1 Score")
-if only_train_head:
-    plt.title("F1 Score Over Epochs for Head Fine-Tuning")
-else:
-    plt.title("F1 Score Over Epochs for Full Model Fine-Tuning")
+plt.title(f"F1 Score Over Epochs for {train_method_title} Fine-Tuning")
 plt.legend()
 plt.xlabel("Epoch")
 plt.ylabel("F1 Score")
@@ -264,10 +298,7 @@ plt.savefig(f"{output_path}/f1.png", dpi=300)
 
 plt.figure()
 plt.plot(epoch_list, accuracies, label="Accuracy")
-if only_train_head:
-    plt.title("Accuracy Over Epochs for Head Fine-Tuning")
-else:
-    plt.title("Accuracy Over Epochs for Full Model Fine-Tuning")
+plt.title(f"Accuracy Over Epochs for {train_method_title} Fine-Tuning")
 plt.legend()
 plt.xlabel("Epoch")
 plt.ylabel("Accuracy")
@@ -275,10 +306,7 @@ plt.savefig(f"{output_path}/accuracy.png", dpi=300)
 
 plt.figure()
 plt.plot(epoch_list, durations, label="Duration")
-if only_train_head:
-    plt.title("Duration Over Epochs for Head Fine-Tuning")
-else:
-    plt.title("Duration Over Epochs for Full Model Fine-Tuning")
+plt.title(f"Duration Over Epochs for {train_method_title} Fine-Tuning")
 plt.legend()
 plt.xlabel("Epoch")
 plt.ylabel("Duration (s)")
@@ -287,10 +315,7 @@ plt.savefig(f"{output_path}/duration.png", dpi=300)
 plt.figure()
 plt.plot(epoch_list, f1s, label="F1 Score")
 plt.plot(epoch_list, accuracies, label="Accuracy")
-if only_train_head:
-    plt.title("F1 Score and Accuracy Over Epochs for Head Fine-Tuning")
-else:
-    plt.title("F1 Score and Accuracy Over Epochs for Full Model Fine-Tuning")
+plt.title(f"F1 Score and Accuracy Over Epochs for {train_method_title} Fine-Tuning")
 plt.legend()
 plt.xlabel("Epoch")
 plt.ylabel("F1 Score/Accuracy")
@@ -299,10 +324,7 @@ plt.savefig(f"{output_path}/f1_and_accuracy.png", dpi=300)
 plt.figure()
 plt.plot(training_losses, label="Training Loss")
 plt.plot(validation_losses, label="Validation Loss")
-if only_train_head:
-    plt.title("Loss Over Epochs for Head Fine-Tuning")
-else:
-    plt.title("Loss Over Epochs for Full Model Fine-Tuning")
+plt.title(f"Loss Over Epochs for {train_method_title} Fine-Tuning")
 plt.legend()
 plt.xlabel("Epoch")
 plt.ylabel("Loss")
