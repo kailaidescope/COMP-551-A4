@@ -98,7 +98,7 @@ model_path = bert_path
 
 # Set the hyperparameters
 batch_size = 16
-weight_decay = 0.2
+weight_decay = 0.5
 warmup_steps = 500
 # Set the learning rate and number of epochs depending on head or full fine-tune
 if train_method == "head":
