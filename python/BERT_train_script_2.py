@@ -57,7 +57,7 @@ if only_train_head:
         print("Name:", name, " - Size:", param.size())
 
     # Only the classification head will be trained
-    for param in model.classifier.parameters():  # Assuming 'classifier' is your head
+    for param in model.classifier.parameters():
         param.requires_grad = True
 
 # If you have a label map (e.g., emotions or sentiments), you can map the index to the label
