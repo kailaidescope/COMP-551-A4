@@ -219,6 +219,23 @@ print("F1 scores:", f1s)
 print("Accuracies:", accuracies)
 print("Durations:", durations)
 
+# Access loss history
+
+log_history = trainer.state.log_history
+
+# Extract training losses
+training_losses = [entry["loss"] for entry in log_history if "loss" in entry]
+
+# Extract validation losses
+validation_losses = [
+    entry["eval_loss"] for entry in log_history if "eval_loss" in entry
+]
+
+# Print or use the results
+print("Training Losses (", len(training_losses), "):", training_losses)
+print("Validation Losses (", len(validation_losses), "):", validation_losses)
+
+
 # Graph the results
 
 plt.figure()
@@ -265,5 +282,17 @@ plt.legend()
 plt.xlabel("Epoch")
 plt.ylabel("F1 Score/Accuracy")
 plt.savefig(f"{output_path}/f1_and_accuracy.png", dpi=300)
+
+plt.figure()
+plt.plot(training_losses, label="Training Loss")
+plt.plot(validation_losses, label="Validation Loss")
+if only_train_head:
+    plt.title("Loss Over Epochs for Head Fine-Tuning")
+else:
+    plt.title("Loss Over Epochs for Full Model Fine-Tuning")
+plt.legend()
+plt.xlabel("Epoch")
+plt.ylabel("Loss")
+plt.savefig(f"{output_path}/losses.png", dpi=300)
 
 print("Graphs saved to disk")
