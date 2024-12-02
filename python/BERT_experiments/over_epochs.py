@@ -88,8 +88,6 @@ print(f"Device: {device}")
 # Move the model to the selected device (either GPU or CPU)
 model.to(device)
 
-only_train_head = False
-
 if only_train_head:
     # Freeze all BERT layers
     for param in model.bert.parameters():
