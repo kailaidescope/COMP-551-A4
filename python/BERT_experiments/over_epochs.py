@@ -82,6 +82,20 @@ print(f"Device: {device}")
 # Move the model to the selected device (either GPU or CPU)
 model.to(device)
 
+only_train_head = False
+
+if only_train_head:
+    # Freeze all BERT layers
+    for param in model.bert.parameters():
+        param.requires_grad = False
+
+    """ for name, param in model.named_parameters():
+        print("Name:", name, " - Size:", param.size()) """
+
+    # Only the classification head will be trained
+    for param in model.classifier.parameters():
+        param.requires_grad = True
+
 print("Fine-tuning the model on the GoEmotions dataset...")
 
 # Step 1: Load the GoEmotions dataset
@@ -183,7 +197,7 @@ results["final"]["duration"] = duration
 
 print("Results:", results)
 
-epoch_list = range(1, num_epochs + 1)
+epoch_list = range(num_epochs + 1)
 f1s = results["f1"]
 accuracies = results["accuracy"]
 durations = results["duration"]
@@ -195,20 +209,32 @@ print("Durations:", durations)
 # Graph the results
 
 plt.plot(epoch_list, f1s, label="F1 Score")
-plt.title("F1 Score Over Epochs for Full Model Fine-Tuning")
+if only_train_head:
+    plt.title("F1 Score Over Epochs for Head Fine-Tuning")
+else:
+    plt.title("F1 Score Over Epochs for Full Model Fine-Tuning")
 plt.savefig(f"{output_path}/f1.png", dpi=300)
 
 plt.plot(epoch_list, accuracies, label="Accuracy")
-plt.title("Accuracy Over Epochs for Full Model Fine-Tuning")
+if only_train_head:
+    plt.title("Accuracy Over Epochs for Head Fine-Tuning")
+else:
+    plt.title("Accuracy Over Epochs for Full Model Fine-Tuning")
 plt.savefig(f"{output_path}/accuracy.png", dpi=300)
 
 plt.plot(epoch_list, durations, label="Duration")
-plt.title("Duration Over Epochs for Full Model Fine-Tuning")
+if only_train_head:
+    plt.title("Duration Over Epochs for Head Fine-Tuning")
+else:
+    plt.title("Duration Over Epochs for Full Model Fine-Tuning")
 plt.savefig(f"{output_path}/duration.png", dpi=300)
 
 plt.plot(epoch_list, f1s, label="F1 Score")
 plt.plot(epoch_list, accuracies, label="Accuracy")
-plt.title("F1 Score and Accuracy Over Epochs for Full Model Fine-Tuning")
+if only_train_head:
+    plt.title("F1 Score and Accuracy Over Epochs for Head Fine-Tuning")
+else:
+    plt.title("F1 Score and Accuracy Over Epochs for Full Model Fine-Tuning")
 plt.savefig(f"{output_path}/f1_and_accuracy.png", dpi=300)
 
 print("Graphs saved to disk")
