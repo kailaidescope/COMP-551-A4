@@ -12,6 +12,7 @@ import numpy as np
 import sys
 import time
 import matplotlib.pyplot as plt
+from sklearn.metrics import classification_report
 
 if len(sys.argv) == 1:
     output_path = "."
@@ -85,6 +86,10 @@ label_map = {
     "27": "neutral",
 }
 
+label_strings = []
+for key in range(28):
+    label_strings.append(label_map[str(key)])
+
 # Path to the local directory containing the saved model
 bert_path = "/opt/models/bert-base-uncased"
 distil_path = "/opt/models/distilgpt2"
@@ -93,7 +98,7 @@ model_path = bert_path
 
 # Set the hyperparameters
 batch_size = 16
-weight_decay = 0.1
+weight_decay = 0.2
 warmup_steps = 500
 # Set the learning rate and number of epochs depending on head or full fine-tune
 if train_method == "head":
@@ -116,12 +121,9 @@ print(
     warmup_steps,
 )
 
+# Initialize the results dictionary
+results = {"f1": [], "accuracy": [], "duration": [], "reports": []}
 
-results = {
-    "f1": [],
-    "accuracy": [],
-    "duration": [],
-}
 start_time = time.time()
 print("Loading model")
 
@@ -205,12 +207,19 @@ def compute_metrics(eval_preds):
     predictions = np.argmax(logits, axis=-1)
     accuracy = accuracy_score(labels, predictions)
     f1 = f1_score(labels, predictions, average="macro")
+    report = classification_report(
+        labels,
+        predictions,
+        target_names=label_strings,
+    )
     results["f1"].append(f1)
     results["accuracy"].append(accuracy)
     results["duration"].append(time.time() - start_time)
+    results["reports"].append(report)
     return {
         "accuracy": accuracy,
         "f1": f1,
+        "classification_report": report,
     }
 
 
@@ -267,12 +276,21 @@ print(
 )
 
 duration = time.time() - start_time
+report = classification_report(
+    predictions.label_ids,
+    class_predictions,
+    target_names=label_strings,
+)
+
+
 results["final"] = {}
 results["final"]["f1"] = f1
 results["final"]["accuracy"] = accuracy
 results["final"]["duration"] = duration
+results["final"]["report"] = report
 
 print("Results:", results)
+print("Final Report:\n", report)
 
 epoch_list = range(num_epochs + 1)
 f1s = results["f1"]
