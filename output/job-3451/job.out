@@ -1,0 +1,41 @@
+Starting BERT epoch experiments script
+Loading model
+Device: cuda
+Fine-tuning the model on the GoEmotions dataset...
+Filtered dataset:
+ DatasetDict({
+    train: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 36308
+    })
+    validation: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 4548
+    })
+    test: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 4590
+    })
+})
+{'eval_loss': 1.3033509254455566, 'eval_accuracy': 0.6242304309586632, 'eval_f1': 0.45408763108709654, 'eval_runtime': 3.0683, 'eval_samples_per_second': 1482.25, 'eval_steps_per_second': 92.885, 'epoch': 1.0}
+{'eval_loss': 1.2590581178665161, 'eval_accuracy': 0.6268689533861038, 'eval_f1': 0.48307984886150074, 'eval_runtime': 3.1093, 'eval_samples_per_second': 1462.716, 'eval_steps_per_second': 91.661, 'epoch': 2.0}
+{'eval_loss': 1.3172186613082886, 'eval_accuracy': 0.6187335092348285, 'eval_f1': 0.4971432447719981, 'eval_runtime': 3.0949, 'eval_samples_per_second': 1469.521, 'eval_steps_per_second': 92.087, 'epoch': 3.0}
+{'eval_loss': 1.535605788230896, 'eval_accuracy': 0.5890501319261213, 'eval_f1': 0.4888929432580592, 'eval_runtime': 3.1117, 'eval_samples_per_second': 1461.567, 'eval_steps_per_second': 91.589, 'epoch': 4.0}
+{'eval_loss': 1.6930962800979614, 'eval_accuracy': 0.5982849604221636, 'eval_f1': 0.4846325410552365, 'eval_runtime': 3.1136, 'eval_samples_per_second': 1460.7, 'eval_steps_per_second': 91.535, 'epoch': 5.0}
+{'eval_loss': 2.004692316055298, 'eval_accuracy': 0.5857519788918206, 'eval_f1': 0.4827060566723028, 'eval_runtime': 3.0957, 'eval_samples_per_second': 1469.137, 'eval_steps_per_second': 92.063, 'epoch': 6.0}
+{'eval_loss': 2.2281882762908936, 'eval_accuracy': 0.5782761653474054, 'eval_f1': 0.47488229285971917, 'eval_runtime': 3.0948, 'eval_samples_per_second': 1469.55, 'eval_steps_per_second': 92.089, 'epoch': 7.0}
+{'eval_loss': 2.443082332611084, 'eval_accuracy': 0.5868513632365875, 'eval_f1': 0.48512569301388014, 'eval_runtime': 3.099, 'eval_samples_per_second': 1467.587, 'eval_steps_per_second': 91.966, 'epoch': 8.0}
+{'eval_loss': 2.609058141708374, 'eval_accuracy': 0.5795954265611257, 'eval_f1': 0.47858091373282574, 'eval_runtime': 3.0984, 'eval_samples_per_second': 1467.84, 'eval_steps_per_second': 91.982, 'epoch': 9.0}
+{'eval_loss': 2.66292142868042, 'eval_accuracy': 0.5842128408091469, 'eval_f1': 0.47555634924484375, 'eval_runtime': 3.1181, 'eval_samples_per_second': 1458.588, 'eval_steps_per_second': 91.402, 'epoch': 10.0}
+{'train_runtime': 1091.6687, 'train_samples_per_second': 332.592, 'train_steps_per_second': 20.794, 'train_loss': 0.5585133879405286, 'epoch': 10.0}
+Predictions shape:  (4590, 28) 
+Labels shape:  (4590, 1) 
+Class Predictions:  [25  0 20 ... 27 17 27]
+Metrics:
+F1: 0.49634907763161074 
+Accuracy: 0.5836601307189543
+Results: {'f1': [0.45408763108709654, 0.48307984886150074, 0.4971432447719981, 0.4888929432580592, 0.4846325410552365, 0.4827060566723028, 0.47488229285971917, 0.48512569301388014, 0.47858091373282574, 0.47555634924484375, 0.49634907763161074], 'accuracy': [0.6242304309586632, 0.6268689533861038, 0.6187335092348285, 0.5890501319261213, 0.5982849604221636, 0.5857519788918206, 0.5782761653474054, 0.5868513632365875, 0.5795954265611257, 0.5842128408091469, 0.5836601307189543], 'duration': [110.22576689720154, 219.121817111969, 328.6259481906891, 437.87522864341736, 547.3781042098999, 656.7699189186096, 765.9647464752197, 875.2320170402527, 984.4459400177002, 1093.7998435497284, 1096.9164102077484], 'final': {'f1': 0.49634907763161074, 'accuracy': 0.5836601307189543, 'duration': 1096.9196326732635}}
+F1 scores: [0.45408763108709654, 0.48307984886150074, 0.4971432447719981, 0.4888929432580592, 0.4846325410552365, 0.4827060566723028, 0.47488229285971917, 0.48512569301388014, 0.47858091373282574, 0.47555634924484375, 0.49634907763161074]
+Accuracies: [0.6242304309586632, 0.6268689533861038, 0.6187335092348285, 0.5890501319261213, 0.5982849604221636, 0.5857519788918206, 0.5782761653474054, 0.5868513632365875, 0.5795954265611257, 0.5842128408091469, 0.5836601307189543]
+Durations: [110.22576689720154, 219.121817111969, 328.6259481906891, 437.87522864341736, 547.3781042098999, 656.7699189186096, 765.9647464752197, 875.2320170402527, 984.4459400177002, 1093.7998435497284, 1096.9164102077484]
+Graphs saved to disk
