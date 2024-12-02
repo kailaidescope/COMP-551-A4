@@ -1,0 +1,268 @@
+Starting BERT epoch experiments script
+Train method: head+1
+Learning rate: 0.001 
+Num epochs: 14 
+Batch size: 16 
+Weight decay: 0.01
+Loading model
+Device: cuda
+Name: bert.embeddings.word_embeddings.weight  - Size: torch.Size([30522, 768])  - Requires grad: False
+Name: bert.embeddings.position_embeddings.weight  - Size: torch.Size([512, 768])  - Requires grad: False
+Name: bert.embeddings.token_type_embeddings.weight  - Size: torch.Size([2, 768])  - Requires grad: False
+Name: bert.embeddings.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.embeddings.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.0.attention.self.query.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.0.attention.self.query.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.0.attention.self.key.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.0.attention.self.key.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.0.attention.self.value.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.0.attention.self.value.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.0.attention.output.dense.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.0.attention.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.0.attention.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.0.attention.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.0.intermediate.dense.weight  - Size: torch.Size([3072, 768])  - Requires grad: False
+Name: bert.encoder.layer.0.intermediate.dense.bias  - Size: torch.Size([3072])  - Requires grad: False
+Name: bert.encoder.layer.0.output.dense.weight  - Size: torch.Size([768, 3072])  - Requires grad: False
+Name: bert.encoder.layer.0.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.0.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.0.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.1.attention.self.query.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.1.attention.self.query.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.1.attention.self.key.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.1.attention.self.key.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.1.attention.self.value.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.1.attention.self.value.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.1.attention.output.dense.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.1.attention.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.1.attention.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.1.attention.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.1.intermediate.dense.weight  - Size: torch.Size([3072, 768])  - Requires grad: False
+Name: bert.encoder.layer.1.intermediate.dense.bias  - Size: torch.Size([3072])  - Requires grad: False
+Name: bert.encoder.layer.1.output.dense.weight  - Size: torch.Size([768, 3072])  - Requires grad: False
+Name: bert.encoder.layer.1.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.1.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.1.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.2.attention.self.query.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.2.attention.self.query.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.2.attention.self.key.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.2.attention.self.key.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.2.attention.self.value.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.2.attention.self.value.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.2.attention.output.dense.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.2.attention.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.2.attention.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.2.attention.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.2.intermediate.dense.weight  - Size: torch.Size([3072, 768])  - Requires grad: False
+Name: bert.encoder.layer.2.intermediate.dense.bias  - Size: torch.Size([3072])  - Requires grad: False
+Name: bert.encoder.layer.2.output.dense.weight  - Size: torch.Size([768, 3072])  - Requires grad: False
+Name: bert.encoder.layer.2.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.2.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.2.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.3.attention.self.query.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.3.attention.self.query.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.3.attention.self.key.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.3.attention.self.key.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.3.attention.self.value.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.3.attention.self.value.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.3.attention.output.dense.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.3.attention.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.3.attention.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.3.attention.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.3.intermediate.dense.weight  - Size: torch.Size([3072, 768])  - Requires grad: False
+Name: bert.encoder.layer.3.intermediate.dense.bias  - Size: torch.Size([3072])  - Requires grad: False
+Name: bert.encoder.layer.3.output.dense.weight  - Size: torch.Size([768, 3072])  - Requires grad: False
+Name: bert.encoder.layer.3.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.3.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.3.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.4.attention.self.query.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.4.attention.self.query.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.4.attention.self.key.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.4.attention.self.key.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.4.attention.self.value.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.4.attention.self.value.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.4.attention.output.dense.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.4.attention.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.4.attention.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.4.attention.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.4.intermediate.dense.weight  - Size: torch.Size([3072, 768])  - Requires grad: False
+Name: bert.encoder.layer.4.intermediate.dense.bias  - Size: torch.Size([3072])  - Requires grad: False
+Name: bert.encoder.layer.4.output.dense.weight  - Size: torch.Size([768, 3072])  - Requires grad: False
+Name: bert.encoder.layer.4.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.4.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.4.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.5.attention.self.query.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.5.attention.self.query.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.5.attention.self.key.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.5.attention.self.key.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.5.attention.self.value.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.5.attention.self.value.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.5.attention.output.dense.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.5.attention.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.5.attention.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.5.attention.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.5.intermediate.dense.weight  - Size: torch.Size([3072, 768])  - Requires grad: False
+Name: bert.encoder.layer.5.intermediate.dense.bias  - Size: torch.Size([3072])  - Requires grad: False
+Name: bert.encoder.layer.5.output.dense.weight  - Size: torch.Size([768, 3072])  - Requires grad: False
+Name: bert.encoder.layer.5.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.5.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.5.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.6.attention.self.query.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.6.attention.self.query.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.6.attention.self.key.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.6.attention.self.key.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.6.attention.self.value.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.6.attention.self.value.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.6.attention.output.dense.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.6.attention.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.6.attention.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.6.attention.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.6.intermediate.dense.weight  - Size: torch.Size([3072, 768])  - Requires grad: False
+Name: bert.encoder.layer.6.intermediate.dense.bias  - Size: torch.Size([3072])  - Requires grad: False
+Name: bert.encoder.layer.6.output.dense.weight  - Size: torch.Size([768, 3072])  - Requires grad: False
+Name: bert.encoder.layer.6.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.6.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.6.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.7.attention.self.query.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.7.attention.self.query.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.7.attention.self.key.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.7.attention.self.key.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.7.attention.self.value.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.7.attention.self.value.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.7.attention.output.dense.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.7.attention.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.7.attention.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.7.attention.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.7.intermediate.dense.weight  - Size: torch.Size([3072, 768])  - Requires grad: False
+Name: bert.encoder.layer.7.intermediate.dense.bias  - Size: torch.Size([3072])  - Requires grad: False
+Name: bert.encoder.layer.7.output.dense.weight  - Size: torch.Size([768, 3072])  - Requires grad: False
+Name: bert.encoder.layer.7.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.7.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.7.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.8.attention.self.query.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.8.attention.self.query.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.8.attention.self.key.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.8.attention.self.key.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.8.attention.self.value.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.8.attention.self.value.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.8.attention.output.dense.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.8.attention.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.8.attention.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.8.attention.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.8.intermediate.dense.weight  - Size: torch.Size([3072, 768])  - Requires grad: False
+Name: bert.encoder.layer.8.intermediate.dense.bias  - Size: torch.Size([3072])  - Requires grad: False
+Name: bert.encoder.layer.8.output.dense.weight  - Size: torch.Size([768, 3072])  - Requires grad: False
+Name: bert.encoder.layer.8.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.8.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.8.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.9.attention.self.query.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.9.attention.self.query.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.9.attention.self.key.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.9.attention.self.key.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.9.attention.self.value.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.9.attention.self.value.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.9.attention.output.dense.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.9.attention.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.9.attention.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.9.attention.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.9.intermediate.dense.weight  - Size: torch.Size([3072, 768])  - Requires grad: False
+Name: bert.encoder.layer.9.intermediate.dense.bias  - Size: torch.Size([3072])  - Requires grad: False
+Name: bert.encoder.layer.9.output.dense.weight  - Size: torch.Size([768, 3072])  - Requires grad: False
+Name: bert.encoder.layer.9.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.9.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.9.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.10.attention.self.query.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.10.attention.self.query.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.10.attention.self.key.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.10.attention.self.key.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.10.attention.self.value.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.10.attention.self.value.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.10.attention.output.dense.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.10.attention.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.10.attention.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.10.attention.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.10.intermediate.dense.weight  - Size: torch.Size([3072, 768])  - Requires grad: False
+Name: bert.encoder.layer.10.intermediate.dense.bias  - Size: torch.Size([3072])  - Requires grad: False
+Name: bert.encoder.layer.10.output.dense.weight  - Size: torch.Size([768, 3072])  - Requires grad: False
+Name: bert.encoder.layer.10.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.10.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.10.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.11.attention.self.query.weight  - Size: torch.Size([768, 768])  - Requires grad: True
+Name: bert.encoder.layer.11.attention.self.query.bias  - Size: torch.Size([768])  - Requires grad: True
+Name: bert.encoder.layer.11.attention.self.key.weight  - Size: torch.Size([768, 768])  - Requires grad: True
+Name: bert.encoder.layer.11.attention.self.key.bias  - Size: torch.Size([768])  - Requires grad: True
+Name: bert.encoder.layer.11.attention.self.value.weight  - Size: torch.Size([768, 768])  - Requires grad: True
+Name: bert.encoder.layer.11.attention.self.value.bias  - Size: torch.Size([768])  - Requires grad: True
+Name: bert.encoder.layer.11.attention.output.dense.weight  - Size: torch.Size([768, 768])  - Requires grad: True
+Name: bert.encoder.layer.11.attention.output.dense.bias  - Size: torch.Size([768])  - Requires grad: True
+Name: bert.encoder.layer.11.attention.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: True
+Name: bert.encoder.layer.11.attention.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: True
+Name: bert.encoder.layer.11.intermediate.dense.weight  - Size: torch.Size([3072, 768])  - Requires grad: True
+Name: bert.encoder.layer.11.intermediate.dense.bias  - Size: torch.Size([3072])  - Requires grad: True
+Name: bert.encoder.layer.11.output.dense.weight  - Size: torch.Size([768, 3072])  - Requires grad: True
+Name: bert.encoder.layer.11.output.dense.bias  - Size: torch.Size([768])  - Requires grad: True
+Name: bert.encoder.layer.11.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: True
+Name: bert.encoder.layer.11.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: True
+Name: bert.pooler.dense.weight  - Size: torch.Size([768, 768])  - Requires grad: True
+Name: bert.pooler.dense.bias  - Size: torch.Size([768])  - Requires grad: True
+Name: classifier.weight  - Size: torch.Size([28, 768])  - Requires grad: True
+Name: classifier.bias  - Size: torch.Size([28])  - Requires grad: True
+Fine-tuning the model on the GoEmotions dataset...
+Filtered dataset:
+ DatasetDict({
+    train: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 36308
+    })
+    validation: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 4548
+    })
+    test: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 4590
+    })
+})
+{'loss': 1.799, 'grad_norm': 7.779838562011719, 'learning_rate': 0.0009285714285714287, 'epoch': 1.0}
+{'eval_loss': 1.5714714527130127, 'eval_accuracy': 0.5441952506596306, 'eval_f1': 0.33805204567662095, 'eval_runtime': 3.0764, 'eval_samples_per_second': 1478.347, 'eval_steps_per_second': 92.64, 'epoch': 1.0}
+{'loss': 1.5697, 'grad_norm': 3.8006322383880615, 'learning_rate': 0.0008571428571428571, 'epoch': 2.0}
+{'eval_loss': 1.4844738245010376, 'eval_accuracy': 0.5712401055408971, 'eval_f1': 0.3581805557724698, 'eval_runtime': 3.1032, 'eval_samples_per_second': 1465.596, 'eval_steps_per_second': 91.841, 'epoch': 2.0}
+{'loss': 1.4972, 'grad_norm': 4.784372329711914, 'learning_rate': 0.0007857142857142857, 'epoch': 3.0}
+{'eval_loss': 1.4254734516143799, 'eval_accuracy': 0.5822339489885664, 'eval_f1': 0.3832595488443419, 'eval_runtime': 3.1125, 'eval_samples_per_second': 1461.2, 'eval_steps_per_second': 91.566, 'epoch': 3.0}
+{'loss': 1.4365, 'grad_norm': 3.562922239303589, 'learning_rate': 0.0007142857142857143, 'epoch': 4.0}
+{'eval_loss': 1.4281162023544312, 'eval_accuracy': 0.5835532102022867, 'eval_f1': 0.4061154910680389, 'eval_runtime': 3.1173, 'eval_samples_per_second': 1458.961, 'eval_steps_per_second': 91.426, 'epoch': 4.0}
+{'loss': 1.3939, 'grad_norm': 6.245693683624268, 'learning_rate': 0.0006428571428571429, 'epoch': 5.0}
+{'eval_loss': 1.4414464235305786, 'eval_accuracy': 0.5740985048372911, 'eval_f1': 0.386917301959473, 'eval_runtime': 3.1229, 'eval_samples_per_second': 1456.354, 'eval_steps_per_second': 91.262, 'epoch': 5.0}
+{'loss': 1.3585, 'grad_norm': 5.220641613006592, 'learning_rate': 0.0005714285714285714, 'epoch': 6.0}
+{'eval_loss': 1.4143301248550415, 'eval_accuracy': 0.5844327176781002, 'eval_f1': 0.4275534072459902, 'eval_runtime': 3.1133, 'eval_samples_per_second': 1460.848, 'eval_steps_per_second': 91.544, 'epoch': 6.0}
+{'loss': 1.3255, 'grad_norm': 4.164936542510986, 'learning_rate': 0.0005, 'epoch': 7.0}
+{'eval_loss': 1.3838824033737183, 'eval_accuracy': 0.5949868073878628, 'eval_f1': 0.42416877373595735, 'eval_runtime': 3.112, 'eval_samples_per_second': 1461.442, 'eval_steps_per_second': 91.581, 'epoch': 7.0}
+{'loss': 1.2916, 'grad_norm': 4.173306941986084, 'learning_rate': 0.00042857142857142855, 'epoch': 8.0}
+{'eval_loss': 1.3664722442626953, 'eval_accuracy': 0.5982849604221636, 'eval_f1': 0.43566323612493607, 'eval_runtime': 3.1119, 'eval_samples_per_second': 1461.473, 'eval_steps_per_second': 91.583, 'epoch': 8.0}
+{'loss': 1.2601, 'grad_norm': 4.191446304321289, 'learning_rate': 0.00035714285714285714, 'epoch': 9.0}
+{'eval_loss': 1.3824790716171265, 'eval_accuracy': 0.5894898856640282, 'eval_f1': 0.4411188814563851, 'eval_runtime': 3.1124, 'eval_samples_per_second': 1461.273, 'eval_steps_per_second': 91.571, 'epoch': 9.0}
+{'loss': 1.2268, 'grad_norm': 4.350154399871826, 'learning_rate': 0.0002857142857142857, 'epoch': 10.0}
+{'eval_loss': 1.3725221157073975, 'eval_accuracy': 0.5987247141600703, 'eval_f1': 0.4419113743981691, 'eval_runtime': 3.1218, 'eval_samples_per_second': 1456.838, 'eval_steps_per_second': 91.293, 'epoch': 10.0}
+{'loss': 1.1984, 'grad_norm': 5.404646873474121, 'learning_rate': 0.00021428571428571427, 'epoch': 11.0}
+{'eval_loss': 1.3802210092544556, 'eval_accuracy': 0.5954265611257695, 'eval_f1': 0.44448392303799605, 'eval_runtime': 3.1233, 'eval_samples_per_second': 1456.135, 'eval_steps_per_second': 91.249, 'epoch': 11.0}
+{'loss': 1.1684, 'grad_norm': 2.0340094566345215, 'learning_rate': 0.00014285714285714284, 'epoch': 12.0}
+{'eval_loss': 1.3810691833496094, 'eval_accuracy': 0.6020228671943711, 'eval_f1': 0.43308993359313996, 'eval_runtime': 3.1228, 'eval_samples_per_second': 1456.37, 'eval_steps_per_second': 91.263, 'epoch': 12.0}
+{'loss': 1.1336, 'grad_norm': 2.7934184074401855, 'learning_rate': 7.142857142857142e-05, 'epoch': 13.0}
+{'eval_loss': 1.3798956871032715, 'eval_accuracy': 0.5960861917326298, 'eval_f1': 0.4335829319106063, 'eval_runtime': 3.1176, 'eval_samples_per_second': 1458.829, 'eval_steps_per_second': 91.417, 'epoch': 13.0}
+{'loss': 1.1097, 'grad_norm': 4.063270568847656, 'learning_rate': 0.0, 'epoch': 14.0}
+{'eval_loss': 1.3810713291168213, 'eval_accuracy': 0.5974054529463501, 'eval_f1': 0.45015071627534403, 'eval_runtime': 3.1186, 'eval_samples_per_second': 1458.326, 'eval_steps_per_second': 91.386, 'epoch': 14.0}
+{'train_runtime': 503.6543, 'train_samples_per_second': 1009.248, 'train_steps_per_second': 63.099, 'train_loss': 1.3406221883112412, 'epoch': 14.0}
+Predictions shape:  (4590, 28) 
+Labels shape:  (4590, 1) 
+Class Predictions:  [18 14 20 ... 27  0 27]
+Metrics:
+F1: 0.4787453061644065 
+Accuracy: 0.6091503267973856
+Results: {'f1': [0.33805204567662095, 0.3581805557724698, 0.3832595488443419, 0.4061154910680389, 0.386917301959473, 0.4275534072459902, 0.42416877373595735, 0.43566323612493607, 0.4411188814563851, 0.4419113743981691, 0.44448392303799605, 0.43308993359313996, 0.4335829319106063, 0.45015071627534403, 0.4787453061644065], 'accuracy': [0.5441952506596306, 0.5712401055408971, 0.5822339489885664, 0.5835532102022867, 0.5740985048372911, 0.5844327176781002, 0.5949868073878628, 0.5982849604221636, 0.5894898856640282, 0.5987247141600703, 0.5954265611257695, 0.6020228671943711, 0.5960861917326298, 0.5974054529463501, 0.6091503267973856], 'duration': [41.12851929664612, 76.91541695594788, 112.86043691635132, 148.86011219024658, 184.85941815376282, 220.86829161643982, 256.8960361480713, 292.8505268096924, 328.81126260757446, 364.837149143219, 400.8897428512573, 436.9070520401001, 472.945289850235, 508.92823362350464, 512.0567038059235], 'final': {'f1': 0.4787453061644065, 'accuracy': 0.6091503267973856, 'duration': 512.0600264072418}}
+F1 scores: [0.33805204567662095, 0.3581805557724698, 0.3832595488443419, 0.4061154910680389, 0.386917301959473, 0.4275534072459902, 0.42416877373595735, 0.43566323612493607, 0.4411188814563851, 0.4419113743981691, 0.44448392303799605, 0.43308993359313996, 0.4335829319106063, 0.45015071627534403, 0.4787453061644065]
+Accuracies: [0.5441952506596306, 0.5712401055408971, 0.5822339489885664, 0.5835532102022867, 0.5740985048372911, 0.5844327176781002, 0.5949868073878628, 0.5982849604221636, 0.5894898856640282, 0.5987247141600703, 0.5954265611257695, 0.6020228671943711, 0.5960861917326298, 0.5974054529463501, 0.6091503267973856]
+Durations: [41.12851929664612, 76.91541695594788, 112.86043691635132, 148.86011219024658, 184.85941815376282, 220.86829161643982, 256.8960361480713, 292.8505268096924, 328.81126260757446, 364.837149143219, 400.8897428512573, 436.9070520401001, 472.945289850235, 508.92823362350464, 512.0567038059235]
+log_history: [{'loss': 1.799, 'grad_norm': 7.779838562011719, 'learning_rate': 0.0009285714285714287, 'epoch': 1.0, 'step': 2270}, {'eval_loss': 1.5714714527130127, 'eval_accuracy': 0.5441952506596306, 'eval_f1': 0.33805204567662095, 'eval_runtime': 3.0764, 'eval_samples_per_second': 1478.347, 'eval_steps_per_second': 92.64, 'epoch': 1.0, 'step': 2270}, {'loss': 1.5697, 'grad_norm': 3.8006322383880615, 'learning_rate': 0.0008571428571428571, 'epoch': 2.0, 'step': 4540}, {'eval_loss': 1.4844738245010376, 'eval_accuracy': 0.5712401055408971, 'eval_f1': 0.3581805557724698, 'eval_runtime': 3.1032, 'eval_samples_per_second': 1465.596, 'eval_steps_per_second': 91.841, 'epoch': 2.0, 'step': 4540}, {'loss': 1.4972, 'grad_norm': 4.784372329711914, 'learning_rate': 0.0007857142857142857, 'epoch': 3.0, 'step': 6810}, {'eval_loss': 1.4254734516143799, 'eval_accuracy': 0.5822339489885664, 'eval_f1': 0.3832595488443419, 'eval_runtime': 3.1125, 'eval_samples_per_second': 1461.2, 'eval_steps_per_second': 91.566, 'epoch': 3.0, 'step': 6810}, {'loss': 1.4365, 'grad_norm': 3.562922239303589, 'learning_rate': 0.0007142857142857143, 'epoch': 4.0, 'step': 9080}, {'eval_loss': 1.4281162023544312, 'eval_accuracy': 0.5835532102022867, 'eval_f1': 0.4061154910680389, 'eval_runtime': 3.1173, 'eval_samples_per_second': 1458.961, 'eval_steps_per_second': 91.426, 'epoch': 4.0, 'step': 9080}, {'loss': 1.3939, 'grad_norm': 6.245693683624268, 'learning_rate': 0.0006428571428571429, 'epoch': 5.0, 'step': 11350}, {'eval_loss': 1.4414464235305786, 'eval_accuracy': 0.5740985048372911, 'eval_f1': 0.386917301959473, 'eval_runtime': 3.1229, 'eval_samples_per_second': 1456.354, 'eval_steps_per_second': 91.262, 'epoch': 5.0, 'step': 11350}, {'loss': 1.3585, 'grad_norm': 5.220641613006592, 'learning_rate': 0.0005714285714285714, 'epoch': 6.0, 'step': 13620}, {'eval_loss': 1.4143301248550415, 'eval_accuracy': 0.5844327176781002, 'eval_f1': 0.4275534072459902, 'eval_runtime': 3.1133, 'eval_samples_per_second': 1460.848, 'eval_steps_per_second': 91.544, 'epoch': 6.0, 'step': 13620}, {'loss': 1.3255, 'grad_norm': 4.164936542510986, 'learning_rate': 0.0005, 'epoch': 7.0, 'step': 15890}, {'eval_loss': 1.3838824033737183, 'eval_accuracy': 0.5949868073878628, 'eval_f1': 0.42416877373595735, 'eval_runtime': 3.112, 'eval_samples_per_second': 1461.442, 'eval_steps_per_second': 91.581, 'epoch': 7.0, 'step': 15890}, {'loss': 1.2916, 'grad_norm': 4.173306941986084, 'learning_rate': 0.00042857142857142855, 'epoch': 8.0, 'step': 18160}, {'eval_loss': 1.3664722442626953, 'eval_accuracy': 0.5982849604221636, 'eval_f1': 0.43566323612493607, 'eval_runtime': 3.1119, 'eval_samples_per_second': 1461.473, 'eval_steps_per_second': 91.583, 'epoch': 8.0, 'step': 18160}, {'loss': 1.2601, 'grad_norm': 4.191446304321289, 'learning_rate': 0.00035714285714285714, 'epoch': 9.0, 'step': 20430}, {'eval_loss': 1.3824790716171265, 'eval_accuracy': 0.5894898856640282, 'eval_f1': 0.4411188814563851, 'eval_runtime': 3.1124, 'eval_samples_per_second': 1461.273, 'eval_steps_per_second': 91.571, 'epoch': 9.0, 'step': 20430}, {'loss': 1.2268, 'grad_norm': 4.350154399871826, 'learning_rate': 0.0002857142857142857, 'epoch': 10.0, 'step': 22700}, {'eval_loss': 1.3725221157073975, 'eval_accuracy': 0.5987247141600703, 'eval_f1': 0.4419113743981691, 'eval_runtime': 3.1218, 'eval_samples_per_second': 1456.838, 'eval_steps_per_second': 91.293, 'epoch': 10.0, 'step': 22700}, {'loss': 1.1984, 'grad_norm': 5.404646873474121, 'learning_rate': 0.00021428571428571427, 'epoch': 11.0, 'step': 24970}, {'eval_loss': 1.3802210092544556, 'eval_accuracy': 0.5954265611257695, 'eval_f1': 0.44448392303799605, 'eval_runtime': 3.1233, 'eval_samples_per_second': 1456.135, 'eval_steps_per_second': 91.249, 'epoch': 11.0, 'step': 24970}, {'loss': 1.1684, 'grad_norm': 2.0340094566345215, 'learning_rate': 0.00014285714285714284, 'epoch': 12.0, 'step': 27240}, {'eval_loss': 1.3810691833496094, 'eval_accuracy': 0.6020228671943711, 'eval_f1': 0.43308993359313996, 'eval_runtime': 3.1228, 'eval_samples_per_second': 1456.37, 'eval_steps_per_second': 91.263, 'epoch': 12.0, 'step': 27240}, {'loss': 1.1336, 'grad_norm': 2.7934184074401855, 'learning_rate': 7.142857142857142e-05, 'epoch': 13.0, 'step': 29510}, {'eval_loss': 1.3798956871032715, 'eval_accuracy': 0.5960861917326298, 'eval_f1': 0.4335829319106063, 'eval_runtime': 3.1176, 'eval_samples_per_second': 1458.829, 'eval_steps_per_second': 91.417, 'epoch': 13.0, 'step': 29510}, {'loss': 1.1097, 'grad_norm': 4.063270568847656, 'learning_rate': 0.0, 'epoch': 14.0, 'step': 31780}, {'eval_loss': 1.3810713291168213, 'eval_accuracy': 0.5974054529463501, 'eval_f1': 0.45015071627534403, 'eval_runtime': 3.1186, 'eval_samples_per_second': 1458.326, 'eval_steps_per_second': 91.386, 'epoch': 14.0, 'step': 31780}, {'train_runtime': 503.6543, 'train_samples_per_second': 1009.248, 'train_steps_per_second': 63.099, 'total_flos': 8951523957809280.0, 'train_loss': 1.3406221883112412, 'epoch': 14.0, 'step': 31780}]
+Training Losses ( 14 ): [1.799, 1.5697, 1.4972, 1.4365, 1.3939, 1.3585, 1.3255, 1.2916, 1.2601, 1.2268, 1.1984, 1.1684, 1.1336, 1.1097]
+Validation Losses ( 14 ): [1.5714714527130127, 1.4844738245010376, 1.4254734516143799, 1.4281162023544312, 1.4414464235305786, 1.4143301248550415, 1.3838824033737183, 1.3664722442626953, 1.3824790716171265, 1.3725221157073975, 1.3802210092544556, 1.3810691833496094, 1.3798956871032715, 1.3810713291168213]
+Graphs saved to disk
