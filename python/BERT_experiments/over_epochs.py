@@ -83,7 +83,7 @@ weight_decay = 0.01
 # Set the learning rate and number of epochs depending on head or full fine-tune
 if train_method == "head":
     learning_rate = 0.01
-    num_epochs = (num_epochs * 2) - 4
+    num_epochs = num_epochs * 3
 elif train_method == "full":
     learning_rate = 2e-5
 elif train_method == "head+1":
