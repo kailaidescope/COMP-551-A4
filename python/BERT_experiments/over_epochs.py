@@ -16,6 +16,7 @@ import matplotlib.pyplot as plt
 if len(sys.argv) == 1:
     output_path = "."
     train_method = "full"
+    num_epochs = 10
 elif len(sys.argv) == 2:
     output_path = sys.argv[1]
     train_method = "full"
@@ -30,9 +31,22 @@ elif len(sys.argv) == 3:
     else:
         print("Invalid train method. Options: head, full, head+1")
         sys.exit(1)
+    num_epochs = 10
+elif len(sys.argv) == 4:
+    output_path = sys.argv[1]
+    if str.lower(sys.argv[2]) == "head":
+        train_method = "head"
+    elif str.lower(sys.argv[2]) == "full":
+        train_method = "full"
+    elif str.lower(sys.argv[2]) == "head+1":
+        train_method = "head+1"
+    else:
+        print("Invalid train method. Options: head, full, head+1")
+        sys.exit(1)
+    num_epochs = int(sys.argv[3])
 else:
     print(
-        "Usage: python over_epochs.py [output_path] [train_method (head, full, head+1)]"
+        "Usage: python over_epochs.py [output_path] [train_method (head, full, head+1)] [num_epochs]"
     )
     sys.exit(1)
 
@@ -77,18 +91,15 @@ distil_path = "/opt/models/distilgpt2"
 
 model_path = bert_path
 
-num_epochs = 10
 batch_size = 16
 weight_decay = 0.01
 # Set the learning rate and number of epochs depending on head or full fine-tune
 if train_method == "head":
     learning_rate = 0.01
-    num_epochs = num_epochs * 3
 elif train_method == "full":
     learning_rate = 2e-5
 elif train_method == "head+1":
     learning_rate = 1e-3
-    num_epochs = (num_epochs * 2) - 6
 
 print(
     "Learning rate:",
@@ -213,6 +224,7 @@ training_args = TrainingArguments(
     save_strategy="no",  # No saving
     push_to_hub=False,  # Don't push model to Hugging Face Hub
     report_to="none",  # Disable reporting to tracking tools like TensorBoard, etc.
+    warmup_steps=500,  # Number of warmup steps for learning rate scheduler
 )
 
 # Step 5: Initialize the Trainer
