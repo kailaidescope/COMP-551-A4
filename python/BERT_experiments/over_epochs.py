@@ -162,7 +162,7 @@ training_args = TrainingArguments(
     per_device_eval_batch_size=16,  # Batch size for evaluation
     num_train_epochs=num_epochs,  # Number of epochs
     weight_decay=0.01,  # Weight decay strength
-    logging_strategy="no",  # No logging
+    logging_strategy="epoch",  # No logging
     save_strategy="no",  # No saving
     push_to_hub=False,  # Don't push model to Hugging Face Hub
     report_to="none",  # Disable reporting to tracking tools like TensorBoard, etc.
@@ -233,6 +233,7 @@ validation_losses = [
 ]
 
 # Print or use the results
+print("log_history:", log_history)
 print("Training Losses (", len(training_losses), "):", training_losses)
 print("Validation Losses (", len(validation_losses), "):", validation_losses)
 
