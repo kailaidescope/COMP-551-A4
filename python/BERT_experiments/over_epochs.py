@@ -27,6 +27,7 @@ else:
     sys.exit(1)
 
 print("Starting BERT epoch experiments script")
+print("Only train head:", only_train_head)
 
 # If you have a label map (e.g., emotions or sentiments), you can map the index to the label
 label_map = {
