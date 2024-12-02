@@ -26,6 +26,22 @@ else:
 
 print("Starting BERT fine-tuning script")
 
+learning_rate = 0.01
+num_epochs = 8
+batch_size = 16
+weight_decay = 0.01
+
+print(
+    "Learning rate:",
+    learning_rate,
+    "\nNumber of epochs:",
+    num_epochs,
+    "\nBatch size:",
+    batch_size,
+    "\nWeight decay:",
+    weight_decay,
+)
+
 # Path to the local directory containing the saved model
 bert_path = "/opt/models/bert-base-uncased"
 distil_path = "/opt/models/distilgpt2"
@@ -134,12 +150,12 @@ def compute_metrics(eval_preds):
 training_args = TrainingArguments(
     output_dir=f"{output_path}/results",  # Still need an output directory, but no logging or saving
     evaluation_strategy="epoch",  # Evaluate every epoch
-    learning_rate=0.01,  # Learning rate for training
-    per_device_train_batch_size=16,  # Batch size for training
-    per_device_eval_batch_size=16,  # Batch size for evaluation
-    num_train_epochs=8,  # Number of epochs
-    weight_decay=0.01,  # Weight decay strength
-    logging_strategy="no",  # No logging
+    learning_rate=learning_rate,  # Learning rate for training
+    per_device_train_batch_size=batch_size,  # Batch size for training
+    per_device_eval_batch_size=batch_size,  # Batch size for evaluation
+    num_train_epochs=num_epochs,  # Number of epochs
+    weight_decay=weight_decay,  # Weight decay strength
+    logging_strategy="epoch",  # No logging
     save_strategy="no",  # No saving
     push_to_hub=False,  # Don't push model to Hugging Face Hub
     report_to="none",  # Disable reporting to tracking tools like TensorBoard, etc.

@@ -68,6 +68,27 @@ distil_path = "/opt/models/distilgpt2"
 model_path = bert_path
 
 num_epochs = 10
+batch_size = 16
+weight_decay = 0.01
+# Set the learning rate and number of epochs depending on head or full fine-tune
+if only_train_head:
+    learning_rate = 0.01
+    num_epochs = (num_epochs * 2) - 4
+else:
+    learning_rate = 2e-5
+
+print(
+    "Learning rate:",
+    learning_rate,
+    "\nNum epochs:",
+    num_epochs,
+    "\nBatch size:",
+    batch_size,
+    "\nWeight decay:",
+    weight_decay,
+)
+
+
 results = {
     "f1": [],
     "accuracy": [],
@@ -142,24 +163,16 @@ def compute_metrics(eval_preds):
     }
 
 
-if only_train_head:
-    learning_rate = 0.01
-    num_epochs = (num_epochs * 2) - 4
-else:
-    learning_rate = 2e-5
-
-print("Learning rate:", learning_rate, "\nNum epochs:", num_epochs)
-
 # Step 4: Set up training arguments
 # Define training arguments with minimal output
 training_args = TrainingArguments(
     output_dir=f"{output_path}/results",  # Still need an output directory, but no logging or saving
     evaluation_strategy="epoch",  # Evaluate every epoch
-    learning_rate=2e-5,  # Learning rate for training
-    per_device_train_batch_size=16,  # Batch size for training
-    per_device_eval_batch_size=16,  # Batch size for evaluation
+    learning_rate=learning_rate,  # Learning rate for training
+    per_device_train_batch_size=batch_size,  # Batch size for training
+    per_device_eval_batch_size=batch_size,  # Batch size for evaluation
     num_train_epochs=num_epochs,  # Number of epochs
-    weight_decay=0.01,  # Weight decay strength
+    weight_decay=weight_decay,  # Weight decay strength
     logging_strategy="epoch",  # No logging
     save_strategy="no",  # No saving
     push_to_hub=False,  # Don't push model to Hugging Face Hub
