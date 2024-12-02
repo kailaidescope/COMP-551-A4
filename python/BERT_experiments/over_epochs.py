@@ -150,6 +150,7 @@ if only_train_head:
 else:
     learning_rate = 2e-5
 
+print("Learning rate:", learning_rate, "\nNum epochs:", num_epochs)
 
 # Step 4: Set up training arguments
 # Define training arguments with minimal output
