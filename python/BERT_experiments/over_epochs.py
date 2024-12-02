@@ -15,10 +15,15 @@ import matplotlib.pyplot as plt
 
 if len(sys.argv) == 1:
     output_path = "."
+    only_train_head = False
 elif len(sys.argv) == 2:
     output_path = sys.argv[1]
+    only_train_head = False
+elif len(sys.argv) == 3:
+    output_path = sys.argv[1]
+    only_train_head = str.lower(sys.argv[2]) == "true"
 else:
-    print("Usage: python over_epochs.py [output_path]")
+    print("Usage: python over_epochs.py [output_path] [train_head_only (True/False)]")
     sys.exit(1)
 
 print("Starting BERT epoch experiments script")
@@ -138,6 +143,13 @@ def compute_metrics(eval_preds):
     }
 
 
+if only_train_head:
+    learning_rate = 0.01
+    num_epochs = (num_epochs * 2) - 4
+else:
+    learning_rate = 2e-5
+
+
 # Step 4: Set up training arguments
 # Define training arguments with minimal output
 training_args = TrainingArguments(
@@ -208,33 +220,49 @@ print("Durations:", durations)
 
 # Graph the results
 
+plt.figure()
 plt.plot(epoch_list, f1s, label="F1 Score")
 if only_train_head:
     plt.title("F1 Score Over Epochs for Head Fine-Tuning")
 else:
     plt.title("F1 Score Over Epochs for Full Model Fine-Tuning")
+plt.legend()
+plt.xlabel("Epoch")
+plt.ylabel("F1 Score")
 plt.savefig(f"{output_path}/f1.png", dpi=300)
 
+plt.figure()
 plt.plot(epoch_list, accuracies, label="Accuracy")
 if only_train_head:
     plt.title("Accuracy Over Epochs for Head Fine-Tuning")
 else:
     plt.title("Accuracy Over Epochs for Full Model Fine-Tuning")
+plt.legend()
+plt.xlabel("Epoch")
+plt.ylabel("Accuracy")
 plt.savefig(f"{output_path}/accuracy.png", dpi=300)
 
+plt.figure()
 plt.plot(epoch_list, durations, label="Duration")
 if only_train_head:
     plt.title("Duration Over Epochs for Head Fine-Tuning")
 else:
     plt.title("Duration Over Epochs for Full Model Fine-Tuning")
+plt.legend()
+plt.xlabel("Epoch")
+plt.ylabel("Duration (s)")
 plt.savefig(f"{output_path}/duration.png", dpi=300)
 
+plt.figure()
 plt.plot(epoch_list, f1s, label="F1 Score")
 plt.plot(epoch_list, accuracies, label="Accuracy")
 if only_train_head:
     plt.title("F1 Score and Accuracy Over Epochs for Head Fine-Tuning")
 else:
     plt.title("F1 Score and Accuracy Over Epochs for Full Model Fine-Tuning")
+plt.legend()
+plt.xlabel("Epoch")
+plt.ylabel("F1 Score/Accuracy")
 plt.savefig(f"{output_path}/f1_and_accuracy.png", dpi=300)
 
 print("Graphs saved to disk")
