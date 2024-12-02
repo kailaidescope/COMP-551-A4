@@ -91,8 +91,10 @@ distil_path = "/opt/models/distilgpt2"
 
 model_path = bert_path
 
+# Set the hyperparameters
 batch_size = 16
-weight_decay = 0.01
+weight_decay = 0.1
+warmup_steps = 500
 # Set the learning rate and number of epochs depending on head or full fine-tune
 if train_method == "head":
     learning_rate = 0.01
@@ -110,6 +112,8 @@ print(
     batch_size,
     "\nWeight decay:",
     weight_decay,
+    "\nWarmup steps:",
+    warmup_steps,
 )
 
 
@@ -224,7 +228,7 @@ training_args = TrainingArguments(
     save_strategy="no",  # No saving
     push_to_hub=False,  # Don't push model to Hugging Face Hub
     report_to="none",  # Disable reporting to tracking tools like TensorBoard, etc.
-    warmup_steps=500,  # Number of warmup steps for learning rate scheduler
+    warmup_steps=warmup_steps,  # Number of warmup steps for learning rate scheduler
 )
 
 # Step 5: Initialize the Trainer
