@@ -365,7 +365,7 @@ for hyperparam in search_space:
 
 # Graph the results
 train_method_title = train_method.title()
-if search_hyperparam == "learning_rate":
+if search_hyperparam == "learning_rate" or search_hyperparam == "weight_decay":
     x_scale = "log"
 else:
     x_scale = "linear"
