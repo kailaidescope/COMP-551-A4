@@ -16,11 +16,11 @@ from sklearn.metrics import classification_report
 
 
 def get_train_method(str):
-    if str.lower(str) == "head":
+    if str.lower() == "head":
         return "head"
-    elif str.lower(str) == "full":
+    elif str.lower() == "full":
         return "full"
-    elif str.lower(str) == "head+1":
+    elif str.lower() == "head+1":
         return "head+1"
     else:
         print("Invalid train method. Options: head, full, head+1")
@@ -28,24 +28,24 @@ def get_train_method(str):
 
 
 def get_search_hyperparam(str, values=None):
-    if str.lower(str) == "default":
+    if str.lower() == "default":
         str = "weight_decay"
 
     if values is not None:
         values = values.split(",")
         search_space = [float(i) for i in values]
 
-    if str.lower(str) == "batch_size":
+    if str.lower() == "batch_size":
         if values is None:
             search_space = [8, 16, 32, 64, 128, 256]
         else:
             search_space = [int(i) for i in values]
         return "batch_size", search_space
-    elif str.lower(str) == "weight_decay":
+    elif str.lower() == "weight_decay":
         if values is None:
             search_space = [0.01, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6]
         return "weight_decay", search_space
-    elif str.lower(str) == "learning_rate":
+    elif str.lower() == "learning_rate":
         if values is None:
             search_space = [1e-5, 1e-4, 1e-3, 1e-2, 1e-1]
         return "learning_rate", search_space
