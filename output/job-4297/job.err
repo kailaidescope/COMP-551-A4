@@ -1,0 +1,15 @@
+2024-12-05 00:31:25.293968: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2024-12-05 00:31:25.306225: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:477] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1733376685.319526 2048411 cuda_dnn.cc:8310] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1733376685.323449 2048411 cuda_blas.cc:1418] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2024-12-05 00:31:25.340044: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI AVX512_BF16 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Traceback (most recent call last):
+  File "/home/2021/kturan/courses/COMP551/COMP-551-A4/jobs/../python/BERT_experiments/over_hyperparam.py", line 79, in <module>
+    search_hyperparam, search_space = get_search_hyperparam(
+                                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/2021/kturan/courses/COMP551/COMP-551-A4/jobs/../python/BERT_experiments/over_hyperparam.py", line 42, in get_search_hyperparam
+    search_space = [int(i) for i in values]
+                    ^^^^^^
+ValueError: invalid literal for int() with base 10: '0.00001'

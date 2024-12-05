@@ -1,0 +1,620 @@
+Starting BERT epoch experiments script
+Train method: head+1
+======= Search hyperparam: batch_size  =======
+====  batch_size :  8  ====
+Learning rate: 0.001 
+Num epochs: 8 
+Batch size: 8 
+Weight decay: 0.5 
+Warmup steps: 500
+Loading model
+Device: cuda
+Fine-tuning the model on the GoEmotions dataset...
+Filtered dataset:
+ DatasetDict({
+    train: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 36308
+    })
+    validation: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 4548
+    })
+    test: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 4590
+    })
+})
+{'loss': 1.9639, 'grad_norm': 6.9483723640441895, 'learning_rate': 0.00088721657544957, 'epoch': 1.0}
+{'eval_loss': 1.6971092224121094, 'eval_accuracy': 0.5255057167985928, 'eval_f1': 0.2533311925814911, 'eval_runtime': 3.5285, 'eval_samples_per_second': 1288.927, 'eval_steps_per_second': 161.258, 'epoch': 1.0}
+{'loss': 1.7859, 'grad_norm': 3.943726062774658, 'learning_rate': 0.0007604713503853457, 'epoch': 2.0}
+{'eval_loss': 1.7101720571517944, 'eval_accuracy': 0.5402374670184696, 'eval_f1': 0.2836418694267392, 'eval_runtime': 3.5508, 'eval_samples_per_second': 1280.838, 'eval_steps_per_second': 160.246, 'epoch': 2.0}
+{'loss': 1.7006, 'grad_norm': 5.833456993103027, 'learning_rate': 0.0006337261253211214, 'epoch': 3.0}
+{'eval_loss': 1.580536961555481, 'eval_accuracy': 0.5468337730870713, 'eval_f1': 0.29453479429264073, 'eval_runtime': 3.5669, 'eval_samples_per_second': 1275.067, 'eval_steps_per_second': 159.524, 'epoch': 3.0}
+{'loss': 1.6398, 'grad_norm': 4.163488388061523, 'learning_rate': 0.0005069809002568971, 'epoch': 4.0}
+{'eval_loss': 1.57716965675354, 'eval_accuracy': 0.5591468777484608, 'eval_f1': 0.31391753086115143, 'eval_runtime': 3.6244, 'eval_samples_per_second': 1254.836, 'eval_steps_per_second': 156.992, 'epoch': 4.0}
+{'loss': 1.5829, 'grad_norm': 8.317734718322754, 'learning_rate': 0.00038023567519267286, 'epoch': 5.0}
+{'eval_loss': 1.4943194389343262, 'eval_accuracy': 0.5657431838170625, 'eval_f1': 0.3358468657296842, 'eval_runtime': 3.6149, 'eval_samples_per_second': 1258.125, 'eval_steps_per_second': 157.404, 'epoch': 5.0}
+{'loss': 1.5124, 'grad_norm': 7.343839645385742, 'learning_rate': 0.00025349045012844855, 'epoch': 6.0}
+{'eval_loss': 1.441695213317871, 'eval_accuracy': 0.579155672823219, 'eval_f1': 0.4042749097942102, 'eval_runtime': 3.6039, 'eval_samples_per_second': 1261.98, 'eval_steps_per_second': 157.886, 'epoch': 6.0}
+{'loss': 1.4303, 'grad_norm': 5.0858988761901855, 'learning_rate': 0.00012674522506422428, 'epoch': 7.0}
+{'eval_loss': 1.3787840604782104, 'eval_accuracy': 0.5974054529463501, 'eval_f1': 0.4181778235740484, 'eval_runtime': 3.5757, 'eval_samples_per_second': 1271.934, 'eval_steps_per_second': 159.132, 'epoch': 7.0}
+{'loss': 1.3217, 'grad_norm': 6.256423473358154, 'learning_rate': 0.0, 'epoch': 8.0}
+{'eval_loss': 1.3282501697540283, 'eval_accuracy': 0.609938434476693, 'eval_f1': 0.435557618920993, 'eval_runtime': 3.5768, 'eval_samples_per_second': 1271.535, 'eval_steps_per_second': 159.082, 'epoch': 8.0}
+{'train_runtime': 368.7793, 'train_samples_per_second': 787.636, 'train_steps_per_second': 98.465, 'train_loss': 1.6171943982232113, 'epoch': 8.0}
+Predictions shape:  (4590, 28) 
+Labels shape:  (4590, 1) 
+Class Predictions:  [24 25 20 ... 27  0 27]
+Metrics:
+F1: 0.4416676063083878 
+Accuracy: 0.6043572984749456
+Final Report:
+                 precision    recall  f1-score   support
+
+    admiration       0.60      0.72      0.66       348
+     amusement       0.75      0.88      0.81       186
+         anger       0.48      0.46      0.47       131
+     annoyance       0.28      0.11      0.16       194
+      approval       0.53      0.34      0.41       236
+        caring       0.54      0.41      0.46        86
+     confusion       0.39      0.33      0.36        97
+     curiosity       0.47      0.61      0.53       176
+        desire       0.62      0.41      0.49        56
+disappointment       0.38      0.14      0.20        88
+   disapproval       0.46      0.29      0.36       195
+       disgust       0.43      0.46      0.44        76
+ embarrassment       0.47      0.30      0.37        23
+    excitement       0.55      0.40      0.46        57
+          fear       0.68      0.63      0.66        65
+     gratitude       0.89      0.90      0.89       260
+         grief       0.00      0.00      0.00         2
+           joy       0.55      0.53      0.54        93
+          love       0.73      0.88      0.80       160
+   nervousness       0.33      0.08      0.13        12
+      optimism       0.61      0.60      0.60       107
+         pride       0.00      0.00      0.00         7
+   realization       0.50      0.04      0.08        89
+        relief       1.00      0.14      0.25         7
+       remorse       0.58      0.70      0.64        44
+       sadness       0.55      0.50      0.53       102
+      surprise       0.44      0.33      0.38        87
+       neutral       0.62      0.76      0.68      1606
+
+      accuracy                           0.60      4590
+     macro avg       0.52      0.43      0.44      4590
+  weighted avg       0.58      0.60      0.58      4590
+
+F1 scores: [0.2533311925814911, 0.2836418694267392, 0.29453479429264073, 0.31391753086115143, 0.3358468657296842, 0.4042749097942102, 0.4181778235740484, 0.435557618920993, 0.4416676063083878]
+Accuracies: [0.5255057167985928, 0.5402374670184696, 0.5468337730870713, 0.5591468777484608, 0.5657431838170625, 0.579155672823219, 0.5974054529463501, 0.609938434476693, 0.6043572984749456]
+Durations: [49.683919191360474, 95.40731120109558, 141.1618413925171, 187.24838376045227, 233.76439356803894, 279.93505096435547, 326.4095616340637, 372.2451457977295, 375.8474221229553]
+Training Losses ( 8 ): [1.9639, 1.7859, 1.7006, 1.6398, 1.5829, 1.5124, 1.4303, 1.3217]
+Validation Losses ( 8 ): [1.6971092224121094, 1.7101720571517944, 1.580536961555481, 1.57716965675354, 1.4943194389343262, 1.441695213317871, 1.3787840604782104, 1.3282501697540283]
+====  batch_size :  16  ====
+Learning rate: 0.001 
+Num epochs: 8 
+Batch size: 16 
+Weight decay: 0.5 
+Warmup steps: 500
+Loading model
+Device: cuda
+Fine-tuning the model on the GoEmotions dataset...
+Filtered dataset:
+ DatasetDict({
+    train: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 36308
+    })
+    validation: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 4548
+    })
+    test: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 4590
+    })
+})
+{'loss': 1.8688, 'grad_norm': 6.314305305480957, 'learning_rate': 0.0008997734994337487, 'epoch': 1.0}
+{'eval_loss': 1.6077311038970947, 'eval_accuracy': 0.5371591908531222, 'eval_f1': 0.3170902344787108, 'eval_runtime': 3.0504, 'eval_samples_per_second': 1490.945, 'eval_steps_per_second': 93.43, 'epoch': 1.0}
+{'loss': 1.6487, 'grad_norm': 6.24553108215332, 'learning_rate': 0.0007712344280860703, 'epoch': 2.0}
+{'eval_loss': 1.6145423650741577, 'eval_accuracy': 0.552990325417766, 'eval_f1': 0.32453643960669265, 'eval_runtime': 3.0496, 'eval_samples_per_second': 1491.356, 'eval_steps_per_second': 93.456, 'epoch': 2.0}
+{'loss': 1.5869, 'grad_norm': 5.339900016784668, 'learning_rate': 0.0006426953567383919, 'epoch': 3.0}
+{'eval_loss': 1.484167218208313, 'eval_accuracy': 0.5729991204925242, 'eval_f1': 0.34249025570892344, 'eval_runtime': 3.0488, 'eval_samples_per_second': 1491.734, 'eval_steps_per_second': 93.479, 'epoch': 3.0}
+{'loss': 1.5195, 'grad_norm': 4.064177989959717, 'learning_rate': 0.0005141562853907134, 'epoch': 4.0}
+{'eval_loss': 1.486251950263977, 'eval_accuracy': 0.5743183817062445, 'eval_f1': 0.37246668030950075, 'eval_runtime': 3.0506, 'eval_samples_per_second': 1490.877, 'eval_steps_per_second': 93.426, 'epoch': 4.0}
+{'loss': 1.4594, 'grad_norm': 8.595508575439453, 'learning_rate': 0.00038561721404303513, 'epoch': 5.0}
+{'eval_loss': 1.4446781873703003, 'eval_accuracy': 0.56948109058927, 'eval_f1': 0.37681715179516445, 'eval_runtime': 3.0506, 'eval_samples_per_second': 1490.842, 'eval_steps_per_second': 93.423, 'epoch': 5.0}
+{'loss': 1.3864, 'grad_norm': 7.36777925491333, 'learning_rate': 0.0002570781426953567, 'epoch': 6.0}
+{'eval_loss': 1.3630479574203491, 'eval_accuracy': 0.5982849604221636, 'eval_f1': 0.44141740852721384, 'eval_runtime': 3.0505, 'eval_samples_per_second': 1490.916, 'eval_steps_per_second': 93.428, 'epoch': 6.0}
+{'loss': 1.3004, 'grad_norm': 8.040124893188477, 'learning_rate': 0.00012853907134767836, 'epoch': 7.0}
+{'eval_loss': 1.330742597579956, 'eval_accuracy': 0.6011433597185576, 'eval_f1': 0.4337121790730062, 'eval_runtime': 3.0501, 'eval_samples_per_second': 1491.114, 'eval_steps_per_second': 93.44, 'epoch': 7.0}
+{'loss': 1.1924, 'grad_norm': 7.433070659637451, 'learning_rate': 0.0, 'epoch': 8.0}
+{'eval_loss': 1.3015162944793701, 'eval_accuracy': 0.6077396657871592, 'eval_f1': 0.44536613925211604, 'eval_runtime': 3.0506, 'eval_samples_per_second': 1490.843, 'eval_steps_per_second': 93.424, 'epoch': 8.0}
+{'train_runtime': 285.3197, 'train_samples_per_second': 1018.03, 'train_steps_per_second': 63.648, 'train_loss': 1.4953138443867016, 'epoch': 8.0}
+Predictions shape:  (4590, 28) 
+Labels shape:  (4590, 1) 
+Class Predictions:  [24 14 20 ... 27  0 27]
+Metrics:
+F1: 0.4761536358391151 
+Accuracy: 0.6067538126361656
+Final Report:
+                 precision    recall  f1-score   support
+
+    admiration       0.63      0.75      0.68       348
+     amusement       0.76      0.88      0.81       186
+         anger       0.50      0.42      0.46       131
+     annoyance       0.27      0.14      0.18       194
+      approval       0.52      0.33      0.40       236
+        caring       0.53      0.50      0.51        86
+     confusion       0.40      0.37      0.39        97
+     curiosity       0.44      0.55      0.49       176
+        desire       0.66      0.41      0.51        56
+disappointment       0.40      0.24      0.30        88
+   disapproval       0.40      0.33      0.36       195
+       disgust       0.44      0.47      0.46        76
+ embarrassment       0.48      0.43      0.45        23
+    excitement       0.48      0.40      0.44        57
+          fear       0.67      0.68      0.67        65
+     gratitude       0.90      0.90      0.90       260
+         grief       0.00      0.00      0.00         2
+           joy       0.55      0.58      0.56        93
+          love       0.72      0.89      0.80       160
+   nervousness       0.38      0.42      0.40        12
+      optimism       0.62      0.62      0.62       107
+         pride       1.00      0.14      0.25         7
+   realization       0.28      0.08      0.12        89
+        relief       1.00      0.14      0.25         7
+       remorse       0.60      0.77      0.67        44
+       sadness       0.59      0.47      0.52       102
+      surprise       0.49      0.38      0.43        87
+       neutral       0.64      0.73      0.68      1606
+
+      accuracy                           0.61      4590
+     macro avg       0.55      0.47      0.48      4590
+  weighted avg       0.59      0.61      0.59      4590
+
+F1 scores: [0.3170902344787108, 0.32453643960669265, 0.34249025570892344, 0.37246668030950075, 0.37681715179516445, 0.44141740852721384, 0.4337121790730062, 0.44536613925211604, 0.4761536358391151]
+Accuracies: [0.5371591908531222, 0.552990325417766, 0.5729991204925242, 0.5743183817062445, 0.56948109058927, 0.5982849604221636, 0.6011433597185576, 0.6077396657871592, 0.6067538126361656]
+Durations: [36.94240999221802, 72.62228178977966, 108.30692148208618, 143.93737196922302, 179.58498334884644, 215.25992727279663, 250.93803596496582, 286.6025004386902, 289.66057109832764]
+Training Losses ( 8 ): [1.8688, 1.6487, 1.5869, 1.5195, 1.4594, 1.3864, 1.3004, 1.1924]
+Validation Losses ( 8 ): [1.6077311038970947, 1.6145423650741577, 1.484167218208313, 1.486251950263977, 1.4446781873703003, 1.3630479574203491, 1.330742597579956, 1.3015162944793701]
+====  batch_size :  32  ====
+Learning rate: 0.001 
+Num epochs: 8 
+Batch size: 32 
+Weight decay: 0.5 
+Warmup steps: 500
+Loading model
+Device: cuda
+Fine-tuning the model on the GoEmotions dataset...
+Filtered dataset:
+ DatasetDict({
+    train: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 36308
+    })
+    validation: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 4548
+    })
+    test: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 4590
+    })
+})
+{'loss': 1.8051, 'grad_norm': 4.941058158874512, 'learning_rate': 0.000925990675990676, 'epoch': 1.0}
+{'eval_loss': 1.5109000205993652, 'eval_accuracy': 0.5606860158311345, 'eval_f1': 0.3479527641711587, 'eval_runtime': 2.9351, 'eval_samples_per_second': 1549.505, 'eval_steps_per_second': 48.72, 'epoch': 1.0}
+{'loss': 1.5412, 'grad_norm': 3.5932517051696777, 'learning_rate': 0.0007937062937062938, 'epoch': 2.0}
+{'eval_loss': 1.46604323387146, 'eval_accuracy': 0.5767370272647317, 'eval_f1': 0.39079846427845627, 'eval_runtime': 2.9355, 'eval_samples_per_second': 1549.294, 'eval_steps_per_second': 48.714, 'epoch': 2.0}
+{'loss': 1.4482, 'grad_norm': 3.2880804538726807, 'learning_rate': 0.0006614219114219114, 'epoch': 3.0}
+{'eval_loss': 1.3664456605911255, 'eval_accuracy': 0.5938874230430958, 'eval_f1': 0.4074751498945224, 'eval_runtime': 2.9379, 'eval_samples_per_second': 1548.069, 'eval_steps_per_second': 48.675, 'epoch': 3.0}
+{'loss': 1.3761, 'grad_norm': 2.7611911296844482, 'learning_rate': 0.0005291375291375291, 'epoch': 4.0}
+{'eval_loss': 1.3464947938919067, 'eval_accuracy': 0.5958663148636764, 'eval_f1': 0.4419342663534969, 'eval_runtime': 2.9402, 'eval_samples_per_second': 1546.818, 'eval_steps_per_second': 48.636, 'epoch': 4.0}
+{'loss': 1.3111, 'grad_norm': 3.977760076522827, 'learning_rate': 0.0003968531468531469, 'epoch': 5.0}
+{'eval_loss': 1.3718043565750122, 'eval_accuracy': 0.5892700087950747, 'eval_f1': 0.4108030188117023, 'eval_runtime': 2.9399, 'eval_samples_per_second': 1546.987, 'eval_steps_per_second': 48.641, 'epoch': 5.0}
+{'loss': 1.2317, 'grad_norm': 3.063450574874878, 'learning_rate': 0.00026456876456876455, 'epoch': 6.0}
+{'eval_loss': 1.3260308504104614, 'eval_accuracy': 0.6022427440633246, 'eval_f1': 0.46108442831838886, 'eval_runtime': 2.9364, 'eval_samples_per_second': 1548.827, 'eval_steps_per_second': 48.699, 'epoch': 6.0}
+{'loss': 1.1452, 'grad_norm': 3.270641565322876, 'learning_rate': 0.00013228438228438227, 'epoch': 7.0}
+{'eval_loss': 1.2869627475738525, 'eval_accuracy': 0.6147757255936676, 'eval_f1': 0.46810303142915555, 'eval_runtime': 2.9389, 'eval_samples_per_second': 1547.516, 'eval_steps_per_second': 48.658, 'epoch': 7.0}
+{'loss': 1.0371, 'grad_norm': 3.50567364692688, 'learning_rate': 0.0, 'epoch': 8.0}
+{'eval_loss': 1.2879408597946167, 'eval_accuracy': 0.613896218117854, 'eval_f1': 0.48524215398832704, 'eval_runtime': 2.9446, 'eval_samples_per_second': 1544.541, 'eval_steps_per_second': 48.564, 'epoch': 8.0}
+{'train_runtime': 256.5857, 'train_samples_per_second': 1132.035, 'train_steps_per_second': 35.388, 'train_loss': 1.3619543941010464, 'epoch': 8.0}
+Predictions shape:  (4590, 28) 
+Labels shape:  (4590, 1) 
+Class Predictions:  [24 14 20 ... 27  0 27]
+Metrics:
+F1: 0.49430498328168176 
+Accuracy: 0.6139433551198257
+Final Report:
+                 precision    recall  f1-score   support
+
+    admiration       0.64      0.74      0.69       348
+     amusement       0.75      0.88      0.81       186
+         anger       0.52      0.45      0.48       131
+     annoyance       0.37      0.21      0.26       194
+      approval       0.48      0.34      0.40       236
+        caring       0.46      0.42      0.44        86
+     confusion       0.42      0.37      0.39        97
+     curiosity       0.49      0.58      0.53       176
+        desire       0.55      0.41      0.47        56
+disappointment       0.48      0.27      0.35        88
+   disapproval       0.44      0.34      0.39       195
+       disgust       0.54      0.50      0.52        76
+ embarrassment       0.61      0.48      0.54        23
+    excitement       0.46      0.46      0.46        57
+          fear       0.72      0.74      0.73        65
+     gratitude       0.94      0.90      0.92       260
+         grief       0.00      0.00      0.00         2
+           joy       0.54      0.59      0.57        93
+          love       0.73      0.88      0.80       160
+   nervousness       0.75      0.50      0.60        12
+      optimism       0.62      0.60      0.61       107
+         pride       0.40      0.29      0.33         7
+   realization       0.42      0.19      0.26        89
+        relief       0.00      0.00      0.00         7
+       remorse       0.59      0.82      0.69        44
+       sadness       0.53      0.51      0.52       102
+      surprise       0.46      0.38      0.42        87
+       neutral       0.64      0.73      0.68      1606
+
+      accuracy                           0.61      4590
+     macro avg       0.52      0.48      0.49      4590
+  weighted avg       0.60      0.61      0.60      4590
+
+F1 scores: [0.3479527641711587, 0.39079846427845627, 0.4074751498945224, 0.4419342663534969, 0.4108030188117023, 0.46108442831838886, 0.46810303142915555, 0.48524215398832704, 0.49430498328168176]
+Accuracies: [0.5606860158311345, 0.5767370272647317, 0.5938874230430958, 0.5958663148636764, 0.5892700087950747, 0.6022427440633246, 0.6147757255936676, 0.613896218117854, 0.6139433551198257]
+Durations: [35.69857573509216, 67.76651501655579, 99.8373556137085, 131.92359018325806, 164.04641461372375, 196.11468720436096, 228.24098229408264, 260.31237626075745, 263.23750352859497]
+Training Losses ( 8 ): [1.8051, 1.5412, 1.4482, 1.3761, 1.3111, 1.2317, 1.1452, 1.0371]
+Validation Losses ( 8 ): [1.5109000205993652, 1.46604323387146, 1.3664456605911255, 1.3464947938919067, 1.3718043565750122, 1.3260308504104614, 1.2869627475738525, 1.2879408597946167]
+====  batch_size :  64  ====
+Learning rate: 0.001 
+Num epochs: 8 
+Batch size: 64 
+Weight decay: 0.5 
+Warmup steps: 500
+Loading model
+Device: cuda
+Fine-tuning the model on the GoEmotions dataset...
+Filtered dataset:
+ DatasetDict({
+    train: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 36308
+    })
+    validation: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 4548
+    })
+    test: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 4590
+    })
+})
+{'loss': 1.8055, 'grad_norm': 4.97699499130249, 'learning_rate': 0.0009831849653808111, 'epoch': 1.0}
+{'eval_loss': 1.4883519411087036, 'eval_accuracy': 0.560905892700088, 'eval_f1': 0.3528642037849477, 'eval_runtime': 2.9164, 'eval_samples_per_second': 1559.473, 'eval_steps_per_second': 24.688, 'epoch': 1.0}
+{'loss': 1.4895, 'grad_norm': 4.701873302459717, 'learning_rate': 0.0008427299703264096, 'epoch': 2.0}
+{'eval_loss': 1.4348266124725342, 'eval_accuracy': 0.5809146877748461, 'eval_f1': 0.42617251925296923, 'eval_runtime': 2.9074, 'eval_samples_per_second': 1564.264, 'eval_steps_per_second': 24.764, 'epoch': 2.0}
+{'loss': 1.3844, 'grad_norm': 3.2448227405548096, 'learning_rate': 0.0007022749752720079, 'epoch': 3.0}
+{'eval_loss': 1.3483989238739014, 'eval_accuracy': 0.5910290237467019, 'eval_f1': 0.41130456585058645, 'eval_runtime': 2.9111, 'eval_samples_per_second': 1562.316, 'eval_steps_per_second': 24.733, 'epoch': 3.0}
+{'loss': 1.3037, 'grad_norm': 2.9497230052948, 'learning_rate': 0.0005618199802176064, 'epoch': 4.0}
+{'eval_loss': 1.3407237529754639, 'eval_accuracy': 0.5969656992084432, 'eval_f1': 0.42908200877011043, 'eval_runtime': 2.9108, 'eval_samples_per_second': 1562.477, 'eval_steps_per_second': 24.736, 'epoch': 4.0}
+{'loss': 1.2316, 'grad_norm': 4.089015007019043, 'learning_rate': 0.0004213649851632048, 'epoch': 5.0}
+{'eval_loss': 1.3469579219818115, 'eval_accuracy': 0.5872911169744943, 'eval_f1': 0.4473403768753483, 'eval_runtime': 2.9106, 'eval_samples_per_second': 1562.548, 'eval_steps_per_second': 24.737, 'epoch': 5.0}
+{'loss': 1.1499, 'grad_norm': 3.8410449028015137, 'learning_rate': 0.0002809099901088032, 'epoch': 6.0}
+{'eval_loss': 1.3325395584106445, 'eval_accuracy': 0.6064204045734388, 'eval_f1': 0.4640164268357928, 'eval_runtime': 2.9111, 'eval_samples_per_second': 1562.301, 'eval_steps_per_second': 24.733, 'epoch': 6.0}
+{'loss': 1.0634, 'grad_norm': 4.4183173179626465, 'learning_rate': 0.0001404549950544016, 'epoch': 7.0}
+{'eval_loss': 1.3025338649749756, 'eval_accuracy': 0.6015831134564644, 'eval_f1': 0.46116793362440045, 'eval_runtime': 2.9102, 'eval_samples_per_second': 1562.803, 'eval_steps_per_second': 24.741, 'epoch': 7.0}
+{'loss': 0.9626, 'grad_norm': 3.249204635620117, 'learning_rate': 0.0, 'epoch': 8.0}
+{'eval_loss': 1.3082375526428223, 'eval_accuracy': 0.6101583113456465, 'eval_f1': 0.4686322629136011, 'eval_runtime': 2.9134, 'eval_samples_per_second': 1561.059, 'eval_steps_per_second': 24.713, 'epoch': 8.0}
+{'train_runtime': 248.2016, 'train_samples_per_second': 1170.274, 'train_steps_per_second': 18.308, 'train_loss': 1.298821919400927, 'epoch': 8.0}
+Predictions shape:  (4590, 28) 
+Labels shape:  (4590, 1) 
+Class Predictions:  [25 14 20 ... 27  0 27]
+Metrics:
+F1: 0.4953026278986122 
+Accuracy: 0.6084967320261437
+Final Report:
+                 precision    recall  f1-score   support
+
+    admiration       0.63      0.73      0.67       348
+     amusement       0.75      0.90      0.81       186
+         anger       0.51      0.41      0.46       131
+     annoyance       0.39      0.22      0.28       194
+      approval       0.49      0.33      0.40       236
+        caring       0.47      0.36      0.41        86
+     confusion       0.44      0.42      0.43        97
+     curiosity       0.47      0.53      0.50       176
+        desire       0.67      0.50      0.57        56
+disappointment       0.40      0.23      0.29        88
+   disapproval       0.38      0.35      0.36       195
+       disgust       0.51      0.50      0.50        76
+ embarrassment       0.58      0.48      0.52        23
+    excitement       0.51      0.47      0.49        57
+          fear       0.63      0.71      0.67        65
+     gratitude       0.92      0.88      0.90       260
+         grief       0.00      0.00      0.00         2
+           joy       0.55      0.56      0.55        93
+          love       0.77      0.88      0.82       160
+   nervousness       0.44      0.58      0.50        12
+      optimism       0.60      0.61      0.60       107
+         pride       0.67      0.29      0.40         7
+   realization       0.34      0.13      0.19        89
+        relief       0.25      0.14      0.18         7
+       remorse       0.65      0.75      0.69        44
+       sadness       0.50      0.54      0.52       102
+      surprise       0.47      0.44      0.45        87
+       neutral       0.64      0.72      0.68      1606
+
+      accuracy                           0.61      4590
+     macro avg       0.52      0.49      0.50      4590
+  weighted avg       0.59      0.61      0.60      4590
+
+F1 scores: [0.3528642037849477, 0.42617251925296923, 0.41130456585058645, 0.42908200877011043, 0.4473403768753483, 0.4640164268357928, 0.46116793362440045, 0.4686322629136011, 0.4953026278986122]
+Accuracies: [0.560905892700088, 0.5809146877748461, 0.5910290237467019, 0.5969656992084432, 0.5872911169744943, 0.6064204045734388, 0.6015831134564644, 0.6101583113456465, 0.6084967320261437]
+Durations: [32.14911079406738, 63.203869342803955, 94.20145082473755, 125.22197151184082, 156.25153303146362, 187.30159449577332, 218.31449151039124, 249.29572820663452, 252.22802448272705]
+Training Losses ( 8 ): [1.8055, 1.4895, 1.3844, 1.3037, 1.2316, 1.1499, 1.0634, 0.9626]
+Validation Losses ( 8 ): [1.4883519411087036, 1.4348266124725342, 1.3483989238739014, 1.3407237529754639, 1.3469579219818115, 1.3325395584106445, 1.3025338649749756, 1.3082375526428223]
+====  batch_size :  128  ====
+Learning rate: 0.001 
+Num epochs: 8 
+Batch size: 128 
+Weight decay: 0.5 
+Warmup steps: 500
+Loading model
+Device: cuda
+Fine-tuning the model on the GoEmotions dataset...
+Filtered dataset:
+ DatasetDict({
+    train: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 36308
+    })
+    validation: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 4548
+    })
+    test: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 4590
+    })
+})
+{'loss': 1.9161, 'grad_norm': 2.0657806396484375, 'learning_rate': 0.0005679999999999999, 'epoch': 1.0}
+{'eval_loss': 1.428031325340271, 'eval_accuracy': 0.5842128408091469, 'eval_f1': 0.3978117061253036, 'eval_runtime': 2.9045, 'eval_samples_per_second': 1565.834, 'eval_steps_per_second': 12.394, 'epoch': 1.0}
+{'loss': 1.4516, 'grad_norm': 2.0382115840911865, 'learning_rate': 0.0009616252821670429, 'epoch': 2.0}
+{'eval_loss': 1.4242963790893555, 'eval_accuracy': 0.5787159190853123, 'eval_f1': 0.4119852107909984, 'eval_runtime': 2.9028, 'eval_samples_per_second': 1566.748, 'eval_steps_per_second': 12.402, 'epoch': 2.0}
+{'loss': 1.3741, 'grad_norm': 2.016710042953491, 'learning_rate': 0.0008013544018058691, 'epoch': 3.0}
+{'eval_loss': 1.3482098579406738, 'eval_accuracy': 0.5879507475813545, 'eval_f1': 0.3916431990396614, 'eval_runtime': 2.9045, 'eval_samples_per_second': 1565.825, 'eval_steps_per_second': 12.394, 'epoch': 3.0}
+{'loss': 1.2806, 'grad_norm': 2.0774829387664795, 'learning_rate': 0.0006410835214446952, 'epoch': 4.0}
+{'eval_loss': 1.360375165939331, 'eval_accuracy': 0.588830255057168, 'eval_f1': 0.45371946255694434, 'eval_runtime': 2.9071, 'eval_samples_per_second': 1564.434, 'eval_steps_per_second': 12.383, 'epoch': 4.0}
+{'loss': 1.1946, 'grad_norm': 2.165799140930176, 'learning_rate': 0.00048081264108352145, 'epoch': 5.0}
+{'eval_loss': 1.343318223953247, 'eval_accuracy': 0.5894898856640282, 'eval_f1': 0.4604969842796316, 'eval_runtime': 2.9063, 'eval_samples_per_second': 1564.896, 'eval_steps_per_second': 12.387, 'epoch': 5.0}
+{'loss': 1.0975, 'grad_norm': 2.187530994415283, 'learning_rate': 0.0003205417607223476, 'epoch': 6.0}
+{'eval_loss': 1.3059977293014526, 'eval_accuracy': 0.6029023746701847, 'eval_f1': 0.4694827697498885, 'eval_runtime': 2.9088, 'eval_samples_per_second': 1563.516, 'eval_steps_per_second': 12.376, 'epoch': 6.0}
+{'loss': 0.9895, 'grad_norm': 1.9132453203201294, 'learning_rate': 0.0001602708803611738, 'epoch': 7.0}
+{'eval_loss': 1.3225966691970825, 'eval_accuracy': 0.6086191732629728, 'eval_f1': 0.4696545106201709, 'eval_runtime': 2.9044, 'eval_samples_per_second': 1565.874, 'eval_steps_per_second': 12.395, 'epoch': 7.0}
+{'loss': 0.8844, 'grad_norm': 2.0908663272857666, 'learning_rate': 0.0, 'epoch': 8.0}
+{'eval_loss': 1.3304659128189087, 'eval_accuracy': 0.604221635883905, 'eval_f1': 0.46781959588633587, 'eval_runtime': 2.905, 'eval_samples_per_second': 1565.56, 'eval_steps_per_second': 12.392, 'epoch': 8.0}
+{'train_runtime': 244.7622, 'train_samples_per_second': 1186.719, 'train_steps_per_second': 9.282, 'train_loss': 1.2735486635020081, 'epoch': 8.0}
+Predictions shape:  (4590, 28) 
+Labels shape:  (4590, 1) 
+Class Predictions:  [24 14 20 ... 27  0 27]
+Metrics:
+F1: 0.506224754951847 
+Accuracy: 0.608714596949891
+Final Report:
+                 precision    recall  f1-score   support
+
+    admiration       0.66      0.75      0.70       348
+     amusement       0.74      0.88      0.81       186
+         anger       0.53      0.46      0.49       131
+     annoyance       0.37      0.25      0.30       194
+      approval       0.44      0.35      0.39       236
+        caring       0.47      0.41      0.43        86
+     confusion       0.43      0.39      0.41        97
+     curiosity       0.47      0.52      0.49       176
+        desire       0.59      0.46      0.52        56
+disappointment       0.47      0.26      0.34        88
+   disapproval       0.40      0.36      0.38       195
+       disgust       0.50      0.51      0.51        76
+ embarrassment       0.62      0.57      0.59        23
+    excitement       0.46      0.47      0.47        57
+          fear       0.71      0.69      0.70        65
+     gratitude       0.93      0.89      0.91       260
+         grief       0.00      0.00      0.00         2
+           joy       0.54      0.56      0.55        93
+          love       0.74      0.86      0.80       160
+   nervousness       0.57      0.67      0.62        12
+      optimism       0.58      0.55      0.57       107
+         pride       0.67      0.29      0.40         7
+   realization       0.38      0.18      0.24        89
+        relief       0.50      0.14      0.22         7
+       remorse       0.57      0.80      0.67        44
+       sadness       0.51      0.48      0.49       102
+      surprise       0.57      0.46      0.51        87
+       neutral       0.64      0.71      0.67      1606
+
+      accuracy                           0.61      4590
+     macro avg       0.54      0.50      0.51      4590
+  weighted avg       0.60      0.61      0.60      4590
+
+F1 scores: [0.3978117061253036, 0.4119852107909984, 0.3916431990396614, 0.45371946255694434, 0.4604969842796316, 0.4694827697498885, 0.4696545106201709, 0.46781959588633587, 0.506224754951847]
+Accuracies: [0.5842128408091469, 0.5787159190853123, 0.5879507475813545, 0.588830255057168, 0.5894898856640282, 0.6029023746701847, 0.6086191732629728, 0.604221635883905, 0.608714596949891]
+Durations: [31.722092390060425, 62.303985357284546, 92.83727359771729, 123.37581133842468, 153.9184684753418, 184.50662970542908, 215.3593077659607, 245.94595909118652, 248.89015173912048]
+Training Losses ( 8 ): [1.9161, 1.4516, 1.3741, 1.2806, 1.1946, 1.0975, 0.9895, 0.8844]
+Validation Losses ( 8 ): [1.428031325340271, 1.4242963790893555, 1.3482098579406738, 1.360375165939331, 1.343318223953247, 1.3059977293014526, 1.3225966691970825, 1.3304659128189087]
+====  batch_size :  256  ====
+Learning rate: 0.001 
+Num epochs: 8 
+Batch size: 256 
+Weight decay: 0.5 
+Warmup steps: 500
+Loading model
+Device: cuda
+Fine-tuning the model on the GoEmotions dataset...
+Filtered dataset:
+ DatasetDict({
+    train: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 36308
+    })
+    validation: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 4548
+    })
+    test: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 4590
+    })
+})
+{'loss': 2.2182, 'grad_norm': 1.9074651002883911, 'learning_rate': 0.00028399999999999996, 'epoch': 1.0}
+{'eval_loss': 1.4405490159988403, 'eval_accuracy': 0.5789357959542656, 'eval_f1': 0.3542679162438359, 'eval_runtime': 2.8944, 'eval_samples_per_second': 1571.315, 'eval_steps_per_second': 6.219, 'epoch': 1.0}
+{'loss': 1.4424, 'grad_norm': 1.7102645635604858, 'learning_rate': 0.0005679999999999999, 'epoch': 2.0}
+{'eval_loss': 1.3600528240203857, 'eval_accuracy': 0.5987247141600703, 'eval_f1': 0.41793459545620415, 'eval_runtime': 2.8957, 'eval_samples_per_second': 1570.598, 'eval_steps_per_second': 6.216, 'epoch': 2.0}
+{'loss': 1.3519, 'grad_norm': 1.4129778146743774, 'learning_rate': 0.000852, 'epoch': 3.0}
+{'eval_loss': 1.3432823419570923, 'eval_accuracy': 0.5923482849604221, 'eval_f1': 0.42086858662468674, 'eval_runtime': 2.8976, 'eval_samples_per_second': 1569.552, 'eval_steps_per_second': 6.212, 'epoch': 3.0}
+{'loss': 1.3061, 'grad_norm': 1.6136444807052612, 'learning_rate': 0.0008930817610062893, 'epoch': 4.0}
+{'eval_loss': 1.3445491790771484, 'eval_accuracy': 0.5978452066842568, 'eval_f1': 0.42820732505214487, 'eval_runtime': 2.8985, 'eval_samples_per_second': 1569.097, 'eval_steps_per_second': 6.21, 'epoch': 4.0}
+{'loss': 1.2164, 'grad_norm': 1.306164026260376, 'learning_rate': 0.0006698113207547169, 'epoch': 5.0}
+{'eval_loss': 1.3518829345703125, 'eval_accuracy': 0.5859718557607739, 'eval_f1': 0.4433044535742698, 'eval_runtime': 2.8982, 'eval_samples_per_second': 1569.269, 'eval_steps_per_second': 6.211, 'epoch': 5.0}
+{'loss': 1.0986, 'grad_norm': 1.5024350881576538, 'learning_rate': 0.00044654088050314467, 'epoch': 6.0}
+{'eval_loss': 1.3419920206069946, 'eval_accuracy': 0.6009234828496042, 'eval_f1': 0.4583690814958557, 'eval_runtime': 2.9004, 'eval_samples_per_second': 1568.054, 'eval_steps_per_second': 6.206, 'epoch': 6.0}
+{'loss': 0.9658, 'grad_norm': 1.5678033828735352, 'learning_rate': 0.00022327044025157233, 'epoch': 7.0}
+{'eval_loss': 1.3377195596694946, 'eval_accuracy': 0.5987247141600703, 'eval_f1': 0.4471842184453099, 'eval_runtime': 2.8999, 'eval_samples_per_second': 1568.354, 'eval_steps_per_second': 6.207, 'epoch': 7.0}
+{'loss': 0.8056, 'grad_norm': 1.545018196105957, 'learning_rate': 0.0, 'epoch': 8.0}
+{'eval_loss': 1.3718234300613403, 'eval_accuracy': 0.6024626209322779, 'eval_f1': 0.4634381549416288, 'eval_runtime': 2.9005, 'eval_samples_per_second': 1567.985, 'eval_steps_per_second': 6.206, 'epoch': 8.0}
+{'train_runtime': 250.6325, 'train_samples_per_second': 1158.924, 'train_steps_per_second': 4.533, 'train_loss': 1.3006269898213132, 'epoch': 8.0}
+Predictions shape:  (4590, 28) 
+Labels shape:  (4590, 1) 
+Class Predictions:  [25 14 20 ... 27 17 27]
+Metrics:
+F1: 0.49468234591236293 
+Accuracy: 0.5971677559912854
+Final Report:
+                 precision    recall  f1-score   support
+
+    admiration       0.65      0.72      0.69       348
+     amusement       0.73      0.84      0.78       186
+         anger       0.48      0.39      0.43       131
+     annoyance       0.36      0.22      0.27       194
+      approval       0.43      0.34      0.38       236
+        caring       0.43      0.37      0.40        86
+     confusion       0.39      0.36      0.38        97
+     curiosity       0.47      0.52      0.49       176
+        desire       0.62      0.46      0.53        56
+disappointment       0.35      0.24      0.28        88
+   disapproval       0.39      0.36      0.37       195
+       disgust       0.53      0.47      0.50        76
+ embarrassment       0.52      0.52      0.52        23
+    excitement       0.43      0.47      0.45        57
+          fear       0.71      0.71      0.71        65
+     gratitude       0.92      0.88      0.90       260
+         grief       0.00      0.00      0.00         2
+           joy       0.55      0.57      0.56        93
+          love       0.76      0.87      0.81       160
+   nervousness       0.47      0.58      0.52        12
+      optimism       0.60      0.58      0.59       107
+         pride       0.43      0.43      0.43         7
+   realization       0.28      0.18      0.22        89
+        relief       0.40      0.29      0.33         7
+       remorse       0.64      0.73      0.68        44
+       sadness       0.50      0.54      0.52       102
+      surprise       0.47      0.41      0.44        87
+       neutral       0.64      0.70      0.67      1606
+
+      accuracy                           0.60      4590
+     macro avg       0.50      0.49      0.49      4590
+  weighted avg       0.58      0.60      0.59      4590
+
+F1 scores: [0.3542679162438359, 0.41793459545620415, 0.42086858662468674, 0.42820732505214487, 0.4433044535742698, 0.4583690814958557, 0.4471842184453099, 0.4634381549416288, 0.49468234591236293]
+Accuracies: [0.5789357959542656, 0.5987247141600703, 0.5923482849604221, 0.5978452066842568, 0.5859718557607739, 0.6009234828496042, 0.5987247141600703, 0.6024626209322779, 0.5971677559912854]
+Durations: [34.892117977142334, 66.27449369430542, 97.5045256614685, 129.0730745792389, 160.3168318271637, 191.67352724075317, 222.95481705665588, 254.29157328605652, 257.2918858528137]
+Training Losses ( 8 ): [2.2182, 1.4424, 1.3519, 1.3061, 1.2164, 1.0986, 0.9658, 0.8056]
+Validation Losses ( 8 ): [1.4405490159988403, 1.3600528240203857, 1.3432823419570923, 1.3445491790771484, 1.3518829345703125, 1.3419920206069946, 1.3377195596694946, 1.3718234300613403]
+====  batch_size :  512  ====
+Learning rate: 0.001 
+Num epochs: 8 
+Batch size: 512 
+Weight decay: 0.5 
+Warmup steps: 500
+Loading model
+Device: cuda
+Fine-tuning the model on the GoEmotions dataset...
+Filtered dataset:
+ DatasetDict({
+    train: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 36308
+    })
+    validation: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 4548
+    })
+    test: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 4590
+    })
+})
+{'loss': 2.6773, 'grad_norm': 1.1303222179412842, 'learning_rate': 0.00014199999999999998, 'epoch': 1.0}
+{'eval_loss': 1.8984886407852173, 'eval_accuracy': 0.4742744063324538, 'eval_f1': 0.1548291539832081, 'eval_runtime': 2.9763, 'eval_samples_per_second': 1528.05, 'eval_steps_per_second': 3.024, 'epoch': 1.0}
+{'loss': 1.6257, 'grad_norm': 1.3551878929138184, 'learning_rate': 0.00028399999999999996, 'epoch': 2.0}
+{'eval_loss': 1.4018964767456055, 'eval_accuracy': 0.5870712401055409, 'eval_f1': 0.38682149839262936, 'eval_runtime': 2.9818, 'eval_samples_per_second': 1525.252, 'eval_steps_per_second': 3.018, 'epoch': 2.0}
+{'loss': 1.3843, 'grad_norm': 1.0913116931915283, 'learning_rate': 0.000426, 'epoch': 3.0}
+{'eval_loss': 1.327164888381958, 'eval_accuracy': 0.6018029903254177, 'eval_f1': 0.44055128992659315, 'eval_runtime': 2.9816, 'eval_samples_per_second': 1525.334, 'eval_steps_per_second': 3.018, 'epoch': 3.0}
+{'loss': 1.2933, 'grad_norm': 1.1878248453140259, 'learning_rate': 0.0005679999999999999, 'epoch': 4.0}
+{'eval_loss': 1.3208788633346558, 'eval_accuracy': 0.5980650835532102, 'eval_f1': 0.4564775942156973, 'eval_runtime': 2.9835, 'eval_samples_per_second': 1524.406, 'eval_steps_per_second': 3.017, 'epoch': 4.0}
+{'loss': 1.229, 'grad_norm': 1.4612927436828613, 'learning_rate': 0.00071, 'epoch': 5.0}
+{'eval_loss': 1.3168259859085083, 'eval_accuracy': 0.6015831134564644, 'eval_f1': 0.4587228808393743, 'eval_runtime': 3.2306, 'eval_samples_per_second': 1407.801, 'eval_steps_per_second': 2.786, 'epoch': 5.0}
+{'loss': 1.1616, 'grad_norm': 1.201621413230896, 'learning_rate': 0.000852, 'epoch': 6.0}
+{'eval_loss': 1.3298393487930298, 'eval_accuracy': 0.5932277924362357, 'eval_f1': 0.46069716655029247, 'eval_runtime': 2.9792, 'eval_samples_per_second': 1526.594, 'eval_steps_per_second': 3.021, 'epoch': 6.0}
+{'loss': 1.0997, 'grad_norm': 1.2327841520309448, 'learning_rate': 0.000994, 'epoch': 7.0}
+{'eval_loss': 1.3726568222045898, 'eval_accuracy': 0.590589270008795, 'eval_f1': 0.42196871127743474, 'eval_runtime': 2.9795, 'eval_samples_per_second': 1526.428, 'eval_steps_per_second': 3.021, 'epoch': 7.0}
+{'loss': 0.9478, 'grad_norm': 1.2211480140686035, 'learning_rate': 0.0, 'epoch': 8.0}
+{'eval_loss': 1.3723654747009277, 'eval_accuracy': 0.594547053649956, 'eval_f1': 0.46645946681729594, 'eval_runtime': 2.9786, 'eval_samples_per_second': 1526.902, 'eval_steps_per_second': 3.022, 'epoch': 8.0}
+{'train_runtime': 270.0282, 'train_samples_per_second': 1075.68, 'train_steps_per_second': 2.103, 'train_loss': 1.4273330661612498, 'epoch': 8.0}
+Predictions shape:  (4590, 28) 
+Labels shape:  (4590, 1) 
+Class Predictions:  [24 14 13 ... 27  0 27]
+Metrics:
+F1: 0.487934551618969 
+Accuracy: 0.5997821350762528
+Final Report:
+                 precision    recall  f1-score   support
+
+    admiration       0.68      0.71      0.69       348
+     amusement       0.71      0.88      0.79       186
+         anger       0.45      0.41      0.43       131
+     annoyance       0.34      0.21      0.26       194
+      approval       0.38      0.35      0.37       236
+        caring       0.42      0.35      0.38        86
+     confusion       0.42      0.34      0.38        97
+     curiosity       0.49      0.54      0.52       176
+        desire       0.64      0.45      0.53        56
+disappointment       0.43      0.22      0.29        88
+   disapproval       0.40      0.37      0.38       195
+       disgust       0.51      0.54      0.53        76
+ embarrassment       0.55      0.48      0.51        23
+    excitement       0.40      0.44      0.42        57
+          fear       0.71      0.65      0.68        65
+     gratitude       0.90      0.89      0.90       260
+         grief       0.00      0.00      0.00         2
+           joy       0.56      0.52      0.54        93
+          love       0.76      0.88      0.81       160
+   nervousness       0.55      0.50      0.52        12
+      optimism       0.57      0.55      0.56       107
+         pride       0.40      0.29      0.33         7
+   realization       0.37      0.19      0.25        89
+        relief       0.50      0.14      0.22         7
+       remorse       0.63      0.75      0.69        44
+       sadness       0.56      0.53      0.55       102
+      surprise       0.51      0.46      0.48        87
+       neutral       0.64      0.71      0.67      1606
+
+      accuracy                           0.60      4590
+     macro avg       0.52      0.48      0.49      4590
+  weighted avg       0.59      0.60      0.59      4590
+
+F1 scores: [0.1548291539832081, 0.38682149839262936, 0.44055128992659315, 0.4564775942156973, 0.4587228808393743, 0.46069716655029247, 0.42196871127743474, 0.46645946681729594, 0.487934551618969]
+Accuracies: [0.4742744063324538, 0.5870712401055409, 0.6018029903254177, 0.5980650835532102, 0.6015831134564644, 0.5932277924362357, 0.590589270008795, 0.594547053649956, 0.5997821350762528]
+Durations: [36.31590557098389, 70.10396099090576, 104.03447270393372, 137.7252974510193, 171.2290017604828, 205.02909994125366, 238.84768104553223, 272.550639629364, 275.70280504226685]
+Training Losses ( 8 ): [2.6773, 1.6257, 1.3843, 1.2933, 1.229, 1.1616, 1.0997, 0.9478]
+Validation Losses ( 8 ): [1.8984886407852173, 1.4018964767456055, 1.327164888381958, 1.3208788633346558, 1.3168259859085083, 1.3298393487930298, 1.3726568222045898, 1.3723654747009277]
+Graphs saved to disk
