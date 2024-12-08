@@ -4,7 +4,7 @@
 #SBATCH --tasks-per-node=1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=32G
-#SBATCH --time=02:00:00 # 2 hours
+#SBATCH --time=01:00:00 # 1 hour
 #SBATCH --output=../output/job-%j/job.out
 #SBATCH --account=fall2024-comp551
 #SBATCH -e ../output/job-%j/job.err # STDERR

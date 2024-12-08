@@ -251,8 +251,27 @@ trainer = Trainer(
     compute_metrics=compute_metrics,
 )
 
-# Step 6: Train the model
+# Step 6: Train & save the model
 trainer.train()
+
+# Group unfrozen layers
+layers_to_save = {}
+if train_method == "head":
+    print("Saving classifier layer")
+    layers_to_save["classifier"] = model.classifier.state_dict()
+elif train_method == "head+1":
+    print("Saving classifier, encoder, and pooler layers")
+    layers_to_save["classifier"] = model.classifier.state_dict()
+    layers_to_save["encoder"] = model.bert.encoder.layer[11].state_dict()
+    layers_to_save["pooler"] = model.bert.pooler.state_dict()
+elif train_method == "full":
+    print("Saving all layers")
+    layers_to_save["model"] = model.state_dict()
+
+print("Gathered layers to save.")
+
+torch.save(layers_to_save, f"{output_path}/selected_layers_state_dict.pth")
+print("Layer weights saved.")
 
 # Step 7: Test the model
 predictions = trainer.predict(tokenized_datasets["test"])
@@ -265,6 +284,50 @@ print(
     "\nClass Predictions: ",
     class_predictions,
 )
+
+
+def get_instances_by_prediction_correctness(
+    dataset, preds, class_preds, correct=True, num_instances=10
+):
+    assert dataset.len() == len(preds.label_ids) == len(class_preds)
+    p = np.random.permutation(dataset.len())
+
+    # Collect instances
+    instances = []
+    i = 0
+    while len(instances) < num_instances and i < len(p):
+        idx = p[i]
+
+        if (correct and preds.label_ids[idx] == class_preds[idx]) or (
+            not correct and preds.label_ids[idx] != class_preds[idx]
+        ):
+            # Save instance number, tokens, true label, and predicted label (labels as strings)
+            instances.append(
+                [
+                    idx,
+                    tokenizer.convert_ids_to_tokens(dataset["text"][idx]),
+                    label_map[str(preds.label_ids[idx])],
+                    label_map[str(class_preds[idx])],
+                ]
+            )
+            print(instances[-1])
+
+        i += 1
+
+    return instances
+
+
+correct_instances = get_instances_by_prediction_correctness(
+    tokenized_datasets["test"], predictions, class_predictions, correct=True
+)
+
+incorrect_instances = get_instances_by_prediction_correctness(
+    tokenized_datasets["test"], predictions, class_predictions, correct=False
+)
+
+print("Correct Instances: ", correct_instances)
+print("Incorrect Instances: ", incorrect_instances)
+
 
 f1 = f1_score(predictions.label_ids, class_predictions, average="macro")
 accuracy = accuracy_score(predictions.label_ids, class_predictions)
