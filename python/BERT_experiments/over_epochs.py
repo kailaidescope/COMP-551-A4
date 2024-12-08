@@ -306,7 +306,7 @@ def get_instances_by_prediction_correctness(
                 [
                     idx,
                     dataset["text"][idx],
-                    label_map[str(preds.label_ids[idx])],
+                    label_map[str(preds.label_ids[idx][0])],
                     label_map[str(class_preds[idx])],
                 ]
             )
