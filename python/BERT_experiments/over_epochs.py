@@ -206,7 +206,7 @@ def compute_metrics(eval_preds):
     logits, labels = eval_preds
     predictions = np.argmax(logits, axis=-1)
     accuracy = accuracy_score(labels, predictions)
-    f1 = f1_score(labels, predictions, average="macro")
+    f1 = f1_score(labels, predictions, average="macro", zero_division=0.0)
     report = classification_report(
         labels,
         predictions,
@@ -289,8 +289,8 @@ print(
 def get_instances_by_prediction_correctness(
     dataset, preds, class_preds, correct=True, num_instances=10
 ):
-    assert dataset.len() == len(preds.label_ids) == len(class_preds)
-    p = np.random.permutation(dataset.len())
+    assert dataset.num_rows == len(preds.label_ids) == len(class_preds)
+    p = np.random.permutation(dataset.num_rows)
 
     # Collect instances
     instances = []
@@ -329,7 +329,9 @@ print("Correct Instances: ", correct_instances)
 print("Incorrect Instances: ", incorrect_instances)
 
 
-f1 = f1_score(predictions.label_ids, class_predictions, average="macro")
+f1 = f1_score(
+    predictions.label_ids, class_predictions, average="macro", zero_division=0.0
+)
 accuracy = accuracy_score(predictions.label_ids, class_predictions)
 print(
     "Metrics:\nF1:",
