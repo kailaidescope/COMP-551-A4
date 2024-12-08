@@ -305,7 +305,7 @@ def get_instances_by_prediction_correctness(
             instances.append(
                 [
                     idx,
-                    tokenizer.convert_ids_to_tokens(dataset["text"][idx]),
+                    dataset["text"][idx],
                     label_map[str(preds.label_ids[idx])],
                     label_map[str(class_preds[idx])],
                 ]
