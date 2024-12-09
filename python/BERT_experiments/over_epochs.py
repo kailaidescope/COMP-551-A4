@@ -268,7 +268,7 @@ trainer = Trainer(
 )
 
 # Train model
-# trainer.train()
+trainer.train()
 
 # Save trained model parameters
 layers_to_save = {}
