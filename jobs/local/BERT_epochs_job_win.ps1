@@ -13,10 +13,4 @@ New-Item -ItemType Directory -Force -Path $job_path | Out-Null
 "BERT Test Job $job_number" | Set-Content -Path "$job_path/test_out.txt"
 
 # Run the Python script and redirect stdout and stderr to respective files
-python "../../python/BERT_experiments/over_epochs.py" `
-    "$job_path" `
-    "head+1" `
-    8 `
-    $true `
-    >> "$job_path/job.out" `
-    2>> "$job_path/job.err"
+python "../../python/BERT_experiments/over_epochs.py" "$job_path" "head+1" "8" "True" >> "$job_path/job.out" 2>> "$job_path/job.err"

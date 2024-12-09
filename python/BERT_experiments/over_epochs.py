@@ -328,7 +328,12 @@ def get_instances_by_prediction_correctness(
                     label_map[str(class_preds[idx])],
                 ]
             )
-            print(instances[-1])
+            try:
+                print(instances[-1])
+            except UnicodeEncodeError:
+                print("UnicodeEncodeError")
+            except:
+                print("Unknown error")
 
         i += 1
 
@@ -343,8 +348,13 @@ incorrect_instances = get_instances_by_prediction_correctness(
     tokenized_datasets["test"], predictions, class_predictions, correct=False
 )
 
-print("Correct Instances: ", correct_instances)
-print("Incorrect Instances: ", incorrect_instances)
+try:
+    print("Correct Instances: ", correct_instances)
+    print("Incorrect Instances: ", incorrect_instances)
+except UnicodeEncodeError:
+    print("UnicodeEncodeError")
+except:
+    print("Unknown error")
 
 
 f1 = f1_score(
