@@ -15,6 +15,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import classification_report
 
 
+# Function to choose what weights to train
 def get_train_method(str):
     if str.lower() == "head":
         return "head"
@@ -27,6 +28,7 @@ def get_train_method(str):
         sys.exit(1)
 
 
+# Function to choose how to search hyperparameters
 def get_search_hyperparam(str, values=None):
     if str.lower() == "default":
         str = "weight_decay"
@@ -88,7 +90,7 @@ else:
 print("Starting BERT epoch experiments script")
 print("Train method:", train_method)
 
-# If you have a label map (e.g., emotions or sentiments), you can map the index to the label
+# Define the label map
 label_map = {
     "0": "admiration",
     "1": "amusement",
@@ -124,10 +126,9 @@ label_strings = []
 for key in range(28):
     label_strings.append(label_map[str(key)])
 
-# Path to the local directory containing the saved model
+# Path to the local directory containing the saved model (for SLURM)
 bert_path = "/opt/models/bert-base-uncased"
 distil_path = "/opt/models/distilgpt2"
-
 model_path = bert_path
 
 # Set the hyperparameters
@@ -148,6 +149,7 @@ print("======= Search hyperparam:", search_hyperparam, " =======")
 
 overall_results = {}
 
+# Loop over the search space
 for hyperparam in search_space:
     print("==== ", search_hyperparam, ": ", hyperparam, " ====")
     if search_hyperparam == "batch_size":
@@ -182,12 +184,12 @@ for hyperparam in search_space:
         model_path, num_labels=28
     )  # 27 emotions + neutral
 
+    # Send to GPU if available
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Device: {device}")
-
-    # Move the model to the selected device (either GPU or CPU)
     model.to(device)
 
+    # Freeze layers depending on which are selected for training
     if train_method == "head":
         # Freeze all BERT layers
         for param in model.bert.parameters():
@@ -213,6 +215,7 @@ for hyperparam in search_space:
         for param in model.bert.pooler.parameters():
             param.requires_grad = True
 
+    # Print the trainable parameters
     """for name, param in model.named_parameters():    
         print(
             "Name:",
@@ -223,29 +226,25 @@ for hyperparam in search_space:
             param.requires_grad,
         ) """
 
+    # Load the GoEmotions dataset
     print("Fine-tuning the model on the GoEmotions dataset...")
-
-    # Step 1: Load the GoEmotions dataset
     dataset = load_dataset("google-research-datasets/go_emotions")
 
-    # Define a filtering function to keep only examples with a single label
+    # Filter for examples with a single label
     def filter_single_label(example):
         return len(example["labels"]) == 1
 
-    # Apply the filter to all splits (train, validation, test)
     filtered_dataset = dataset.filter(filter_single_label)
-
     print("Filtered dataset:\n", filtered_dataset)
 
-    # Step 2: Preprocess the dataset (tokenize)
+    # Preprocess the dataset (tokenize)
     def preprocess_function(examples):
         return tokenizer(examples["text"], truncation=True)
 
-    # Tokenize the dataset
     tokenized_datasets = filtered_dataset.map(preprocess_function, batched=True)
     data_collator = DataCollatorWithPadding(tokenizer)
 
-    # Step 3: Define the compute metric function for evaluation
+    # Define the evaluation metrics
     def compute_metrics(eval_preds):
         logits, labels = eval_preds
         predictions = np.argmax(logits, axis=-1)
@@ -265,8 +264,8 @@ for hyperparam in search_space:
             "f1": f1,
         }
 
-    # Step 4: Set up training arguments
-    # Define training arguments with minimal output
+    # Set up training arguments
+    # Note: set to give minimal logs and no saving, to preserve disk space on MIMI
     training_args = TrainingArguments(
         output_dir=f"{output_path}/results",  # Still need an output directory, but no logging or saving
         evaluation_strategy="epoch",  # Evaluate every epoch
@@ -282,7 +281,7 @@ for hyperparam in search_space:
         warmup_steps=warmup_steps,  # Number of warmup steps for learning rate scheduler
     )
 
-    # Step 5: Initialize the Trainer
+    # Initialize the Trainer
     trainer = Trainer(
         model=model,
         args=training_args,
@@ -293,10 +292,10 @@ for hyperparam in search_space:
         compute_metrics=compute_metrics,
     )
 
-    # Step 6: Train the model
+    # Train the model
     trainer.train()
 
-    # Step 7: Test the model
+    # Test the model
     predictions = trainer.predict(tokenized_datasets["test"])
     class_predictions = np.argmax(predictions.predictions, axis=1)
     print(
@@ -324,6 +323,7 @@ for hyperparam in search_space:
         target_names=label_strings,
     )
 
+    # Save results
     results["final"] = {}
     results["final"]["f1"] = f1
     results["final"]["accuracy"] = accuracy
@@ -342,7 +342,6 @@ for hyperparam in search_space:
     print("Durations:", durations)
 
     # Access loss history
-
     log_history = trainer.state.log_history
 
     # Extract training losses

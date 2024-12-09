@@ -11,6 +11,7 @@ from datasets import load_dataset, load_metric
 import numpy as np
 import sys
 
+# Set the output path and head name
 if len(sys.argv) == 1:
     output_path = "."
     head_name = "classification_head"
@@ -26,11 +27,11 @@ else:
 
 print("Starting BERT fine-tuning script")
 
+# Set the hyperparameters
 learning_rate = 0.01
 num_epochs = 8
 batch_size = 16
 weight_decay = 0.01
-
 print(
     "Learning rate:",
     learning_rate,
@@ -45,25 +46,22 @@ print(
 # Path to the local directory containing the saved model
 bert_path = "/opt/models/bert-base-uncased"
 distil_path = "/opt/models/distilgpt2"
-
 model_path = bert_path
 
-print("Loading model")
-
 # Load the tokenizer and model
+print("Loading model")
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 model = AutoModelForSequenceClassification.from_pretrained(
     model_path, num_labels=28
 )  # 27 emotions + neutral
 
+# Send to GPU if available
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Device: {device}")
-
-# Move the model to the selected device (either GPU or CPU)
 model.to(device)
 
+# Chooses whether to train only the classification head
 only_train_head = True
-
 if only_train_head:
     # Freeze all BERT layers
     for param in model.bert.parameters():
@@ -76,7 +74,7 @@ if only_train_head:
     for param in model.classifier.parameters():
         param.requires_grad = True
 
-# If you have a label map (e.g., emotions or sentiments), you can map the index to the label
+# Define label map
 label_map = {
     "0": "admiration",
     "1": "amusement",
@@ -110,32 +108,29 @@ label_map = {
 
 print("Fine-tuning the model on the GoEmotions dataset...")
 
-# Step 1: Load the GoEmotions dataset
+# Load the GoEmotions dataset
 dataset = load_dataset("google-research-datasets/go_emotions")
 
 
-# Define a filtering function to keep only examples with a single label
+# Filter for examples with a single label
 def filter_single_label(example):
     return len(example["labels"]) == 1
 
 
-# Apply the filter to all splits (train, validation, test)
 filtered_dataset = dataset.filter(filter_single_label)
-
 print("Filtered dataset:\n", filtered_dataset)
 
 
-# Step 2: Preprocess the dataset (tokenize)
+# Preprocess the dataset (tokenize)
 def preprocess_function(examples):
     return tokenizer(examples["text"], truncation=True)
 
 
-# Tokenize the dataset
 tokenized_datasets = filtered_dataset.map(preprocess_function, batched=True)
 data_collator = DataCollatorWithPadding(tokenizer)
 
 
-# Step 3: Define the compute metric function for evaluation
+# Define the evaluation metrics
 def compute_metrics(eval_preds):
     logits, labels = eval_preds
     predictions = np.argmax(logits, axis=-1)
@@ -145,8 +140,8 @@ def compute_metrics(eval_preds):
     }
 
 
-# Step 4: Set up training arguments
-# Define training arguments with minimal output
+# Set up training arguments
+# Note: set to give minimal logs and no saving, to preserve disk space on MIMI
 training_args = TrainingArguments(
     output_dir=f"{output_path}/results",  # Still need an output directory, but no logging or saving
     evaluation_strategy="epoch",  # Evaluate every epoch
@@ -161,7 +156,7 @@ training_args = TrainingArguments(
     report_to="none",  # Disable reporting to tracking tools like TensorBoard, etc.
 )
 
-# Step 5: Initialize the Trainer
+# Initialize the Trainer
 trainer = Trainer(
     model=model,
     args=training_args,
@@ -173,16 +168,15 @@ trainer = Trainer(
 )
 
 
-# Step 6: Train the model
+# Train the model
 trainer.train()
 
-# Step 7: Save only the classification head (classifier layer)
+# Save only the classification head (classifier layer)
 classifier_layer = model.classifier  # This is the classification head
 torch.save(classifier_layer.state_dict(), f"{output_path}/{head_name}.pth")
 print("Classification head saved.")
 
-# Step 8: Test the model
-
+# Test the model & print results
 predictions = trainer.predict(tokenized_datasets["test"])
 class_predictions = np.argmax(predictions.predictions, axis=1)
 print(

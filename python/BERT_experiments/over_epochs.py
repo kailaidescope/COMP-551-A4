@@ -14,6 +14,7 @@ import time
 import matplotlib.pyplot as plt
 from sklearn.metrics import classification_report
 
+# Set the output path, parts of model to train, number of epochs, and whether to download or use local BERT
 use_online_bert = False
 if len(sys.argv) == 1:
     output_path = "."
@@ -68,7 +69,7 @@ else:
 print("Starting BERT epoch experiments script")
 print("Train method:", train_method)
 
-# If you have a label map (e.g., emotions or sentiments), you can map the index to the label
+# Define the label map
 label_map = {
     "0": "admiration",
     "1": "amusement",
@@ -104,10 +105,10 @@ label_strings = []
 for key in range(28):
     label_strings.append(label_map[str(key)])
 
-# Path to the local directory containing the saved model
+
+# Path to the local directory containing the saved model (for SLURM)
 bert_path = "/opt/models/bert-base-uncased"
 distil_path = "/opt/models/distilgpt2"
-
 model_path = bert_path
 
 # Set the hyperparameters
@@ -135,12 +136,12 @@ print(
     warmup_steps,
 )
 
+
 # Initialize the results dictionary
 results = {"f1": [], "accuracy": [], "duration": [], "reports": []}
-
 start_time = time.time()
-print("Loading model")
 
+print("Loading model")
 if use_online_bert:
     model_path = "bert-base-uncased"
     print("Using online BERT model")
@@ -151,12 +152,12 @@ model = AutoModelForSequenceClassification.from_pretrained(
     model_path, num_labels=28
 )  # 27 emotions + neutral
 
+# Send to GPU if available
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Device: {device}")
-
-# Move the model to the selected device (either GPU or CPU)
 model.to(device)
 
+# Freeze layers depending on which are selected for training
 if train_method == "head":
     # Freeze all BERT layers
     for param in model.bert.parameters():
@@ -170,7 +171,7 @@ elif train_method == "head+1":
     for param in model.bert.parameters():
         param.requires_grad = False
 
-    # Only the classification head will be trained
+    # Unfreeze the classification head
     for param in model.classifier.parameters():
         param.requires_grad = True
 
@@ -182,6 +183,7 @@ elif train_method == "head+1":
     for param in model.bert.pooler.parameters():
         param.requires_grad = True
 
+# Print the model's trainable parameters, with sizen and frozen status
 for name, param in model.named_parameters():
     print(
         "Name:",
@@ -192,34 +194,30 @@ for name, param in model.named_parameters():
         param.requires_grad,
     )
 
+# Load the GoEmotions dataset
 print("Fine-tuning the model on the GoEmotions dataset...")
-
-# Step 1: Load the GoEmotions dataset
 dataset = load_dataset("google-research-datasets/go_emotions")
 
 
-# Define a filtering function to keep only examples with a single label
+# Filter for examples with a single label
 def filter_single_label(example):
     return len(example["labels"]) == 1
 
 
-# Apply the filter to all splits (train, validation, test)
 filtered_dataset = dataset.filter(filter_single_label)
-
 print("Filtered dataset:\n", filtered_dataset)
 
 
-# Step 2: Preprocess the dataset (tokenize)
+# Preprocess the dataset (tokenize)
 def preprocess_function(examples):
     return tokenizer(examples["text"], truncation=True)
 
 
-# Tokenize the dataset
 tokenized_datasets = filtered_dataset.map(preprocess_function, batched=True)
 data_collator = DataCollatorWithPadding(tokenizer)
 
 
-# Step 3: Define the compute metric function for evaluation
+# Define the evaluation metrics
 def compute_metrics(eval_preds):
     logits, labels = eval_preds
     predictions = np.argmax(logits, axis=-1)
@@ -241,8 +239,8 @@ def compute_metrics(eval_preds):
     }
 
 
-# Step 4: Set up training arguments
-# Define training arguments with minimal output
+# Set up training arguments
+# Note: set to give minimal logs and no saving, to preserve disk space on MIMI
 training_args = TrainingArguments(
     output_dir=f"{output_path}/results",  # Still need an output directory, but no logging or saving
     evaluation_strategy="epoch",  # Evaluate every epoch
@@ -258,7 +256,7 @@ training_args = TrainingArguments(
     warmup_steps=warmup_steps,  # Number of warmup steps for learning rate scheduler
 )
 
-# Step 5: Initialize the Trainer
+# Initialize the Trainer
 trainer = Trainer(
     model=model,
     args=training_args,
@@ -269,10 +267,10 @@ trainer = Trainer(
     compute_metrics=compute_metrics,
 )
 
-# Step 6: Train & save the model
-trainer.train()
+# Train model
+# trainer.train()
 
-# Group unfrozen layers
+# Save trained model parameters
 layers_to_save = {}
 if train_method == "head":
     print("Saving classifier layer")
@@ -291,7 +289,7 @@ print("Gathered layers to save.")
 torch.save(layers_to_save, f"{output_path}/selected_layers_state_dict.pth")
 print("Layer weights saved.")
 
-# Step 7: Test the model
+# Test the model
 predictions = trainer.predict(tokenized_datasets["test"])
 class_predictions = np.argmax(predictions.predictions, axis=1)
 print(
@@ -356,7 +354,7 @@ except UnicodeEncodeError:
 except:
     print("Unknown error")
 
-
+# Calculate final metrics
 f1 = f1_score(
     predictions.label_ids, class_predictions, average="macro", zero_division=0.0
 )
@@ -375,7 +373,7 @@ report = classification_report(
     target_names=label_strings,
 )
 
-
+# Save final results
 results["final"] = {}
 results["final"]["f1"] = f1
 results["final"]["accuracy"] = accuracy
@@ -395,7 +393,6 @@ print("Accuracies:", accuracies)
 print("Durations:", durations)
 
 # Access loss history
-
 log_history = trainer.state.log_history
 
 # Extract training losses
@@ -415,6 +412,7 @@ print("Validation Losses (", len(validation_losses), "):", validation_losses)
 # Graph the results
 train_method_title = train_method.title()
 
+# F1 score
 plt.figure()
 plt.plot(epoch_list, f1s, label="F1 Score")
 plt.title(f"F1 Score Over Epochs for {train_method_title} Fine-Tuning")
@@ -423,6 +421,7 @@ plt.xlabel("Epoch")
 plt.ylabel("F1 Score")
 plt.savefig(f"{output_path}/f1.png", dpi=300)
 
+# Accuracy
 plt.figure()
 plt.plot(epoch_list, accuracies, label="Accuracy")
 plt.title(f"Accuracy Over Epochs for {train_method_title} Fine-Tuning")
@@ -431,6 +430,7 @@ plt.xlabel("Epoch")
 plt.ylabel("Accuracy")
 plt.savefig(f"{output_path}/accuracy.png", dpi=300)
 
+# Duration
 plt.figure()
 plt.plot(epoch_list, durations, label="Duration")
 plt.title(f"Duration Over Epochs for {train_method_title} Fine-Tuning")
@@ -439,6 +439,7 @@ plt.xlabel("Epoch")
 plt.ylabel("Duration (s)")
 plt.savefig(f"{output_path}/duration.png", dpi=300)
 
+# F1 score and accuracy
 plt.figure()
 plt.plot(epoch_list, f1s, label="F1 Score")
 plt.plot(epoch_list, accuracies, label="Accuracy")
@@ -448,6 +449,7 @@ plt.xlabel("Epoch")
 plt.ylabel("F1 Score/Accuracy")
 plt.savefig(f"{output_path}/f1_and_accuracy.png", dpi=300)
 
+# Losses
 plt.figure()
 plt.plot(training_losses, label="Training Loss")
 plt.plot(validation_losses, label="Validation Loss")
