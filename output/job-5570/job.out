@@ -1,0 +1,300 @@
+Starting BERT epoch experiments script
+Train method: head+1
+Learning rate: 0.001 
+Num epochs: 8 
+Batch size: 32 
+Weight decay: 1 
+Warmup steps: 500
+Loading model
+Device: cuda
+Name: bert.embeddings.word_embeddings.weight  - Size: torch.Size([30522, 768])  - Requires grad: False
+Name: bert.embeddings.position_embeddings.weight  - Size: torch.Size([512, 768])  - Requires grad: False
+Name: bert.embeddings.token_type_embeddings.weight  - Size: torch.Size([2, 768])  - Requires grad: False
+Name: bert.embeddings.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.embeddings.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.0.attention.self.query.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.0.attention.self.query.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.0.attention.self.key.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.0.attention.self.key.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.0.attention.self.value.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.0.attention.self.value.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.0.attention.output.dense.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.0.attention.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.0.attention.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.0.attention.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.0.intermediate.dense.weight  - Size: torch.Size([3072, 768])  - Requires grad: False
+Name: bert.encoder.layer.0.intermediate.dense.bias  - Size: torch.Size([3072])  - Requires grad: False
+Name: bert.encoder.layer.0.output.dense.weight  - Size: torch.Size([768, 3072])  - Requires grad: False
+Name: bert.encoder.layer.0.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.0.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.0.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.1.attention.self.query.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.1.attention.self.query.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.1.attention.self.key.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.1.attention.self.key.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.1.attention.self.value.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.1.attention.self.value.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.1.attention.output.dense.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.1.attention.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.1.attention.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.1.attention.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.1.intermediate.dense.weight  - Size: torch.Size([3072, 768])  - Requires grad: False
+Name: bert.encoder.layer.1.intermediate.dense.bias  - Size: torch.Size([3072])  - Requires grad: False
+Name: bert.encoder.layer.1.output.dense.weight  - Size: torch.Size([768, 3072])  - Requires grad: False
+Name: bert.encoder.layer.1.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.1.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.1.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.2.attention.self.query.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.2.attention.self.query.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.2.attention.self.key.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.2.attention.self.key.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.2.attention.self.value.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.2.attention.self.value.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.2.attention.output.dense.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.2.attention.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.2.attention.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.2.attention.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.2.intermediate.dense.weight  - Size: torch.Size([3072, 768])  - Requires grad: False
+Name: bert.encoder.layer.2.intermediate.dense.bias  - Size: torch.Size([3072])  - Requires grad: False
+Name: bert.encoder.layer.2.output.dense.weight  - Size: torch.Size([768, 3072])  - Requires grad: False
+Name: bert.encoder.layer.2.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.2.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.2.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.3.attention.self.query.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.3.attention.self.query.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.3.attention.self.key.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.3.attention.self.key.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.3.attention.self.value.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.3.attention.self.value.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.3.attention.output.dense.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.3.attention.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.3.attention.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.3.attention.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.3.intermediate.dense.weight  - Size: torch.Size([3072, 768])  - Requires grad: False
+Name: bert.encoder.layer.3.intermediate.dense.bias  - Size: torch.Size([3072])  - Requires grad: False
+Name: bert.encoder.layer.3.output.dense.weight  - Size: torch.Size([768, 3072])  - Requires grad: False
+Name: bert.encoder.layer.3.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.3.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.3.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.4.attention.self.query.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.4.attention.self.query.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.4.attention.self.key.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.4.attention.self.key.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.4.attention.self.value.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.4.attention.self.value.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.4.attention.output.dense.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.4.attention.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.4.attention.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.4.attention.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.4.intermediate.dense.weight  - Size: torch.Size([3072, 768])  - Requires grad: False
+Name: bert.encoder.layer.4.intermediate.dense.bias  - Size: torch.Size([3072])  - Requires grad: False
+Name: bert.encoder.layer.4.output.dense.weight  - Size: torch.Size([768, 3072])  - Requires grad: False
+Name: bert.encoder.layer.4.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.4.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.4.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.5.attention.self.query.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.5.attention.self.query.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.5.attention.self.key.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.5.attention.self.key.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.5.attention.self.value.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.5.attention.self.value.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.5.attention.output.dense.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.5.attention.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.5.attention.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.5.attention.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.5.intermediate.dense.weight  - Size: torch.Size([3072, 768])  - Requires grad: False
+Name: bert.encoder.layer.5.intermediate.dense.bias  - Size: torch.Size([3072])  - Requires grad: False
+Name: bert.encoder.layer.5.output.dense.weight  - Size: torch.Size([768, 3072])  - Requires grad: False
+Name: bert.encoder.layer.5.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.5.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.5.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.6.attention.self.query.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.6.attention.self.query.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.6.attention.self.key.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.6.attention.self.key.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.6.attention.self.value.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.6.attention.self.value.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.6.attention.output.dense.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.6.attention.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.6.attention.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.6.attention.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.6.intermediate.dense.weight  - Size: torch.Size([3072, 768])  - Requires grad: False
+Name: bert.encoder.layer.6.intermediate.dense.bias  - Size: torch.Size([3072])  - Requires grad: False
+Name: bert.encoder.layer.6.output.dense.weight  - Size: torch.Size([768, 3072])  - Requires grad: False
+Name: bert.encoder.layer.6.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.6.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.6.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.7.attention.self.query.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.7.attention.self.query.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.7.attention.self.key.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.7.attention.self.key.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.7.attention.self.value.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.7.attention.self.value.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.7.attention.output.dense.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.7.attention.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.7.attention.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.7.attention.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.7.intermediate.dense.weight  - Size: torch.Size([3072, 768])  - Requires grad: False
+Name: bert.encoder.layer.7.intermediate.dense.bias  - Size: torch.Size([3072])  - Requires grad: False
+Name: bert.encoder.layer.7.output.dense.weight  - Size: torch.Size([768, 3072])  - Requires grad: False
+Name: bert.encoder.layer.7.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.7.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.7.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.8.attention.self.query.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.8.attention.self.query.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.8.attention.self.key.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.8.attention.self.key.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.8.attention.self.value.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.8.attention.self.value.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.8.attention.output.dense.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.8.attention.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.8.attention.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.8.attention.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.8.intermediate.dense.weight  - Size: torch.Size([3072, 768])  - Requires grad: False
+Name: bert.encoder.layer.8.intermediate.dense.bias  - Size: torch.Size([3072])  - Requires grad: False
+Name: bert.encoder.layer.8.output.dense.weight  - Size: torch.Size([768, 3072])  - Requires grad: False
+Name: bert.encoder.layer.8.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.8.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.8.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.9.attention.self.query.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.9.attention.self.query.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.9.attention.self.key.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.9.attention.self.key.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.9.attention.self.value.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.9.attention.self.value.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.9.attention.output.dense.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.9.attention.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.9.attention.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.9.attention.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.9.intermediate.dense.weight  - Size: torch.Size([3072, 768])  - Requires grad: False
+Name: bert.encoder.layer.9.intermediate.dense.bias  - Size: torch.Size([3072])  - Requires grad: False
+Name: bert.encoder.layer.9.output.dense.weight  - Size: torch.Size([768, 3072])  - Requires grad: False
+Name: bert.encoder.layer.9.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.9.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.9.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.10.attention.self.query.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.10.attention.self.query.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.10.attention.self.key.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.10.attention.self.key.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.10.attention.self.value.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.10.attention.self.value.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.10.attention.output.dense.weight  - Size: torch.Size([768, 768])  - Requires grad: False
+Name: bert.encoder.layer.10.attention.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.10.attention.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.10.attention.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.10.intermediate.dense.weight  - Size: torch.Size([3072, 768])  - Requires grad: False
+Name: bert.encoder.layer.10.intermediate.dense.bias  - Size: torch.Size([3072])  - Requires grad: False
+Name: bert.encoder.layer.10.output.dense.weight  - Size: torch.Size([768, 3072])  - Requires grad: False
+Name: bert.encoder.layer.10.output.dense.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.10.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.10.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: False
+Name: bert.encoder.layer.11.attention.self.query.weight  - Size: torch.Size([768, 768])  - Requires grad: True
+Name: bert.encoder.layer.11.attention.self.query.bias  - Size: torch.Size([768])  - Requires grad: True
+Name: bert.encoder.layer.11.attention.self.key.weight  - Size: torch.Size([768, 768])  - Requires grad: True
+Name: bert.encoder.layer.11.attention.self.key.bias  - Size: torch.Size([768])  - Requires grad: True
+Name: bert.encoder.layer.11.attention.self.value.weight  - Size: torch.Size([768, 768])  - Requires grad: True
+Name: bert.encoder.layer.11.attention.self.value.bias  - Size: torch.Size([768])  - Requires grad: True
+Name: bert.encoder.layer.11.attention.output.dense.weight  - Size: torch.Size([768, 768])  - Requires grad: True
+Name: bert.encoder.layer.11.attention.output.dense.bias  - Size: torch.Size([768])  - Requires grad: True
+Name: bert.encoder.layer.11.attention.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: True
+Name: bert.encoder.layer.11.attention.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: True
+Name: bert.encoder.layer.11.intermediate.dense.weight  - Size: torch.Size([3072, 768])  - Requires grad: True
+Name: bert.encoder.layer.11.intermediate.dense.bias  - Size: torch.Size([3072])  - Requires grad: True
+Name: bert.encoder.layer.11.output.dense.weight  - Size: torch.Size([768, 3072])  - Requires grad: True
+Name: bert.encoder.layer.11.output.dense.bias  - Size: torch.Size([768])  - Requires grad: True
+Name: bert.encoder.layer.11.output.LayerNorm.weight  - Size: torch.Size([768])  - Requires grad: True
+Name: bert.encoder.layer.11.output.LayerNorm.bias  - Size: torch.Size([768])  - Requires grad: True
+Name: bert.pooler.dense.weight  - Size: torch.Size([768, 768])  - Requires grad: True
+Name: bert.pooler.dense.bias  - Size: torch.Size([768])  - Requires grad: True
+Name: classifier.weight  - Size: torch.Size([28, 768])  - Requires grad: True
+Name: classifier.bias  - Size: torch.Size([28])  - Requires grad: True
+Fine-tuning the model on the GoEmotions dataset...
+Filtered dataset:
+ DatasetDict({
+    train: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 36308
+    })
+    validation: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 4548
+    })
+    test: Dataset({
+        features: ['text', 'labels', 'id'],
+        num_rows: 4590
+    })
+})
+Saving classifier, encoder, and pooler layers
+Gathered layers to save.
+Layer weights saved.
+Predictions shape:  (4590, 28) 
+Labels shape:  (4590, 1) 
+Class Predictions:  [13 13 13 ... 13 13 13]
+[2473, 'Make nachos, get a beer, and get ready to yell SUEY!!', 'excitement', 'excitement']
+[3408, 'looks like we got a double win today!!', 'excitement', 'excitement']
+[3203, "Am interested in responses as I'm in a similar situation, though my tech school is a TDY", 'excitement', 'excitement']
+[3994, 'Your smartly worded refutation of the whole of the rest of Christendom has swayed me completely, Rome is the only true home! Hurrah! Hurrah!', 'excitement', 'excitement']
+[3836, 'Who are these women messaging [NAME]? He looks like a very average-looking teenager.', 'curiosity', 'curiosity']
+[1616, '*OOH* *AH* *OW*', 'excitement', 'excitement']
+[1196, 'Interesting. Never heard of it. Do you like it?', 'excitement', 'excitement']
+[4265, 'Yaaaaaas! I need your curly hair routine!', 'excitement', 'excitement']
+[4060, "I have basically that print on a t-shirt, it's definitely coming out of the closet more often as soon as the campaign is official.", 'excitement', 'excitement']
+[4543, "I'm more interested in why there are goldfish in the picture...", 'excitement', 'excitement']
+[2963, "Deep down you know pain is temporary and you'll do it all over again the next weekend", 'neutral', 'excitement']
+[1718, 'Thanks', 'gratitude', 'excitement']
+[644, "I swear to [NAME], I'm going to approach you. Instead of running away, I'll come right to you.", 'neutral', 'excitement']
+[4244, "I hear that if you say you aren't doing something, when you do it, you're not actually doing it.", 'neutral', 'excitement']
+[745, 'Yeah I wish they could just finish 9th every year in the conference', 'optimism', 'excitement']
+[1863, 'I do not trust our defense at all. I do not believe you can increase the range of Andujar.', 'surprise', 'excitement']
+[1150, 'Difficult to see how this video wouldn’t have been much more interesting if properly shot in landscape.', 'disapproval', 'excitement']
+[2475, 'For the people and finding out how they end up? Sure. Other than that, it’s not great. Frustrating at best. ', 'anger', 'excitement']
+[1297, "That's not cute", 'disapproval', 'disappointment']
+[2788, 'RIGHT?! My mom would literally never forgive the bitch 😂', 'amusement', 'excitement']
+Correct Instances:  [[2473, 'Make nachos, get a beer, and get ready to yell SUEY!!', 'excitement', 'excitement'], [3408, 'looks like we got a double win today!!', 'excitement', 'excitement'], [3203, "Am interested in responses as I'm in a similar situation, though my tech school is a TDY", 'excitement', 'excitement'], [3994, 'Your smartly worded refutation of the whole of the rest of Christendom has swayed me completely, Rome is the only true home! Hurrah! Hurrah!', 'excitement', 'excitement'], [3836, 'Who are these women messaging [NAME]? He looks like a very average-looking teenager.', 'curiosity', 'curiosity'], [1616, '*OOH* *AH* *OW*', 'excitement', 'excitement'], [1196, 'Interesting. Never heard of it. Do you like it?', 'excitement', 'excitement'], [4265, 'Yaaaaaas! I need your curly hair routine!', 'excitement', 'excitement'], [4060, "I have basically that print on a t-shirt, it's definitely coming out of the closet more often as soon as the campaign is official.", 'excitement', 'excitement'], [4543, "I'm more interested in why there are goldfish in the picture...", 'excitement', 'excitement']]
+Incorrect Instances:  [[2963, "Deep down you know pain is temporary and you'll do it all over again the next weekend", 'neutral', 'excitement'], [1718, 'Thanks', 'gratitude', 'excitement'], [644, "I swear to [NAME], I'm going to approach you. Instead of running away, I'll come right to you.", 'neutral', 'excitement'], [4244, "I hear that if you say you aren't doing something, when you do it, you're not actually doing it.", 'neutral', 'excitement'], [745, 'Yeah I wish they could just finish 9th every year in the conference', 'optimism', 'excitement'], [1863, 'I do not trust our defense at all. I do not believe you can increase the range of Andujar.', 'surprise', 'excitement'], [1150, 'Difficult to see how this video wouldn’t have been much more interesting if properly shot in landscape.', 'disapproval', 'excitement'], [2475, 'For the people and finding out how they end up? Sure. Other than that, it’s not great. Frustrating at best. ', 'anger', 'excitement'], [1297, "That's not cute", 'disapproval', 'disappointment'], [2788, 'RIGHT?! My mom would literally never forgive the bitch 😂', 'amusement', 'excitement']]
+Metrics:
+F1: 0.010008981380665066 
+Accuracy: 0.014596949891067539
+Results: {'f1': [0.010008981380665066], 'accuracy': [0.014596949891067539], 'duration': [64.19697642326355], 'reports': ['                precision    recall  f1-score   support\n\n    admiration       0.00      0.00      0.00       348\n     amusement       0.00      0.00      0.00       186\n         anger       0.00      0.00      0.00       131\n     annoyance       0.00      0.00      0.00       194\n      approval       0.00      0.00      0.00       236\n        caring       0.00      0.00      0.00        86\n     confusion       0.00      0.00      0.00        97\n     curiosity       0.07      0.03      0.04       176\n        desire       0.00      0.00      0.00        56\ndisappointment       0.04      0.10      0.06        88\n   disapproval       0.00      0.00      0.00       195\n       disgust       0.00      0.00      0.00        76\n embarrassment       0.00      0.00      0.00        23\n    excitement       0.01      0.88      0.02        57\n          fear       0.00      0.00      0.00        65\n     gratitude       0.00      0.00      0.00       260\n         grief       0.00      0.00      0.00         2\n           joy       0.00      0.00      0.00        93\n          love       0.00      0.00      0.00       160\n   nervousness       0.50      0.08      0.14        12\n      optimism       0.00      0.00      0.00       107\n         pride       0.00      0.00      0.00         7\n   realization       0.00      0.00      0.00        89\n        relief       0.00      0.00      0.00         7\n       remorse       0.01      0.02      0.01        44\n       sadness       0.00      0.00      0.00       102\n      surprise       0.00      0.00      0.00        87\n       neutral       0.00      0.00      0.00      1606\n\n      accuracy                           0.01      4590\n     macro avg       0.02      0.04      0.01      4590\n  weighted avg       0.00      0.01      0.00      4590\n'], 'final': {'f1': 0.010008981380665066, 'accuracy': 0.014596949891067539, 'duration': 64.2490553855896, 'report': '                precision    recall  f1-score   support\n\n    admiration       0.00      0.00      0.00       348\n     amusement       0.00      0.00      0.00       186\n         anger       0.00      0.00      0.00       131\n     annoyance       0.00      0.00      0.00       194\n      approval       0.00      0.00      0.00       236\n        caring       0.00      0.00      0.00        86\n     confusion       0.00      0.00      0.00        97\n     curiosity       0.07      0.03      0.04       176\n        desire       0.00      0.00      0.00        56\ndisappointment       0.04      0.10      0.06        88\n   disapproval       0.00      0.00      0.00       195\n       disgust       0.00      0.00      0.00        76\n embarrassment       0.00      0.00      0.00        23\n    excitement       0.01      0.88      0.02        57\n          fear       0.00      0.00      0.00        65\n     gratitude       0.00      0.00      0.00       260\n         grief       0.00      0.00      0.00         2\n           joy       0.00      0.00      0.00        93\n          love       0.00      0.00      0.00       160\n   nervousness       0.50      0.08      0.14        12\n      optimism       0.00      0.00      0.00       107\n         pride       0.00      0.00      0.00         7\n   realization       0.00      0.00      0.00        89\n        relief       0.00      0.00      0.00         7\n       remorse       0.01      0.02      0.01        44\n       sadness       0.00      0.00      0.00       102\n      surprise       0.00      0.00      0.00        87\n       neutral       0.00      0.00      0.00      1606\n\n      accuracy                           0.01      4590\n     macro avg       0.02      0.04      0.01      4590\n  weighted avg       0.00      0.01      0.00      4590\n'}}
+Final Report:
+                 precision    recall  f1-score   support
+
+    admiration       0.00      0.00      0.00       348
+     amusement       0.00      0.00      0.00       186
+         anger       0.00      0.00      0.00       131
+     annoyance       0.00      0.00      0.00       194
+      approval       0.00      0.00      0.00       236
+        caring       0.00      0.00      0.00        86
+     confusion       0.00      0.00      0.00        97
+     curiosity       0.07      0.03      0.04       176
+        desire       0.00      0.00      0.00        56
+disappointment       0.04      0.10      0.06        88
+   disapproval       0.00      0.00      0.00       195
+       disgust       0.00      0.00      0.00        76
+ embarrassment       0.00      0.00      0.00        23
+    excitement       0.01      0.88      0.02        57
+          fear       0.00      0.00      0.00        65
+     gratitude       0.00      0.00      0.00       260
+         grief       0.00      0.00      0.00         2
+           joy       0.00      0.00      0.00        93
+          love       0.00      0.00      0.00       160
+   nervousness       0.50      0.08      0.14        12
+      optimism       0.00      0.00      0.00       107
+         pride       0.00      0.00      0.00         7
+   realization       0.00      0.00      0.00        89
+        relief       0.00      0.00      0.00         7
+       remorse       0.01      0.02      0.01        44
+       sadness       0.00      0.00      0.00       102
+      surprise       0.00      0.00      0.00        87
+       neutral       0.00      0.00      0.00      1606
+
+      accuracy                           0.01      4590
+     macro avg       0.02      0.04      0.01      4590
+  weighted avg       0.00      0.01      0.00      4590
+
+F1 scores: [0.010008981380665066]
+Accuracies: [0.014596949891067539]
+Durations: [64.19697642326355]
+log_history: []
+Training Losses ( 0 ): []
+Validation Losses ( 0 ): []

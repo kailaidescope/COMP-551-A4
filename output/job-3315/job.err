@@ -1,43 +1,0 @@
-2024-12-01 16:05:49.678417: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
-2024-12-01 16:05:49.690175: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:477] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
-WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-E0000 00:00:1733087149.702444 1922036 cuda_dnn.cc:8310] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
-E0000 00:00:1733087149.706158 1922036 cuda_blas.cc:1418] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
-2024-12-01 16:05:49.722095: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
-To enable the following instructions: AVX2 AVX512F AVX512_VNNI AVX512_BF16 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
-/usr/local/env_dirs/fall2024/lib/python3.12/site-packages/transformers/tokenization_utils_base.py:1601: FutureWarning: `clean_up_tokenization_spaces` was not set. It will be set to `True` by default. This behavior will be depracted in transformers v4.45, and will be then set to `False` by default. For more details check this issue: https://github.com/huggingface/transformers/issues/31884
-  warnings.warn(
-Some weights of BertForSequenceClassification were not initialized from the model checkpoint at /opt/models/bert-base-uncased and are newly initialized: ['classifier.bias', 'classifier.weight']
-You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
-Filter:   0%|          | 0/43410 [00:00<?, ? examples/s]Filter:  55%|█████▌    | 24000/43410 [00:00<00:00, 230454.68 examples/s]Filter: 100%|██████████| 43410/43410 [00:00<00:00, 222307.78 examples/s]
-Filter:   0%|          | 0/5426 [00:00<?, ? examples/s]Filter: 100%|██████████| 5426/5426 [00:00<00:00, 190175.43 examples/s]
-Filter:   0%|          | 0/5427 [00:00<?, ? examples/s]Filter: 100%|██████████| 5427/5427 [00:00<00:00, 192959.67 examples/s]
-Map:   0%|          | 0/36308 [00:00<?, ? examples/s]Map:  11%|█         | 4000/36308 [00:00<00:01, 23881.85 examples/s]Map:  19%|█▉        | 7000/36308 [00:00<00:02, 12321.36 examples/s]Map:  30%|███       | 11000/36308 [00:00<00:01, 15711.26 examples/s]Map:  41%|████▏     | 15000/36308 [00:00<00:01, 18282.40 examples/s]Map:  50%|████▉     | 18000/36308 [00:01<00:00, 19094.48 examples/s]Map:  61%|██████    | 22000/36308 [00:01<00:00, 20396.74 examples/s]Map:  72%|███████▏  | 26000/36308 [00:01<00:00, 21237.88 examples/s]Map:  83%|████████▎ | 30000/36308 [00:01<00:00, 22041.87 examples/s]Map:  91%|█████████ | 33000/36308 [00:01<00:00, 15498.67 examples/s]Map: 100%|██████████| 36308/36308 [00:02<00:00, 17206.67 examples/s]Map: 100%|██████████| 36308/36308 [00:02<00:00, 12485.84 examples/s]
-Map:   0%|          | 0/4548 [00:00<?, ? examples/s]Map:  22%|██▏       | 1000/4548 [00:00<00:00, 9104.26 examples/s]Map:  88%|████████▊ | 4000/4548 [00:00<00:00, 17197.91 examples/s]Map: 100%|██████████| 4548/4548 [00:00<00:00, 9348.46 examples/s] 
-Map:   0%|          | 0/4590 [00:00<?, ? examples/s]Map:  44%|████▎     | 2000/4590 [00:00<00:00, 13040.61 examples/s]Map: 100%|██████████| 4590/4590 [00:00<00:00, 14897.19 examples/s]Map: 100%|██████████| 4590/4590 [00:00<00:00, 9393.82 examples/s] 
-/home/2021/kturan/courses/COMP551/COMP-551-A4/jobs/../python/BERT_train_script_2.py:108: FutureWarning: load_metric is deprecated and will be removed in the next major version of datasets. Use 'evaluate.load' instead, from the new library 🤗 Evaluate: https://huggingface.co/docs/evaluate
-  metric = load_metric("glue", "mprc")
-/usr/local/env_dirs/fall2024/lib/python3.12/site-packages/datasets/load.py:759: FutureWarning: The repository for glue contains custom code which must be executed to correctly load the metric. You can inspect the repository content at https://raw.githubusercontent.com/huggingface/datasets/2.19.1/metrics/glue/glue.py
-You can avoid this message in future by passing the argument `trust_remote_code=True`.
-Passing `trust_remote_code=True` will be mandatory to load this metric from the next major release of `datasets`.
-  warnings.warn(
-Downloading builder script:   0%|          | 0.00/1.84k [00:00<?, ?B/s]Downloading builder script: 5.76kB [00:00, 15.2MB/s]                   
-Traceback (most recent call last):
-  File "/home/2021/kturan/courses/COMP551/COMP-551-A4/jobs/../python/BERT_train_script_2.py", line 108, in <module>
-    metric = load_metric("glue", "mprc")
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/env_dirs/fall2024/lib/python3.12/site-packages/datasets/utils/deprecation_utils.py", line 46, in wrapper
-    return deprecated_function(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/env_dirs/fall2024/lib/python3.12/site-packages/datasets/load.py", line 2112, in load_metric
-    metric = metric_cls(
-             ^^^^^^^^^^^
-  File "/usr/local/env_dirs/fall2024/lib/python3.12/site-packages/datasets/utils/deprecation_utils.py", line 46, in wrapper
-    return deprecated_function(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/env_dirs/fall2024/lib/python3.12/site-packages/datasets/metric.py", line 190, in __init__
-    info = self._info()
-           ^^^^^^^^^^^^
-  File "/home/2021/kturan/.cache/huggingface/modules/datasets_modules/metrics/glue/a3a2e59cb80097e8294371f36168783b8b4b02f12beeabbc60c0e41d86c279df/glue.py", line 121, in _info
-    raise KeyError(
-KeyError: 'You should supply a configuration name selected in ["sst2", "mnli", "mnli_mismatched", "mnli_matched", "cola", "stsb", "mrpc", "qqp", "qnli", "rte", "wnli", "hans"]'

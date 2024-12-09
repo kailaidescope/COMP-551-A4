@@ -1,8 +1,0 @@
-Filter:   0%|          | 0/43410 [00:00<?, ? examples/s]Filter:  78%|███████▊  | 34000/43410 [00:00<00:00, 336522.21 examples/s]Filter: 100%|██████████| 43410/43410 [00:00<00:00, 264503.57 examples/s]
-Filter:   0%|          | 0/5426 [00:00<?, ? examples/s]Filter: 100%|██████████| 5426/5426 [00:00<00:00, 195681.05 examples/s]
-Filter:   0%|          | 0/5427 [00:00<?, ? examples/s]Filter: 100%|██████████| 5427/5427 [00:00<00:00, 195770.98 examples/s]
-Traceback (most recent call last):
-  File "/home/2021/kturan/courses/COMP551/COMP-551-A4/jobs/../python/GoEmotions_probe.py", line 55, in <module>
-    print("Filtered dataset info:\n", filtered_dataset.info)
-                                      ^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'DatasetDict' object has no attribute 'info'
