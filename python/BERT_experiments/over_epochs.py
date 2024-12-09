@@ -14,6 +14,7 @@ import time
 import matplotlib.pyplot as plt
 from sklearn.metrics import classification_report
 
+use_online_bert = False
 if len(sys.argv) == 1:
     output_path = "."
     train_method = "full"
@@ -45,6 +46,19 @@ elif len(sys.argv) == 4:
         print("Invalid train method. Options: head, full, head+1")
         sys.exit(1)
     num_epochs = int(sys.argv[3])
+elif len(sys.argv) == 5:
+    output_path = sys.argv[1]
+    if str.lower(sys.argv[2]) == "head":
+        train_method = "head"
+    elif str.lower(sys.argv[2]) == "full":
+        train_method = "full"
+    elif str.lower(sys.argv[2]) == "head+1":
+        train_method = "head+1"
+    else:
+        print("Invalid train method. Options: head, full, head+1")
+        sys.exit(1)
+    num_epochs = int(sys.argv[3])
+    use_online_bert = sys.argv[4].lower() == "true"
 else:
     print(
         "Usage: python over_epochs.py [output_path] [train_method (head, full, head+1)] [num_epochs]"
@@ -126,6 +140,10 @@ results = {"f1": [], "accuracy": [], "duration": [], "reports": []}
 
 start_time = time.time()
 print("Loading model")
+
+if use_online_bert:
+    model_path = "bert-base-uncased"
+    print("Using online BERT model")
 
 # Load the tokenizer and model
 tokenizer = AutoTokenizer.from_pretrained(model_path)

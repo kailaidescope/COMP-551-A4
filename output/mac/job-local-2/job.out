@@ -1,0 +1,8 @@
+Starting BERT epoch experiments script
+Train method: head+1
+Learning rate: 0.001 
+Num epochs: 8 
+Batch size: 32 
+Weight decay: 1 
+Warmup steps: 500
+Loading model
