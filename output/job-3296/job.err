@@ -1,5 +1,0 @@
-Traceback (most recent call last):
-  File "/home/2021/kturan/courses/COMP551/COMP-551-A4/jobs/../python/GoEmotions_probe.py", line 42, in <module>
-    print("Dataset splits:\n", dataset.splits)
-                               ^^^^^^^^^^^^^^
-AttributeError: 'DatasetDict' object has no attribute 'splits'
