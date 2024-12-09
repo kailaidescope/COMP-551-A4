@@ -1,4 +1,4 @@
-
+#!/bin/bash
 # Access the job name
 job_number="local-$1"
 job_path="../../output/mac/job-$job_number"
