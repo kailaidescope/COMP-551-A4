@@ -8,6 +8,10 @@ In the [research report](../COMP_551_F2024_A4_updated_v3.pdf) included in this r
 
 A range of training methods were used to balance training speed and performance, including head-only training and full-model training.
 
+$~$
+
+$~$
+
 ## Key Results:
 
 - **Dataset:** GoEmotions, a corpus of 58k Reddit comments labeled with 28 emotion categories.
@@ -29,6 +33,10 @@ A range of training methods were used to balance training speed and performance,
 **Future Work:**
 
 - Explore class weighting, regularization, and generalization to other sentiment datasets.
+
+$~$
+
+$~$
 
 ## Attention visualization
 
@@ -58,7 +66,9 @@ The following attention diagrams illustrate how the BERT model "thinks." Tokens 
 
 </div>
 
----
+$~$
+
+$~$
 
 ## Technical
 
