@@ -4,7 +4,7 @@ This repository contains code for a sentiment analysis model trained on the GoEm
 
 This model was produced as part of the fourth assignment in McGill's COMP 551 course "Applied Machine Learning."
 
-In the [research report](../COMP_551_F2024_A4_updated_v3.pdf) included in this repository, this model is compared to GPT2 and Naive Bayes models, among others, to test its efficiency.
+In the [research report](./Final%20Report.pdf) included in this repository, this model is compared to GPT2 and Naive Bayes models, among others, to test its efficiency.
 
 A range of training methods were used to balance training speed and performance, including head-only training and full-model training.
 
