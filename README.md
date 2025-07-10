@@ -36,7 +36,7 @@ The following attention diagrams illustrate how the BERT model "thinks." Tokens 
 
 #### Correctly predicted labels
 
-<div style="display: flex; flex-direction: row; gap: 20px; justify-content: center; align-items: flex-start;">
+<div style="display: flex; flex-direction: row; gap: 20px; justify-content: center; align-items: start;">
 
 <img src="./imgs/Correct/Admiration.png" alt="Admiration attention" width="30%" style="border-radius:15px;">
 
@@ -48,7 +48,7 @@ The following attention diagrams illustrate how the BERT model "thinks." Tokens 
 
 #### Inorrectly predicted labels
 
-<div style="display: flex; flex-direction: row; gap: 20px; justify-content: center; align-items: flex-start;">
+<div style="display: flex; flex-direction: row; gap: 20px; justify-content: center; align-items: start;">
 
 <img src="./imgs/Incorrect/Disapproval.png" alt="Admiration attention" width="30%" style="border-radius:15px;">
 
