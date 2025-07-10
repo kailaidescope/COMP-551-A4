@@ -1,4 +1,4 @@
-# COMP 551 A4
+# BERT Sentiment Analyzer
 
 This repository contains code for a sentiment analysis model trained on the GoEmotions dataset using a base BERT (Bidirectional Encoder Representations from Transformers) model.
 
